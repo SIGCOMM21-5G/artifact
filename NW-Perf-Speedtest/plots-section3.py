@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from utils import *
 
-df = pd.read_csv('speedtest_ookla.csv')
+df = pd.read_csv('dataset_speedtest_ookla.csv')
 SHOW_PLOT_FLAG = True
 
 ##########################################
