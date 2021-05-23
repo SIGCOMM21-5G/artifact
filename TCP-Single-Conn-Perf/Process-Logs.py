@@ -171,7 +171,7 @@ for idx, row in filtered_summary.iterrows():
                   'latency_min': servers_rtt_min_dict[row['server location']], 'month': row['month'],
                   'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
                   'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
-                  'throughput_rolled3': cc_log_df['throughput_rolled3'].mean(),
+                  'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
                   'throughput_avg': cc_log_df['throughput'].mean(),
                   'throughput_max': cc_log_df['throughput'].max(),
                   'throughput_90tile': cc_log_df['throughput'].quantile(0.9),
