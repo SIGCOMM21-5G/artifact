@@ -21,7 +21,6 @@ The dataset file `dataset_speedtest_ookla.csv` contains several fields. We provi
 | `downlink_Mbps`      | Downlink throughput in Megabits per second (Mbps)                  |
 | `uplink_Mbps`        | Uplink throughput in Megabits per second (Mbps)                    |
 | `latency_ms`         | Round trip latency in millisecond (ms)                             |
-| ~~`country_code`~~     | UE's country code  _(planning to remove this column)_                       |
 | `connection_mode`    | Number of connections established for throughput measurement (_single_ or _multi_)       |
 | `sponsor_name`       | Host/Provider of the Speedtest server                              |
 | `UE_model`           | The make and model of the 5G smartphone                            |
