@@ -5,3 +5,6 @@ __pycache__
 # ENV/IDE files
 .venv
 .idea
+
+# Ignore scripts
+TCP-Single-Conn-Perf/Change-Iperf-Date.py

@@ -12,9 +12,9 @@ This folder contains the dataset, processing and plotting scripts for TCP single
 |`data/server/[iperf_run_number].json`|Raw Iperf logs collected on server side|
 |`data-processed/Iperf-Logs/[iperf_run_number].csv`|CSV-based parsed Iperf logs for each run|
 |`data-processed/Merged-Logs/[iperf_run_number].csv`|CSV-based logs containing detailed information for each run|
-|`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See [Dataset Description](#dataset-description) section for more details|
-|`Process-Logs.py`|Python script to process logs for TCP single connection|
-|`Plot-Figure8.py`|Python script to generate figure 8. See [Generating Plots](#generating-plots) section for more details| 
+|`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See the [Dataset Description](#dataset-description) section for more details|
+|`Process-Logs.py`|Python script to process logs for TCP single connection performance|
+|`Plot-Figure8.py`|Python script to generate figure 8. See the [Generating Plots](#generating-plots) section for more details| 
 
 ## Dataset Description
 
@@ -36,7 +36,7 @@ This folder contains the dataset, processing and plotting scripts for TCP single
 
 ## Generating Plots
 
-The scripts will generate figure 8.
+The scripts will generate Figure 8.
 
 ### Requirements
 Here are the software/package requirements. The version number in the bracket indicates the minimum version that our script has been tested on.
@@ -60,4 +60,4 @@ To regenerate the processed logs, the following command can be used.
 python3 Process-Logs.py
 ```
 
-The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) section gives a detailed overview of all files in `data-processed` folder.
+The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) section gives a detailed overview of all the files in `data-processed` folder.
