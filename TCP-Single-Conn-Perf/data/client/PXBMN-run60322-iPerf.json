@@ -1,0 +1,42 @@
+{
+	"start":	{
+		"connected":	[{
+				"socket":	297,
+				"local_host":	"100.124.11.206",
+				"local_port":	49770,
+				"remote_host":	"13.78.148.8",
+				"remote_port":	5201
+			}],
+		"version":	"iperf 3.7",
+		"system_info":	"Linux localhost 4.19.110-g9ceb3bf92e0a-ab6790968 #2 SMP PREEMPT Wed Aug 26 04:14:37 UTC 2020 aarch64",
+		"timestamp":	{
+			"time":	"2021-01-23 12:13:22 CST",
+			"timesecs":	1611425602
+		},
+		"connecting_to":	{
+			"host":	"13.78.148.8",
+			"port":	5201
+		},
+		"cookie":	"f6uqoxzl7kck4i4pfzc4eblbrk7qur6dclvv",
+		"tcp_mss_default":	1376,
+		"target_bitrate":	3000000000,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"test_start":	{
+			"protocol":	"TCP",
+			"num_streams":	1,
+			"blksize":	131072,
+			"omit":	0,
+			"duration":	30,
+			"bytes":	0,
+			"blocks":	0,
+			"reverse":	1,
+			"tos":	0
+		}
+	},
+	"intervals":	[],
+	"end":	{
+	},
+	"title":	"PXBMN-run60322-iPerf"
+}

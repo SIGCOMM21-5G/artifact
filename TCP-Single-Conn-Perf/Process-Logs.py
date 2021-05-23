@@ -21,7 +21,7 @@ def combine_timestamp(t1, t2):
 
 
 ## Config
-IPERF_FORCE_REGENERATE_FLAG = False
+IPERF_FORCE_REGENERATE_FLAG = True
 FORCE_REGENERATE_FLAG = True  # To regenerate merged files
 EXPR_NAME = 'TCP-Single-Conn-Perf'
 DATA_DIR = context.data_dir
@@ -167,10 +167,10 @@ for idx, row in filtered_summary.iterrows():
             merged_logs.to_csv(out_name, index=False)
 
             ## Make combined summary file
-            df = {'server location': row['server location'],
+            df = {'server_location': row['server location'],
                   'latency_min': servers_rtt_min_dict[row['server location']], 'month': row['month'],
                   'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
-                  'iperf run number': row['iperf run number'], 'distance': distance_list[row['server location']],
+                  'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
                   'throughput_rolled3': cc_log_df['throughput_rolled3'].mean(),
                   'throughput_avg': cc_log_df['throughput'].mean(),
                   'throughput_max': cc_log_df['throughput'].max(),

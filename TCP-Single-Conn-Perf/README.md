@@ -1,18 +1,20 @@
-# Figure 8: TCP Single Connection Performance
+(Can be updated)
+# TCP Single Connection Performance
+This folder contains the dataset, processing and plotting scripts for TCP single connection performance measurements conducted using **5GTracker** and Azure VMs. It covers Figure 8 referred in Section 3.2 of the paper.
 
 ## Folder Structure
 
 | Filename | Description |
 |----------|-------------|
 |`data/TCP-Single-Conn-Perf.csv`|Contains description of the runs done|
-|`data/ping/az-[server].csv`|Ping tests for each azure server|
-|`data/client/[iperf run number].json`|Raw Iperf logs collected on client side|
-|`data/server/[iperf run number].json`|Raw Iperf logs collected on server side|
-|`data-processed/Iperf-Logs/[iperf run number].csv`|CSV-based parsed Iperf logs for each run|
-|`data-processed/Merged-Logs/[iperf run number].csv`|CSV-based logs containing detailed information for each run|
-|`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See [Dataset Description](#dataset-description) for more details|
+|`data/ping/az-[server_location].csv`|Ping tests for each azure server|
+|`data/client/[iperf_run_number].json`|Raw Iperf logs collected on client side|
+|`data/server/[iperf_run_number].json`|Raw Iperf logs collected on server side|
+|`data-processed/Iperf-Logs/[iperf_run_number].csv`|CSV-based parsed Iperf logs for each run|
+|`data-processed/Merged-Logs/[iperf_run_number].csv`|CSV-based logs containing detailed information for each run|
+|`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process logs for TCP single connection|
-|`Plot-Figure8.py`|Python script to generate figure 8. See [Generating Plots](#generating-plots) for more details| 
+|`Plot-Figure8.py`|Python script to generate figure 8. See [Generating Plots](#generating-plots) section for more details| 
 
 ## Dataset Description
 
@@ -52,10 +54,10 @@ python3 Plot-Figure8.py
 
 This will create a `plots` folder having figures in 3 formats (png, pdf and eps).
 
-We provide sample raw data in the `data` folder. The complete dataset for TCP single connection performance experiment can be downloaded from [fill this](here). Put the downloaded files in the `data` folder and simply run the following command.
+To regenerate the processed logs, the following command can be used.
 
 ```bash
 python3 Process-Logs.py
 ```
 
-The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) gives a detailed overview of all files in `data-processed` folder.
+The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) section gives a detailed overview of all files in `data-processed` folder.

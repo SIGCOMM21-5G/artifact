@@ -1,0 +1,22 @@
+{
+	"start":	{
+		"connected":	[],
+		"version":	"iperf 3.7",
+		"system_info":	"Linux localhost 4.19.110-g9ceb3bf92e0a-ab6790968 #2 SMP PREEMPT Wed Aug 26 04:14:37 UTC 2020 aarch64",
+		"timestamp":	{
+			"time":	"2021-01-23 12:24:16 CST",
+			"timesecs":	1611426256
+		},
+		"connecting_to":	{
+			"host":	"52.247.225.34",
+			"port":	5201
+		},
+		"cookie":	"4ar6mu6nbutuxmkihu7qlx6xi6sbzy7foucz",
+		"tcp_mss_default":	1376,
+		"target_bitrate":	3000000000
+	},
+	"intervals":	[],
+	"end":	{
+	},
+	"title":	"PXBMN-run60340-iPerf"
+}

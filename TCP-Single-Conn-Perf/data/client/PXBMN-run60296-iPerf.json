@@ -1,0 +1,94 @@
+{
+	"start":	{
+		"connected":	[{
+				"socket":	238,
+				"local_host":	"100.124.11.206",
+				"local_port":	47366,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	233,
+				"local_host":	"100.124.11.206",
+				"local_port":	47368,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	248,
+				"local_host":	"100.124.11.206",
+				"local_port":	47370,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	246,
+				"local_host":	"100.124.11.206",
+				"local_port":	47372,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	254,
+				"local_host":	"100.124.11.206",
+				"local_port":	47374,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	258,
+				"local_host":	"100.124.11.206",
+				"local_port":	47376,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	259,
+				"local_host":	"100.124.11.206",
+				"local_port":	47378,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}, {
+				"socket":	265,
+				"local_host":	"100.124.11.206",
+				"local_port":	47380,
+				"remote_host":	"65.52.60.247",
+				"remote_port":	5201
+			}],
+		"version":	"iperf 3.7",
+		"system_info":	"Linux localhost 4.19.110-g9ceb3bf92e0a-ab6790968 #2 SMP PREEMPT Wed Aug 26 04:14:37 UTC 2020 aarch64",
+		"timestamp":	{
+			"time":	"2021-01-23 11:49:30 CST",
+			"timesecs":	1611424170
+		},
+		"connecting_to":	{
+			"host":	"65.52.60.247",
+			"port":	5201
+		},
+		"cookie":	"6zxtwvytf4r3edjhhnvjabfs26h5sqre6hnq",
+		"tcp_mss_default":	1376,
+		"target_bitrate":	3000000000,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	2097152,
+		"rcvbuf_actual":	6291456
+	},
+	"intervals":	[],
+	"end":	{
+	},
+	"title":	"PXBMN-run60296-iPerf"
+}

@@ -27,10 +27,10 @@ CONN_LINE_STYLE = {
 df = pd.read_csv(path.join(context.data_processed_dir, f"{EXPR_NAME}_combined.csv"))
 
 # country-level
-grp = df.groupby(['server location', 'type', 'distance']).agg(
-    download_max=('throughput_rolled3', np.max),
-    download_mean=('throughput_rolled3', np.mean),
-    download_median=('throughput_rolled3', np.median),
+grp = df.groupby(['server_location', 'type', 'distance']).agg(
+    download_max=('throughput_rolled3_avg', np.max),
+    download_mean=('throughput_rolled3_avg', np.mean),
+    download_median=('throughput_rolled3_avg', np.median),
     latency_min=('latency_min', np.min),
 )
 
@@ -44,7 +44,7 @@ grp.sort_values(by=['distance', 'type'], ascending=True, inplace=True)
 # Azure Servers
 ####################################################################
 plot_id = '24a'
-plot_name = 'rate-limiting-iperf-azure'
+plot_name = 'tcp-single-conn-perf-azure'
 
 color_list = ['tab:green', 'tab:orange', 'tab:blue', 'tab:red']
 
@@ -52,7 +52,7 @@ plt.close('all')
 plt.figure(figsize=(6, 1.8))
 print('plotting {} - {} plot...'.format(plot_id, plot_name))
 
-x = np.arange(grp['server location'].unique().shape[0])  # the label locations
+x = np.arange(grp['server_location'].unique().shape[0])  # the label locations
 width = 0.2  # the width of the bars
 
 df_udp = grp[(grp['type'] == 'udp')].copy(deep=True)
@@ -72,7 +72,7 @@ plt.bar(x + width * 3, df_tcp1d['download_max'].tolist(), width, label='TCP-1 De
 
 plt.ylabel('Throughput\n(in Mbps)', fontsize=14)
 plt.xlabel('Microsoft Azure Server Location ID', fontsize=14)
-server_list = [f'AZ{i}' for i in range(1, grp['server location'].unique().shape[0] + 1)]
+server_list = [f'AZ{i}' for i in range(1, grp['server_location'].unique().shape[0] + 1)]
 ax = plt.gca()
 ax.set_xticks(x + (width * 1.5))
 ax.set_xticklabels(server_list)
