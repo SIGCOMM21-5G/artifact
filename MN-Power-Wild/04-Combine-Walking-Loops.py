@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from set_paths import *
 
-EXPR_TYPE = 'MN-Walking-Iperf'
+EXPR_TYPE = 'MN-Power-Wild'
 DATA_FOLDER = '{}{}/merged-logs/'.format(OUTPUT_FOLDER, EXPR_TYPE)
 
 # read all files names

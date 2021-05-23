@@ -27,7 +27,7 @@ from set_paths import *
 
 ## Config
 DEVICES = ['S20UPM']
-EXPR_TYPE = 'MN-Walking-Iperf'
+EXPR_TYPE = 'MN-Power-Wild'
 
 DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
 CLIENT_LOGS_DIR = '{}/Client'.format(DATA_DIR)

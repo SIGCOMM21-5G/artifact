@@ -4,7 +4,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from utils.utils import *
-import context
+
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
+plot_dir = path.join(proj_dir, 'plots')
 
 # Start of Config
 EXPR_NAME = 'TCP-Single-Conn-Perf'
@@ -24,7 +29,7 @@ CONN_LINE_STYLE = {
 
 # filter data using config
 
-df = pd.read_csv(path.join(context.data_processed_dir, f"{EXPR_NAME}_combined.csv"))
+df = pd.read_csv(path.join(data_processed_dir, f"{EXPR_NAME}_combined.csv"))
 
 # country-level
 grp = df.groupby(['server_location', 'type', 'distance']).agg(
@@ -84,10 +89,10 @@ legend1 = ax.legend(loc='upper center', ncol=4, bbox_to_anchor=(0.4, 1.28), face
 ax.grid(axis='y', linestyle='--', zorder=-1)
 ax.set_axisbelow(True)
 ax.yaxis.grid(color='gainsboro', linestyle='dashed')
-if not os.path.exists(context.plot_dir):
-    os.makedirs('{}/png/'.format(context.plot_dir))
+if not os.path.exists(plot_dir):
+    os.makedirs('{}/png/'.format(plot_dir))
 
-plotme(plt, plot_id, plot_name, context.plot_dir, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
+plotme(plt, plot_id, plot_name, plot_dir, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
 
 ####################################################################
 

@@ -10,7 +10,7 @@ from set_paths import *
 ## Config
 SHOW_PLOT = True
 DEVICES = ['S20UPM']
-EXPR_TYPE = 'MN-Walking-Iperf'
+EXPR_TYPE = 'MN-Power-Wild'
 DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
 OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)
 OUTPUT_LOGS_DIR = '{}/regression-input'.format(OUTPUT_DIR)

@@ -23,7 +23,7 @@ Process 5GTracker Logs
 MAX_NUM_PANELS = 9
 MAX_NUM_TOWERS = 3
 DEVICES = ['S20UPM']
-EXPR_TYPE = 'MN-Walking-Iperf'
+EXPR_TYPE = 'MN-Power-Wild'
 DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
 CLIENT_LOGS_DIR = '{}/Client'.format(DATA_DIR)
 OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)

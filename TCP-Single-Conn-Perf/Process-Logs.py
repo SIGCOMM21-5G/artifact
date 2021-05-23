@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 from os import path
 
-import context
 from utils.IperfLogs import IperfLogs
 
 __author__ = "Ahmad Hassan"
@@ -20,12 +19,17 @@ def combine_timestamp(t1, t2):
         return ''
 
 
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
+
 ## Config
 IPERF_FORCE_REGENERATE_FLAG = True
 FORCE_REGENERATE_FLAG = True  # To regenerate merged files
 EXPR_NAME = 'TCP-Single-Conn-Perf'
-DATA_DIR = context.data_dir
-OUTPUT_LOGS_DIR = context.data_processed_dir
+DATA_DIR = data_dir
+OUTPUT_LOGS_DIR = data_processed_dir
 OUTPUT_CC_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Iperf-Logs')
 OUTPUT_MERGED_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Merged-Logs')
 EXPR_SUMMARY_FILE = path.join(DATA_DIR, EXPR_NAME + '.csv')
@@ -178,7 +182,6 @@ for idx, row in filtered_summary.iterrows():
                   'throughput_95tile': cc_log_df['throughput'].quantile(0.95),
                   'throughput_median': cc_log_df['throughput'].quantile(0.5)}
             rows_list.append(df)
-
 
 dfs = pd.DataFrame(rows_list)
 combined_filename = '{}/{}_combined.csv'.format(OUTPUT_LOGS_DIR, EXPR_NAME)
