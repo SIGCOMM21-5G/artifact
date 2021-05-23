@@ -7,7 +7,7 @@ from utils.utils import *
 import context
 
 # Start of Config
-EXPR_NAME = 'Ratelimit-Iperf'
+EXPR_NAME = 'TCP-Single-Conn-Perf'
 SHOW_PLOT_FLAG = False  # True will show in GUI, False will save plot as file
 MARKERS = ['*', 'd', '>', '<', '^', 'v']
 

@@ -21,26 +21,22 @@ def combine_timestamp(t1, t2):
 
 
 ## Config
-IPERF_FORCE_REGENERATE_FLAG = True
+IPERF_FORCE_REGENERATE_FLAG = False
 FORCE_REGENERATE_FLAG = True  # To regenerate merged files
-EXPR_NAME = 'Ratelimit-Iperf'
-DATA_DIR = path.join(context.data_dir, EXPR_NAME)
+EXPR_NAME = 'TCP-Single-Conn-Perf'
+DATA_DIR = context.data_dir
 OUTPUT_LOGS_DIR = context.data_processed_dir
-OUTPUT_CC_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'CC-Logs')
+OUTPUT_CC_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Iperf-Logs')
 OUTPUT_MERGED_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Merged-Logs')
 EXPR_SUMMARY_FILE = path.join(DATA_DIR, EXPR_NAME + '.csv')
-IPERF_PORT_FILE = '{}/{}-Iperf-Ports.csv'.format(OUTPUT_LOGS_DIR, EXPR_NAME)
 
 ## Load summary files
 expr_summary = pd.read_csv(EXPR_SUMMARY_FILE)
-iperf_ports = pd.read_csv(IPERF_PORT_FILE)
-
 
 ## Filter relevant runs from summary files
 filtered_summary = expr_summary[(expr_summary['iperf run number'].notna()) &
                                 (expr_summary['successful?'] == 'yes')].copy(deep=True)
 filtered_summary['iperf run number'] = filtered_summary['iperf run number'].astype(np.int)
-filtered_summary = pd.merge(filtered_summary, iperf_ports, how='left')
 filtered_summary.reset_index(inplace=True, drop=True)
 
 ## Process CC Logs and store processed files
@@ -122,11 +118,11 @@ for idx, row in filtered_summary.iterrows():
         merged_logs.to_csv(out_name, index=False)
 
         ## Make combined summary file
-        df = {'server location': row['server location'],
+        df = {'server_location': row['server location'],
               'latency_min': servers_rtt_min_dict[row['server location']], 'month': row['month'],
               'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
-              'iperf run number': row['iperf run number'], 'distance': distance_list[row['server location']],
-              'throughput_rolled3': cc_log_df['throughput_rolled3'].mean(),
+              'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
+              'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
               'throughput_avg': cc_log_df['throughput'].mean(),
               'throughput_max': cc_log_df['throughput'].max(),
               'throughput_90tile': cc_log_df['throughput'].quantile(0.9),
