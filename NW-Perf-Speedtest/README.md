@@ -2,7 +2,7 @@
 
 # Network Performance
 
-This folder contains the dataset and plotting scripts for the Speedtest measurements conducted using Ookla's Speedtest app available from Android's Play Store. It covers all the figures referred in Section 3.2 which include Figures 2,3,4,5,6,7. Note Figure 1 is the same as Figure 2 numbers however the former was plotted on a geographic map.
+This folder contains the dataset and plotting scripts for the Speedtest measurements conducted using Ookla's Speedtest app available from Android's Play Store. It covers all the figures referred in Section 3.2 which include Figures 2,3,4,5,6,7. Note, Figure 1 is the same as Figure 2 numbers however the former was plotted on a geographic map.
 
 ## Folder Structure   
 
