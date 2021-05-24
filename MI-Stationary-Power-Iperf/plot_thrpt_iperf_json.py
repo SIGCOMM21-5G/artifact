@@ -3,7 +3,8 @@
 # Plot the time-throughput figure from an iPerf json log
 # Output the average throughput
 
-# Usage: python plot_thrpt_iperf_json.py /path/to/log.json
+# Usage: python plot_thrpt_iperf_json.py /path/to/log.json [xrange start] [xrange end]
+# Example: python plot_thrpt_iperf_json.py data/5GTracker_iPerf/20201130/APPLE-run10045-udp-loc5-600m-1-iPerf.json 0 50
 
 import numpy as np
 import json
