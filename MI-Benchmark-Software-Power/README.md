@@ -1,6 +1,6 @@
 # Benchmarking Software-based Power Monitor
 
-This folder contains the dataset and scripts for the experiments of benchamarking software-based power monitor. The data were collected when running different types of test cases on the UE and turning on 5GTracker at different logging rates (1Hz, 10Hz). The software power values are measured by 5GTracker through system APIs for current and voltage readings. The hardware power values are measured by Monsoon Power Monitor at 5000Hz. It covers the Table 8 in Appendix A.4 (also see Section 4.6).
+This folder contains the dataset and scripts for the experiments of benchamarking software-based power monitor. It covers the Table 8 in Appendix A.4 (also see Section 4.6).
 
 ## Folder Structure   
 
@@ -14,7 +14,7 @@ This folder contains the dataset and scripts for the experiments of benchamarkin
 
 ## Dataset Description
 
-The 5GTracker session logs contains several fields that are useful for this experiment. We provide description for them below.
+The data were collected when running different types of test cases on the UE and turning on 5GTracker at different logging rates (1Hz, 10Hz). The software power values are measured by 5GTracker through system APIs for current and voltage readings. The hardware power values are measured by Monsoon Power Monitor at 5000Hz. The 5GTracker session logs contains several fields that are useful for this experiment. We provide description for them below.
 
 | Field name           | Description of the field                                           |
 |----------------------|--------------------------------------------------------------------|
