@@ -11,7 +11,8 @@ python3 06-DRT-Model.py
 
 ## Folder Structure
 The flow diagram below gives a brief overview of steps performed to generate data for MN Power Wild experiments.
-![MN Power Wild steps](MN-Walking-Iperf.pdf)
+
+![MN Power Wild steps](MN-Power-Wild-Flowchart.png)
 
 Each walking loop can be uniquely identified using `Iperf Run Number`. Note that each iperf run will be mapped to a single 5GTracker session.
 
