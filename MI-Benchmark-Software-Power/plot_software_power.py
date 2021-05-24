@@ -3,6 +3,8 @@
 # Plot time-power figure from a 5G Tracker log
 
 # Usage: python plot_software_power.py /path/to/log.csv [sampling rate] [xrange start] [xrange end]
+# Example: python plot_software_power.py data/5GTracker_iPerf/10Hz/APPLE-1607638238-01.csv 2 0 50
+
 
 import numpy as np
 import csv
