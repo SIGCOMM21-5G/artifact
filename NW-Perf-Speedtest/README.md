@@ -40,9 +40,9 @@ We have built scripts that uses the dataset provided to generate the plots shown
 
 Here are the software/package requirements. The version number in the bracket indicates the minimum version that our script has been tested on.
 
-- Python 3 (3.7.7 and higher)
-- Pandas (1.1.3 and higher)
-- Matplotlib (3.3.1 and higher)
+- Python 3 (>= 3.7.7)
+- Pandas (>= 1.1.3)
+- Matplotlib (>= 3.3.1)
 
 ### Running code
 
