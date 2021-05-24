@@ -20,7 +20,7 @@ The dataset file `dataset_rrc_probe.csv` contains several fields. We provide des
 | `interval`        | Idle time between packets in seconds                    |
 | `RTT1`         | ToDO: XX                             |
 | `RTT2`    | ToDo: YYY       |
-| `Network`       | Radio type active at the time of responding back to the server                            |
+| `active_radio_type`       | Radio type active at the time of responding back to the server                            |
 | `KeepOrDrop`           | We `keep` the data point if there were no other RX/TX transfer on the UE side between two consecutive RRC-Probe packet arrivals. If some other data transmission occured, we mark them as `bad` and remove such noisy data point from the dataset.              |
 
 ## Generating plots
