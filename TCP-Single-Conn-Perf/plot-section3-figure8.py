@@ -13,7 +13,7 @@ plot_dir = path.join(proj_dir, 'plots')
 
 # Start of Config
 EXPR_NAME = 'TCP-Single-Conn-Perf'
-SHOW_PLOT_FLAG = False  # True will show in GUI, False will save plot as file
+SHOW_PLOT_FLAG = False  # True will show in PyCharmGUI, False will save plot as file
 MARKERS = ['*', 'd', '>', '<', '^', 'v']
 
 OP_COLOR = {
@@ -27,18 +27,16 @@ CONN_LINE_STYLE = {
 
 # End of Config
 
-# filter data using config
-
+# load data
 df = pd.read_csv(path.join(data_processed_dir, f"{EXPR_NAME}_combined.csv"))
 
-# country-level
+# aggregate data per server and test-type
 grp = df.groupby(['server_location', 'type', 'distance']).agg(
     download_max=('throughput_rolled3_avg', np.max),
     download_mean=('throughput_rolled3_avg', np.mean),
     download_median=('throughput_rolled3_avg', np.median),
     latency_min=('latency_min', np.min),
 )
-
 grp.reset_index(level=0, inplace=True)
 grp.reset_index(level=0, inplace=True)
 grp.reset_index(level=0, inplace=True)
@@ -48,8 +46,8 @@ grp.sort_values(by=['distance', 'type'], ascending=True, inplace=True)
 ####################################################################
 # Azure Servers
 ####################################################################
-plot_id = '24a'
-plot_name = 'tcp-single-conn-perf-azure'
+plot_id = '8'
+plot_name = 'figure'
 
 color_list = ['tab:green', 'tab:orange', 'tab:blue', 'tab:red']
 

@@ -5,7 +5,7 @@ This folder contains the dataset, processing and plotting scripts for TCP single
 **Run the following command to generate plots.**
 
 ```bash
-python3 Plot-Figure8.py
+python3 plot-section3-figure8.py
 ```
 
 ## Folder Structure
@@ -20,13 +20,13 @@ python3 Plot-Figure8.py
 |`data-processed/Merged-Logs/[iperf_run_number].csv`|CSV-based logs containing detailed information for each run|
 |`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See the [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process logs for TCP single connection performance|
-|`Plot-Figure8.py`|Python script to generate figure 8. See the [Generating Plots](#generating-plots) section for more details| 
+|`plot-section3-figure8.py`|Python script to generate figure 8. See the [Generating Plots](#generating-plots) section for more details| 
 
 ## Dataset Description
 
 | Field Name | Description |
 |-------------|-------------|
-|`server_location`|Location of azure server in US
+|`server_location`|Location of Microsoft Azure server in US
 |`latency_min`|Minimum latency seen for server in ping test (ms)
 |`month`|Month when test was done
 |`type`|Connection type used (TCP-1 default, UDP, TCP-8, TCP-1 tuned) 
@@ -63,7 +63,7 @@ The processed logs will be placed in `data-processed` folder. The [Folder Struct
 To generate Figure 8 shown in the paper, simply run the following command
 
 ```bash
-python3 Plot-Figure8.py
+python3 plot-section3-figure8.py
 ```
 
 This will create a `plots` folder having figures in 3 formats (png, pdf and eps).
