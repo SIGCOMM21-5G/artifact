@@ -1,5 +1,7 @@
 # Adaptive Video Streaming
 
+Since we run 7 different ABR algorithms over many traces (both 4G and 5G) sequentially, it will take longer than 24 hours to finish all the experiments. Hence we provide a screencast of running a subset of the traces to illustrate how the video emulation testbed works. We also provide the full results and ploting scripts for the figures in the paper.
+
 ## Folder Structure
 
 | Folder Name | Description |
@@ -28,3 +30,7 @@ The video session files inside `Full-Results` are the logs containing informatio
 We have built scripts that uses the results provided to generate the plots shown in our paper. More specifically, the scripts will generate Figure 18 and 19.
 
 To generate the figures, run `bash plot-section5.sh`. A `plots` folder should be created with the figures.
+
+## Real test experiments
+
+Since we perform the experiments on AWS VM instances and the price is quite high, we currently have the VMs released. If required, we can provide two AWS VMs (a client-server pair) for tesing all the experiments. For setting up instructions, please refer to `ABR-5G/README.md`.
