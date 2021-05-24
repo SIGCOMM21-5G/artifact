@@ -2,6 +2,12 @@
 # TCP Single Connection Performance
 This folder contains the dataset, processing and plotting scripts for TCP single connection performance measurements conducted using **5GTracker** and Azure VMs. It covers Figure 8 referred in Section 3.2 of the paper.
 
+**Run the following command to generate plots.**
+
+```bash
+python3 Plot-Figure8.py
+```
+
 ## Folder Structure
 
 | Filename | Description |
@@ -46,14 +52,6 @@ Here are the software/package requirements. The version number in the bracket in
 - Matplotlib (3.3.1 and higher)
 
 ### Running code
-After cloning the github repository, navigate to `TCP-Single-Conn-Perf` and simply run the following command.
-
-```bash
-python3 Plot-Figure8.py
-```
-
-This will create a `plots` folder having figures in 3 formats (png, pdf and eps).
-
 To regenerate the processed logs, the following command can be used.
 
 ```bash
@@ -61,3 +59,11 @@ python3 Process-Logs.py
 ```
 
 The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) section gives a detailed overview of all the files in `data-processed` folder.
+
+To generate Figure 8 shown in the paper, simply run the following command
+
+```bash
+python3 Plot-Figure8.py
+```
+
+This will create a `plots` folder having figures in 3 formats (png, pdf and eps).

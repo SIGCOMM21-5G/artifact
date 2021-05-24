@@ -25,7 +25,6 @@ THROUGHPUT_ROLLING_WINDOW = 3
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
 mn_walking_logs = pd.read_csv(MN_WALKING_COMBINE)
 mn_walking_logs['run_number'] = mn_walking_logs['run_number'].astype(int)
-mn_walking_logs = mn_walking_logs[~mn_walking_logs['run_number'].isin(filter_run_list)]
 
 ## process throughput from 5GTracker logs
 mn_walking_logs['downlink_rolled_mbps_2'] = mn_walking_logs['downlink_mbps'].rolling(2,
@@ -62,32 +61,32 @@ print('processing t-mobile SA...')
 t_mobile_sa_down = df[(df['provider'] == 'TMobile') &
                       (df['network_type'] == 'SA only') &
                       (df['direction'] == 'downlink')]
-t_mobile_sa_down.to_csv('{}/t_mobile_sa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_sa_down.to_csv('{}/s20_t-mobile_sa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_sa_up = df[(df['provider'] == 'TMobile') &
                     (df['network_type'] == 'SA only') &
                     (df['direction'] == 'uplink')]
-t_mobile_sa_up.to_csv('{}/t_mobile_sa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_sa_up.to_csv('{}/s20_t-mobile_sa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_sa_all = df[(df['provider'] == 'TMobile') &
                      (df['network_type'] == 'SA only')]
-t_mobile_sa_all.to_csv('{}/t_mobile_sa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_sa_all.to_csv('{}/s20_t-mobile_sa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 # NSA + LTE
 print('processing t-mobile NSA...')
 t_mobile_nsa_down = df[(df['provider'] == 'TMobile') &
                        (df['network_type'] == 'NSA+LTE') &
                        (df['direction'] == 'downlink')]
-t_mobile_nsa_down.to_csv('{}/t_mobile_nsa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_nsa_down.to_csv('{}/s20_t-mobile_nsa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_nsa_up = df[(df['provider'] == 'TMobile') &
                      (df['network_type'] == 'NSA+LTE') &
                      (df['direction'] == 'uplink')]
-t_mobile_nsa_up.to_csv('{}/t_mobile_nsa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_nsa_up.to_csv('{}/s20_t-mobile_nsa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_nsa_all = df[(df['provider'] == 'TMobile') &
                       (df['network_type'] == 'NSA+LTE')]
-t_mobile_nsa_all.to_csv('{}/t_mobile_nsa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+t_mobile_nsa_all.to_csv('{}/s20_t-mobile_nsa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 ## Verizon Baseline Logs
 print('processing Verizon...')
@@ -109,18 +108,18 @@ if SHOW_PLOT:
     plt.show()
 lowband_df = verizon_down[np.array(labels, dtype=bool)]
 highband_df = verizon_down[~np.array(labels, dtype=bool)]
-lowband_df.to_csv('{}/verizon_lowband_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-highband_df.to_csv('{}/verizon_highband_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+lowband_df.to_csv('{}/s20_verizon_nsalow_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+highband_df.to_csv('{}/s20_verizon_nsahigh_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 verizon_down['mmwave_flag'] = ~np.array(labels, dtype=bool)
-verizon_down.to_csv('{}/verizon_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+verizon_down.to_csv('{}/s20_verizon_nsa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 
 verizon_up = df[(df['provider'] == 'Verizon') &
                 (df['direction'] == 'uplink')]
 verizon_up = verizon_up[verizon_up['nr_ssRsrp'].notnull()]
-verizon_up.to_csv('{}/verizon_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+verizon_up.to_csv('{}/s20_verizon_nsa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 verizon_all = df[(df['provider'] == 'Verizon')]
-verizon_all.to_csv('{}/verizon_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+verizon_all.to_csv('{}/s20_verizon_nsa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 print('Complete../')
