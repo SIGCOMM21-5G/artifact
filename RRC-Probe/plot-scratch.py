@@ -232,3 +232,5 @@ fig.add_artist(legend2)
 
 plt.tight_layout()
 plotme(plt, plot_id, plot_name, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
+
+print('Complete./')
