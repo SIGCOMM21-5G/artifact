@@ -4,6 +4,7 @@ import glob
 import pandas as pd
 import numpy as np
 from os import path
+from datetime import timedelta
 
 from utils.IperfLogs import IperfLogs
 
@@ -27,13 +28,16 @@ EXPR_NAME = 'TCP-Single-Conn-Perf'
 DATA_DIR = data_dir
 OUTPUT_LOGS_DIR = data_processed_dir
 EXPR_SUMMARY_FILE = path.join(DATA_DIR, EXPR_NAME + '.csv')
+IPERF_SUMMARY_FILE = path.join(DATA_DIR, 'client', 'HUCKLEBERRY_830-iPerfSummary.csv')
 
 ## Load summary files
 expr_summary = pd.read_csv(EXPR_SUMMARY_FILE)
+iperf_summary = pd.read_csv(IPERF_SUMMARY_FILE)
 
 ## Filter relevant runs from summary files
 filtered_summary = expr_summary[(expr_summary['iperf run number'].notna()) &
                                 (expr_summary['successful?'] == 'yes')].copy(deep=True)
+filtered_summary = pd.merge(filtered_summary, iperf_summary, left_on='iperf run number', right_on='RunNumber',  how='left')
 filtered_summary['iperf run number'] = filtered_summary['iperf run number'].astype(np.int)
 filtered_summary.reset_index(inplace=True, drop=True)
 
@@ -67,53 +71,93 @@ for idx, row in filtered_summary.iterrows():
     # skip if run already processed
     if row['month'] == 'dec':
         if row['iperf type'] in ['tcp1c', 'tcp1d', 'tcp8']:
-            cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['server'],
+            iperf_log_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
                                                                    row['device id'], row['iperf run number']))[0]
 
-        else:
-            cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
-                                                                   row['device id'], row['iperf run number']))[0]
-
-        ## Iperf Logs
-        cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
-        cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
-
-        ## Make combined summary file
-        df = {'server_location': row['server location'],
-              'latency_min': servers_rtt_min_dict[row['server location']],
-              'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
-              'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
-              'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
-              'throughput_avg': cc_log_df['throughput'].mean(),
-              'throughput_max': cc_log_df['throughput'].max(),
-              'throughput_90tile': cc_log_df['throughput'].quantile(0.9),
-              'throughput_95tile': cc_log_df['throughput'].quantile(0.95),
-              'throughput_median': cc_log_df['throughput'].quantile(0.5)}
-        if row['iperf type'] in ['tcp1c', 'tcp1d', 'tcp8']:
-            df['retransmits'] = cc_log_df['retransmits'].sum()
-        rows_list.append(df)
-
-    elif row['month'] == 'jan':
-
-        if row['iperf type'] in ['tcp1c', 'tcp1d', 'tcp8']:
             ## Iperf Logs
-            cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
-                                                                   row['device id'], row['iperf run number']))[0]
-            cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
-            cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
+            iperf_log_df = IperfLogs.parseLogs(iperf_log_file)
+            iperf_log_df['throughput_rolled3'] = iperf_log_df['throughput'].rolling(3, min_periods=1).mean()
 
             ## Make combined summary file
             df = {'server_location': row['server location'],
                   'latency_min': servers_rtt_min_dict[row['server location']],
                   'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
                   'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
-                  'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
-                  'throughput_avg': cc_log_df['throughput'].mean(),
-                  'throughput_max': cc_log_df['throughput'].max(),
-                  'throughput_90tile': cc_log_df['throughput'].quantile(0.9),
-                  'throughput_95tile': cc_log_df['throughput'].quantile(0.95),
-                  'throughput_median': cc_log_df['throughput'].quantile(0.5)}
+                  'throughput_rolled3_avg': iperf_log_df['throughput_rolled3'].mean(),
+                  'throughput_avg': iperf_log_df['throughput'].mean(),
+                  'throughput_max': iperf_log_df['throughput'].max(),
+                  'throughput_90tile': iperf_log_df['throughput'].quantile(0.9),
+                  'throughput_95tile': iperf_log_df['throughput'].quantile(0.95),
+                  'throughput_median': iperf_log_df['throughput'].quantile(0.5)}
             rows_list.append(df)
+        else:
+            iperf_log_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
+                                                                   row['device id'], row['iperf run number']))[0]
+
+            ## Iperf Logs
+            iperf_logs = IperfLogs.parseLogs(iperf_log_file)
+
+            ############ SESSION LOGS ################
+            session_file = path.join(DATA_DIR_CLIENT, f"{row['device id']}-{int(row['SessionID'])}-01.csv")
+            session_logs = pd.read_csv(session_file)
+
+            ## Step 1. Convert 5GTracker timestamps to datetime object
+            session_logs['timestamp'] = pd.to_datetime(session_logs['timestamp'])
+            delta = timedelta(hours=11)
+            session_logs['timestamp'] = session_logs['timestamp'] + delta
+            session_logs['timestamp'] = session_logs['timestamp'].dt.tz_localize(None)
+            session_logs.sort_values(by=['timestamp'], inplace=True, ascending=True)
+            session_logs['downlink_mbps'] = session_logs['mobileRx'].diff()
+            session_logs['downlink_mbps'] = (session_logs['downlink_mbps'] / 1000000) * 8
+            session_logs['throughput_rolled3'] = session_logs['downlink_mbps'].rolling(3, min_periods=1).mean()
+
+            ## Step 3. Merge 5GTracker and Iperf logs
+            tracker_iperf_logs = pd.merge(left=session_logs, right=iperf_logs, how='outer')
+
+            ## Step 4. Convert iperf + 5GTracker merged logs' time to seconds elapsed
+            tracker_iperf_logs['time'] = (tracker_iperf_logs['timestamp'] - tracker_iperf_logs.iloc[0][
+                'timestamp']).astype(
+                'timedelta64[ms]') / 1000
+            tracker_iperf_logs.sort_values(by=['time'], inplace=True, ascending=True)
+
+            ## Step 7. Filter rows when iperf was not running
+            tracker_iperf_logs = tracker_iperf_logs[(tracker_iperf_logs['timestamp'] >= iperf_logs.iloc[0]['timestamp']) &
+                                                    (tracker_iperf_logs['timestamp'] <= iperf_logs.iloc[-1]['timestamp'])]
+            tracker_iperf_logs.reset_index(drop=True, inplace=True)
+
+            ## Make combined summary file
+            df = {'server_location': row['server location'],
+                  'latency_min': servers_rtt_min_dict[row['server location']],
+                  'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
+                  'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
+                  'throughput_rolled3_avg': tracker_iperf_logs['throughput_rolled3'].mean(),
+                  'throughput_avg': tracker_iperf_logs['downlink_mbps'].mean(),
+                  'throughput_max': tracker_iperf_logs['downlink_mbps'].max(),
+                  'throughput_90tile': tracker_iperf_logs['downlink_mbps'].quantile(0.9),
+                  'throughput_95tile': tracker_iperf_logs['downlink_mbps'].quantile(0.95),
+                  'throughput_median': tracker_iperf_logs['downlink_mbps'].quantile(0.5)}
+            rows_list.append(df)
+
+    elif row['month'] == 'jan':
+
+        ## Iperf Logs
+        iperf_log_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
+                                                               row['device id'], row['iperf run number']))[0]
+        iperf_log_df = IperfLogs.parseLogs(iperf_log_file)
+        iperf_log_df['throughput_rolled3'] = iperf_log_df['throughput'].rolling(3, min_periods=1).mean()
+
+        ## Make combined summary file
+        df = {'server_location': row['server location'],
+              'latency_min': servers_rtt_min_dict[row['server location']],
+              'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
+              'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
+              'throughput_rolled3_avg': iperf_log_df['throughput_rolled3'].mean(),
+              'throughput_avg': iperf_log_df['throughput'].mean(),
+              'throughput_max': iperf_log_df['throughput'].max(),
+              'throughput_90tile': iperf_log_df['throughput'].quantile(0.9),
+              'throughput_95tile': iperf_log_df['throughput'].quantile(0.95),
+              'throughput_median': iperf_log_df['throughput'].quantile(0.5)}
+        rows_list.append(df)
 
 dfs = pd.DataFrame(rows_list)
 combined_filename = '{}/{}_combined.csv'.format(OUTPUT_LOGS_DIR, EXPR_NAME)
