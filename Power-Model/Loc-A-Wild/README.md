@@ -23,9 +23,9 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |`data-processed/cleaned-logs/[Model]_[Carrier]_[Network Type]_[Direction].csv`|Cleaned data for each Model [S20, S10], Carrier [Verizon, T-Mobile], Network Type [NSA+LTE, SA, mmWave] and Direction [uplink, downlink]| 
 |`01-Process-Iperf-Logs.py`|Python script to process raw Iperf logs for each run|
 |`02-Process-5GTracker-Logs.py`|Python script to process raw 5GTracker logs for each run|
-|`03-Merge-Walking-Loops.py`|Python script to merge raw power logs, parsed 5GTracker logs and parsed Iperf logs for each run|
-|`04-Combine-Walking-Loops.py`|Python script to generate combined merged file for all runs|
-|`05-Prepare-Data-Modeling.py`|Python script to generate separate data files for each carrier/network/direction config|
+|`03-Merge-Walking-Loops.py`|Python script to merge processed logs from 3 sources shown in [Data Processing Steps](#data-processing-steps)|
+|`04-Combine-Walking-Loops.py`|Python script to generate combined data file for all runs|
+|`05-Prepare-Data-Modeling.py`|Python script to generate separate data files for each model/carrier/network-type/ configuration|
 
 ## Dataset Description
 | Field Name | Description |
