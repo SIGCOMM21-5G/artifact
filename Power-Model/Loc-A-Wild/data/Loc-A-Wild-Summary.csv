@@ -1,0 +1,53 @@
+Index,Provider,Network Type,Direction,Iperf run number,Device,Successful?
+1,Verizon,ALL,downlink,63,S20UPM,yes
+2,Verizon,ALL,downlink,64,S20UPM,yes
+4,Verizon,ALL,downlink,68,S20UPM,yes
+5,Verizon,ALL,uplink,69,S20UPM,yes
+6,Verizon,ALL,uplink,70,S20UPM,yes
+7,Verizon,ALL,uplink,77,S20UPM,yes
+9,Verizon,ALL,downlink,123,S20UPM,yes
+10,Verizon,ALL,downlink,131,S20UPM,yes
+11,Verizon,ALL,downlink,133,S20UPM,yes
+12,Verizon,ALL,downlink,148,S20UPM,yes
+13,Verizon,ALL,downlink,151,S20UPM,yes
+16,Verizon,ALL,downlink,154,S20UPM,yes
+18,Verizon,ALL,downlink,156,S20UPM,yes
+19,Verizon,ALL,downlink,157,S20UPM,yes
+21,Verizon,ALL,downlink,161,S20UPM,yes
+22,Verizon,ALL,downlink,163,S20UPM,yes
+23,Verizon,ALL,downlink,168,S20UPM,yes
+24,Verizon,ALL,downlink,169,S20UPM,yes
+26,Verizon,ALL,downlink,171,S20UPM,yes
+27,Verizon,ALL,downlink,172,S20UPM,yes
+28,Verizon,ALL,downlink,173,S20UPM,yes
+29,Verizon,ALL,uplink,195,S20UPM,yes
+30,Verizon,ALL,uplink,196,S20UPM,yes
+31,Verizon,ALL,uplink,197,S20UPM,yes
+32,Verizon,ALL,uplink,199,S20UPM,yes
+33,Verizon,ALL,uplink,331,S20UPM,yes
+34,TMobile,SA only,downlink,20036,S20UPM,yes
+35,TMobile,SA only,downlink,20046,S20UPM,yes
+36,TMobile,SA only,downlink,20048,S20UPM,yes
+37,TMobile,SA only,downlink,20060,S20UPM,yes
+38,TMobile,SA only,downlink,20061,S20UPM,yes
+40,TMobile,NSA+LTE,downlink,20065,S20UPM,yes
+41,TMobile,NSA+LTE,downlink,20066,S20UPM,yes
+42,TMobile,NSA+LTE,downlink,20067,S20UPM,yes
+43,TMobile,NSA+LTE,downlink,20068,S20UPM,yes
+44,TMobile,NSA+LTE,downlink,20069,S20UPM,yes
+45,TMobile,SA only,uplink,20070,S20UPM,yes
+46,TMobile,SA only,uplink,20073,S20UPM,yes
+47,TMobile,SA only,uplink,20074,S20UPM,yes
+48,TMobile,NSA+LTE,uplink,20075,S20UPM,yes
+49,TMobile,NSA+LTE,uplink,20076,S20UPM,yes
+50,TMobile,NSA+LTE,uplink,20077,S20UPM,yes
+51,TMobile,SA only,uplink,20078,S20UPM,yes
+52,TMobile,SA only,uplink,20079,S20UPM,yes
+53,TMobile,NSA+LTE,uplink,20085,S20UPM,yes
+54,TMobile,NSA+LTE,uplink,20086,S20UPM,yes
+55,TMobile,SA only,downlink,20090,S20UPM,yes
+56,TMobile,SA only,downlink,20091,S20UPM,yes
+57,TMobile,NSA+LTE,downlink,20092,S20UPM,yes
+58,Verizon,ALL,downlink,15652,ELDERBERRY_374,yes
+59,Verizon,ALL,uplink,15656,ELDERBERRY_374,yes
+60,Verizon,ALL,uplink,15657,ELDERBERRY_374,yes
