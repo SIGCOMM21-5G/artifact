@@ -7,6 +7,7 @@ from collections import Counter
 import scapy 
 from scapy.all import *
 from scapy.utils import PcapReader
+import argparse
 
 def parseTcpdump(fileName):
 
@@ -118,7 +119,12 @@ def parseHarFile(fileName):
     informationDict["protocolNumber"] = protocol_num
     return (flag, informationDict)
 
-parentPath = "./Webpage-Data/"
+
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--data_path', type=str,  help='dataset directory path', required=True)
+args = parser.parse_args()
+
+parentPath = args.data_path+'/'
 nameList = ["12-24-2020/har-file/20201224-010218", "12-24-2020/har-file/20201224-215611", "12-25-2020/har-file/20201225-082843", 
             "12-25-2020/har-file/20201225-233305", "12-26-2020/har-file/20201226-093530", "12-27-2020/har-file/20201227-214441", 
             "4g-12-28-2020/har-file/20201228-181445", "5g-12-30-2020/har-file/20201230-113119", 
