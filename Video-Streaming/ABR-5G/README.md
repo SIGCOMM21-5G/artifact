@@ -7,6 +7,8 @@
 python setup.py
 ```
 
+The setup scripts should take around 5-10 minitues to finish. 
+
 ## Running Experiments
 
 To run experiments over the `tc` controlled emulated network, go to `run_exp` folder and run the corresponding scripts.
