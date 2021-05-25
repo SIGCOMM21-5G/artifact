@@ -1,7 +1,7 @@
 (Can be updated)
-# Loc A Power Wild Experiments
+# LocA Power Wild Experiments
 
-This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at Loc A.
+This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at LocA.
 
 ## Data Processing Steps
 The flow diagram below gives a brief overview of steps performed for processing the data for power experiments.
