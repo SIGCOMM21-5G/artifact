@@ -25,13 +25,9 @@ data_dir = path.join(proj_dir, 'data')
 data_processed_dir = path.join(proj_dir, 'data-processed')
 
 ## Config
-IPERF_FORCE_REGENERATE_FLAG = True
-FORCE_REGENERATE_FLAG = True  # To regenerate merged files
 EXPR_NAME = 'TCP-Single-Conn-Perf'
 DATA_DIR = data_dir
 OUTPUT_LOGS_DIR = data_processed_dir
-OUTPUT_CC_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Iperf-Logs')
-OUTPUT_MERGED_LOGS_DIR = path.join(OUTPUT_LOGS_DIR, 'Merged-Logs')
 EXPR_SUMMARY_FILE = path.join(DATA_DIR, EXPR_NAME + '.csv')
 
 ## Load summary files
@@ -48,14 +44,6 @@ if not os.path.exists(OUTPUT_LOGS_DIR):  # create output logs directory if not t
     os.makedirs(OUTPUT_LOGS_DIR)
     print('Directory created: {}'.format(OUTPUT_LOGS_DIR))
 
-if not os.path.exists(OUTPUT_CC_LOGS_DIR):  # create output cc logs directory if not there
-    os.makedirs(OUTPUT_CC_LOGS_DIR)
-    print('Directory created: {}'.format(OUTPUT_CC_LOGS_DIR))
-
-if not os.path.exists(OUTPUT_MERGED_LOGS_DIR):  # create merged logs directory if not there
-    os.makedirs(OUTPUT_MERGED_LOGS_DIR)
-    print('Directory created: {}'.format(OUTPUT_MERGED_LOGS_DIR))
-
 DATA_DIR_SERVER = path.join(DATA_DIR, 'server')
 DATA_DIR_CLIENT = path.join(DATA_DIR, 'client')
 DATA_DIR_COMBINED = {'server': DATA_DIR_SERVER, 'client': DATA_DIR_CLIENT}
@@ -70,7 +58,7 @@ for server in server_list:
     servers_rtt_avg_dict[server] = ping_logs['RTT [ms]'].mean()
 
 ## Get distances for each server
-distance_df = pd.read_csv('{}/azure-distances.csv'.format(DATA_DIR))
+distance_df = pd.read_csv('{}/Azure-UE-Server-Distances.csv'.format(DATA_DIR))
 distance_list = pd.Series(distance_df.distance.values, index=distance_df.server).to_dict()
 
 rows_list = []
@@ -81,49 +69,20 @@ for idx, row in filtered_summary.iterrows():
     # skip if run already processed
     if row['month'] == 'dec':
         if row['iperf type'] in ['tcp1c', 'tcp1d', 'tcp8']:
-            out_name = '{}/{}-run{}-{}.csv'.format(OUTPUT_MERGED_LOGS_DIR, row['device id'],
-                                                   row['iperf run number'], 'server')
             cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['server'],
                                                                    row['device id'], row['iperf run number']))[0]
-            if os.path.exists(out_name) and not FORCE_REGENERATE_FLAG:
-                print('    skipping file: {}. Already processed.\n\n'.format(out_name))
-                continue
 
         else:
-            out_name = '{}/{}-run{}-{}.csv'.format(OUTPUT_MERGED_LOGS_DIR, row['device id'],
-                                                   row['iperf run number'], 'client')
             cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
                                                                    row['device id'], row['iperf run number']))[0]
-            if os.path.exists(out_name) and not FORCE_REGENERATE_FLAG:
-                print('    skipping file: {}. Already processed.\n\n'.format(out_name))
-                continue
 
         ## Iperf Logs
-        cc_out_filename = '{}/run{}.csv'.format(OUTPUT_CC_LOGS_DIR, row['iperf run number'])
-        if os.path.exists(cc_out_filename) and not IPERF_FORCE_REGENERATE_FLAG:
-            cc_log_df = pd.read_csv(cc_out_filename)
-            cc_log_df['timestamp'] = pd.to_datetime(cc_log_df['timestamp'])
-        else:
-            cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
-            cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
-            cc_log_df.to_csv(cc_out_filename, index=False)
-
-        ## Merge all logs
-        merged_logs = cc_log_df.copy(deep=True)
-        merged_logs['time_since_start'] = (merged_logs['timestamp'] -
-                                           merged_logs.loc[0, 'timestamp']).dt.total_seconds()
-        merged_logs.drop(columns=['timestamp'], inplace=True)
-
-        ## Add Extra Columns and save logs
-        merged_logs['run'] = row['iperf run number']
-        merged_logs['month'] = row['month']
-        merged_logs['type'] = row['iperf type']
-        merged_logs['server location'] = row['server location']
-        merged_logs.to_csv(out_name, index=False)
+        cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
+        cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
 
         ## Make combined summary file
         df = {'server_location': row['server location'],
-              'latency_min': servers_rtt_min_dict[row['server location']], 'month': row['month'],
+              'latency_min': servers_rtt_min_dict[row['server location']],
               'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
               'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
               'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
@@ -139,40 +98,15 @@ for idx, row in filtered_summary.iterrows():
     elif row['month'] == 'jan':
 
         if row['iperf type'] in ['tcp1c', 'tcp1d', 'tcp8']:
-            out_name = '{}/{}-run{}-{}.csv'.format(OUTPUT_MERGED_LOGS_DIR, row['device id'],
-                                                   row['iperf run number'], 'server')
-            if os.path.exists(out_name) and not FORCE_REGENERATE_FLAG:
-                print('    skipping file: {}. Already processed.\n\n'.format(out_name))
-                continue
-
             ## Iperf Logs
-            cc_out_filename = '{}/run{}.csv'.format(OUTPUT_CC_LOGS_DIR, row['iperf run number'])
-            if os.path.exists(cc_out_filename) and not IPERF_FORCE_REGENERATE_FLAG:
-                cc_log_df = pd.read_csv(cc_out_filename)
-                cc_log_df['timestamp'] = pd.to_datetime(cc_log_df['timestamp'])
-            else:
-                cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
-                                                                       row['device id'], row['iperf run number']))[0]
-                cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
-                cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
-                cc_log_df.to_csv(cc_out_filename, index=False)
-
-            ## Merge all logs
-            merged_logs = cc_log_df.copy(deep=True)
-            merged_logs['time_since_start'] = (merged_logs['timestamp'] -
-                                               merged_logs.loc[0, 'timestamp']).dt.total_seconds()
-            merged_logs.drop(columns=['timestamp'], inplace=True)
-
-            ## Add Extra Columns and save logs
-            merged_logs['run'] = row['iperf run number']
-            merged_logs['month'] = row['month']
-            merged_logs['type'] = row['iperf type']
-            merged_logs['server location'] = row['server location']
-            merged_logs.to_csv(out_name, index=False)
+            cc_log_server_file = glob.glob('{}/{}*{}*.json'.format(DATA_DIR_COMBINED['client'],
+                                                                   row['device id'], row['iperf run number']))[0]
+            cc_log_df = IperfLogs.parseLogs(cc_log_server_file)
+            cc_log_df['throughput_rolled3'] = cc_log_df['throughput'].rolling(3, min_periods=1).mean()
 
             ## Make combined summary file
             df = {'server_location': row['server location'],
-                  'latency_min': servers_rtt_min_dict[row['server location']], 'month': row['month'],
+                  'latency_min': servers_rtt_min_dict[row['server location']],
                   'latency_avg': servers_rtt_avg_dict[row['server location']], 'type': row['iperf type'],
                   'iperf_run_number': row['iperf run number'], 'distance': distance_list[row['server location']],
                   'throughput_rolled3_avg': cc_log_df['throughput_rolled3'].mean(),
