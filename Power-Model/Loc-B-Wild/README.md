@@ -1,4 +1,4 @@
-# LocA Power Wild Experiments
+# LocB Power Wild Experiments
 
 This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at LocB.
 

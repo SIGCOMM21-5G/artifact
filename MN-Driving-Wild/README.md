@@ -15,7 +15,7 @@ python3 plot-section3-figure9.py
 
 | Filename | Description |
 |----------|-------------|
-|`data/[Device ID]-[run number]-handoff.csv`|Logs containing handoff information collected using Samsung magic code|
+|`data/[Device ID]-[run number]-handoff.csv`|Logs containing handoff information collected using Samsung Service Code|
 |`data/[Device ID]-[run number]_PM.csv`|Power logs collected using Monsoon Power Monitor|
 |`data-processed/[run number].csv`|Processed logs generated after merging power and handoff logs. See the [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process handoff and power logs|

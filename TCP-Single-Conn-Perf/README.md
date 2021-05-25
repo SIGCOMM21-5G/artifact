@@ -15,7 +15,6 @@ python3 plot-section3-figure8.py
 |`data/TCP-Single-Conn-Perf.csv`|Contains description of the runs done|
 |`data/ping/az-[server_location].csv`|Ping tests for each azure server|
 |`data/client/[iperf_run_number].json`|Raw Iperf logs collected on client side|
-|`data/server/[iperf_run_number].json`|Raw Iperf logs collected on server side|
 |`data/UE-Azure-Server-Distance.csv`|CSV-based file containing distance between UE and Microsoft Azure servers tested|
 |`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See the [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process logs for TCP single connection performance|

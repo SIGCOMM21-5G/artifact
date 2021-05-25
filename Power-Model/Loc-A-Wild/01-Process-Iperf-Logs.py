@@ -21,7 +21,7 @@ CLIENT_LOGS_DIR = path.join(DATA_DIR, 'client')
 OUTPUT_DIR = data_processed_dir
 OUTPUT_LOGS_DIR = path.join(OUTPUT_DIR, 'iperf-logs')
 MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
-FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
+FORCE_REGENERATE_FLAG = 1  # set to 1 if you want to do everything from scratch
 
 
 def get_run_num(exp_label):
@@ -84,8 +84,6 @@ def parseText(originaltext, label, regexpr):
 
 # read all files names
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
-mn_walking_summary = mn_walking_summary[mn_walking_summary['Successful?'] == 'yes']
-mn_walking_summary.reset_index(inplace=True, drop=True)
 iperf_run_list = mn_walking_summary['Iperf run number'].astype(int).tolist()
 
 if not os.path.exists(OUTPUT_LOGS_DIR):
@@ -268,6 +266,12 @@ for i in range(len(iperf_run_list)):
         else:
             dfexport = streamsdf[(streamsdf['_seconds'] == 1) & (streamsdf['iperf_type'] == 'parallel-merged')].copy(
                 deep=True)
+
+        # drop columns
+        drop_col_list = ['_bytes', 'rttvar', 'pmtu', '_omitted', '_socket', 'session_num', 'conn_num', 'snd_cwnd']
+        for col in drop_col_list:
+            if col in dfexport.columns.tolist():
+                del dfexport[col]
 
         # sort values
         dfexport.sort_values(by=['run_number', 'seq_no'], ascending=True, inplace=True)
