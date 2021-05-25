@@ -35,8 +35,8 @@ Here are the software/package requirements. The version number in the bracket in
 After cloning the repository, navigate to `Data-Transfer-Power` folder and run the following command.
 
 ```
-python3 plot_hardware_power.py data/PowerMonitor/20201130/screenmax-5g-udp-loc5-600m-1.csv 2 0 60
-python3 plot_thrpt_iperf_json.py data/5GTracker_iPerf/20201130/APPLE-run10045-udp-loc5-600m-1-iPerf.json 0 60
+python3 plot_hardware_power.py data/PowerMonitor/20201130/screenmax-5g-udp-loc5-600m-1.csv 2 0.2 62.3
+python3 plot_thrpt_iperf_json.py data/5GTracker_iPerf/20201130/APPLE-run10045-udp-loc5-600m-1-iPerf.json 3.6 64.5
 ```
 
 The last two parameters indicate the time interval you want to generate the results for. By default the script will process the entire data.

@@ -35,8 +35,8 @@ Here are the software/package requirements. The version number in the bracket in
 After cloning the repository, navigate to `Benchmark-Software-Power` folder and run the following command.
 
 ```
-python3 plot_hardware_power.py data/PowerMonitor/10Hz/screenmax-5g-dl-udp-loc5-50m-2-10hz.csv 2 0 60
-python3 plot_software_power.py data/5GTracker_iPerf/10Hz/APPLE-1607638238-01.csv 2 0 60
+python3 plot_hardware_power.py data/PowerMonitor/10Hz/screenmax-5g-dl-udp-loc5-50m-2-10hz.csv 10 5.5 61.5
+python3 plot_software_power.py data/5GTracker_iPerf/10Hz/APPLE-1607638238-01.csv 10 12.3 68.3
 ```
 
 The last two parameters indicate the time interval you want to generate the results for. By default the script will process the entire data.
