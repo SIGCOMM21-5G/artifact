@@ -16,7 +16,7 @@ DEVICES = ['S20UPM']
 DATA_DIR = data_processed_dir
 PLOT_DIR = path.join(proj_dir, 'plots')
 RANGE = 2
-SHOW_PLOT_FLAG = False
+SHOW_PLOT_FLAG = False  # True will show in PyCharmGUI, False will save plot as file
 
 handover_colors = {
     'unknown': colorlist10[7],
@@ -65,10 +65,10 @@ def get_handoff_color(row):
 
 
 '''
-plot 23
+plot 9
 '''
-plot_id = '23'
-plot_name = 'pm-driving-handoff_plot'
+plot_id = '9'
+plot_name = 'figure'
 
 plt.close('all')
 plt.figure(figsize=(7.5, 2.5))
@@ -85,7 +85,7 @@ for radio_idx, radio_type in enumerate(radio_types):
 
     ## Extract handoff records
     handoff_logs = pm_logs[pm_logs['handover type'].notnull()].copy(deep=True)
-    print(handoff_logs)
+    # print(handoff_logs)
     handoff_logs['handover_vh'] = handoff_logs.apply(lambda x: get_handoff_type(x), axis=1)
     handoff_logs['handover_color'] = handoff_logs.apply(lambda x: get_handoff_color(x), axis=1)
 
@@ -115,8 +115,8 @@ for radio_idx, radio_type in enumerate(radio_types):
     # plot each segment of network type
     for idx, block in enumerate(blk_list):
         if block[0] == '4G':
-            print(block)
-            print
+            # print(block)
+            # print
             lcolor = colorlist10[0]
         elif block[0] == 'NSA 5G':
             lcolor = colorlist10[1]

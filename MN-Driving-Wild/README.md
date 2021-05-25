@@ -8,7 +8,7 @@ Note that we don't have access to RRC messages to accurately determine the time 
 **Run the following command to generate plots.**
 
 ```bash
-python3 Plot-Figure9.py
+python3 plot-section3-figure9.py
 ```
 
 ## Folder Structure
@@ -19,7 +19,7 @@ python3 Plot-Figure9.py
 |`data/[Device ID]-[run number]_PM.csv`|Power logs collected using Monsoon Power Monitor|
 |`data-processed/[run number].csv`|Processed logs generated after merging power and handoff logs. See the [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process handoff and power logs|
-|`Plot-Figure9.py`|Python script to generate Figure 9 in the paper. See the [Generating Plots](#generating-plots) section for more details|
+|`plot-section3-figure9.py`|Python script to generate Figure 9 in the paper. See the [Generating Plots](#generating-plots) section for more details|
 
 
 ## Dataset Description
@@ -54,7 +54,7 @@ The processed logs will be placed in `data-processed` folder. The [Dataset Descr
 To generate Figure 9 shown in the paper, simply run the following command
 
 ```bash
-python3 Plot-Figure9.py
+python3 plot-section3-figure9.py
 ```
 
 This will create a `plots` folder having figures in 3 formats (png, pdf and eps).

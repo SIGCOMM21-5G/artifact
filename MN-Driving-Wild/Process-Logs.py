@@ -23,6 +23,9 @@ run_list = ['112', '107', '108', '109', '110']
 labels = ['NSA', 'SA+LTE', 'SA', 'LTE', 'ALL']
 
 for i in range(len(run_list)):
+    print('=======================================================================')
+    print('  processing run: {}  ({}/{})'.format(run_list[i], i + 1, len(run_list)))
+
     handoff_file = '{}/{}-run{}-handoff.csv'.format(DATA_DIR, DEVICES[0], run_list[i])
     handoff_logs = pd.read_csv(handoff_file, dtype={'time': float, 'active interface': str, 'handover type': str})
 
