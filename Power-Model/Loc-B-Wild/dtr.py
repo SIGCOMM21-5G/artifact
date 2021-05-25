@@ -15,7 +15,6 @@ import sys
 import os
 import pickle
 import argparse
-from matplotlib import pyplot as plt
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, SCORERS
 from sklearn.model_selection import train_test_split, cross_val_score, cross_val_predict
 from sklearn.tree import DecisionTreeRegressor

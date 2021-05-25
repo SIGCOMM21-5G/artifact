@@ -1,6 +1,6 @@
-# MI Power Walking loops
+# LocA Power Wild Experiments
 
-This folder contains the dataset, processing and modeling scripts for walking loops conducted using 5GTracker and Monsoon Power Monitor at UMich. It covers power modeling results presented in Section 4.4 of the paper.
+This folder contains the dataset and processing scripts for power experiments conducted using 5GTracker and Monsoon Power Monitor at LocB. It covers power modeling results presented in Section 4.4 of the paper.
 
 ## Folder Structure   
 
@@ -12,7 +12,6 @@ This folder contains the dataset, processing and modeling scripts for walking lo
 | `data/processed_dataset/mi_[Exp data]_[direction]_[TCP/UDP]_[Target throughput]_1.csv`		| Processed logs generated after merging processed 5GTracker logs and raw power logs |
 | `generate_dataset.py`           | Python script to process 5GTracker logs and power logs |
 | `combine_dataset.py`           | Python script to combine processed data into one csv file |
-| `dtr.py`           | Python script to run decision tree regression on processed data |
 
 ## Dataset Description
 
@@ -49,9 +48,6 @@ After cloning the repository, navigate to `Power-Walking-MI` folder and run the 
 ```
 python3 generate_dataset.py -t data/5GTracker_iPerf/APPLE-1609992831-01.csv -p data/PowerMonitor/20210106-screenmax-5g-dl-udp-loop1-1200m-1.csv -s data/processed_dataset/mi_0106_dl_udp_1200_1.csv -b 3105.223145
 python3 combine_dataset.py -t MI-VZ-HB -s data/
-python3 dtr.py -d data -k MI-VZ-HB -f 1
 ```
 
 The baseline power can be retrieved from the data summary on [Google drive](https://drive.google.com/drive/folders/17DBed12BaHQtEJmSdcZW2wM_sUwW29XO?usp=sharing).
-
-For the DTR (decision tree regression) step, we use `dtr.py` for all the processed data including MI-side (raw data located under this folder) and MN-side (raw data and processing scripts in [Power-Walking-MN](https://github.com/5G-Measurement/sigcomm21-artifact/tree/main/Power-Walking-MN)) ones. The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS).
