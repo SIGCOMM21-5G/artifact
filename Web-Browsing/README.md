@@ -53,6 +53,7 @@ We have built scripts that uses the dataset provided to generate the plots shown
 * seaborn>=0.10.0 
 * Scikit-learn>=0.24.1
 * Matplotlib>=3.1.3
+* graphviz>=0.16
 
 
 
