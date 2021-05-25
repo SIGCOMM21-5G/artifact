@@ -1,22 +1,27 @@
 #!/usr/bin/python3
 import os
+from os import path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.mixture import GaussianMixture
-from set_paths import *
+
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
 
 ## Config
-SHOW_PLOT = True
+SHOW_PLOT = False
 DEVICES = ['S20UPM']
 EXPR_TYPE = 'MN-Power-Wild'
-DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
-OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)
-OUTPUT_LOGS_DIR = '{}/regression-input'.format(OUTPUT_DIR)
-MN_WALKING_SUMMARY = '{}/{}-Summary.csv'.format(DATA_DIR, EXPR_TYPE)
-MN_WALKING_COMBINE = '{}{}_combined.csv'.format(OUTPUT_FOLDER, EXPR_TYPE)
-FORCE_REGENERATE_FLAG = 1  # set to 1 if you want to do everything from scratch
+DATA_DIR = data_dir
+OUTPUT_DIR = data_processed_dir
+OUTPUT_LOGS_DIR = path.join(OUTPUT_DIR, 'cleaned-logs')
+MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
+MN_WALKING_COMBINE = path.join(OUTPUT_DIR, f"{EXPR_TYPE}_combined.csv")
+FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
 THROUGHPUT_ROLLING_WINDOW = 3
 
 # ### Header Info ##### timestamp, nrStatus, lte_rsrp, nr_rsrp, nr_sinr, dl_thrpt, ul_thrpt, sw_power, power (baselin
@@ -58,15 +63,6 @@ df = mn_walking_logs[['timestamp', 'downlink_rolled_mbps_3', 'uplink_rolled_mbps
 
 # SA
 print('processing t-mobile SA...')
-t_mobile_sa_down = df[(df['provider'] == 'TMobile') &
-                      (df['network_type'] == 'SA only') &
-                      (df['direction'] == 'downlink')]
-t_mobile_sa_down.to_csv('{}/s20_t-mobile_sa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-
-t_mobile_sa_up = df[(df['provider'] == 'TMobile') &
-                    (df['network_type'] == 'SA only') &
-                    (df['direction'] == 'uplink')]
-t_mobile_sa_up.to_csv('{}/s20_t-mobile_sa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_sa_all = df[(df['provider'] == 'TMobile') &
                      (df['network_type'] == 'SA only')]
@@ -74,15 +70,6 @@ t_mobile_sa_all.to_csv('{}/s20_t-mobile_sa_all.csv'.format(OUTPUT_LOGS_DIR), ind
 
 # NSA + LTE
 print('processing t-mobile NSA...')
-t_mobile_nsa_down = df[(df['provider'] == 'TMobile') &
-                       (df['network_type'] == 'NSA+LTE') &
-                       (df['direction'] == 'downlink')]
-t_mobile_nsa_down.to_csv('{}/s20_t-mobile_nsa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-
-t_mobile_nsa_up = df[(df['provider'] == 'TMobile') &
-                     (df['network_type'] == 'NSA+LTE') &
-                     (df['direction'] == 'uplink')]
-t_mobile_nsa_up.to_csv('{}/s20_t-mobile_nsa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 t_mobile_nsa_all = df[(df['provider'] == 'TMobile') &
                       (df['network_type'] == 'NSA+LTE')]
@@ -95,7 +82,7 @@ verizon_down = df[(df['provider'] == 'Verizon') &
 verizon_down = verizon_down[verizon_down['nr_ssRsrp'].notnull()]
 if SHOW_PLOT:
     sns.scatterplot(data=verizon_down, x='avg_power', y='nr_ssRsrp')
-    plt.title('Combined Data')
+    plt.title('Downlink Data')
     plt.show()
 
 ## create gaussian mixture model to separate low band and high band
@@ -104,22 +91,37 @@ gmm = GaussianMixture(n_components=2).fit(X)
 labels = gmm.predict(X)
 if SHOW_PLOT:
     plt.scatter(X[:, 0], X[:, 1], c=labels, s=20, cmap='viridis')
-    plt.title('Gaussian Mixture')
+    plt.title('Downlink Gaussian Mixture')
     plt.show()
-lowband_df = verizon_down[np.array(labels, dtype=bool)]
-highband_df = verizon_down[~np.array(labels, dtype=bool)]
-lowband_df.to_csv('{}/s20_verizon_nsalow_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-highband_df.to_csv('{}/s20_verizon_nsahigh_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+lowband_down_df = verizon_down[np.array(labels, dtype=bool)]
+highband_down_df = verizon_down[~np.array(labels, dtype=bool)]
 verizon_down['mmwave_flag'] = ~np.array(labels, dtype=bool)
-verizon_down.to_csv('{}/s20_verizon_nsa_down.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-
 
 verizon_up = df[(df['provider'] == 'Verizon') &
                 (df['direction'] == 'uplink')]
 verizon_up = verizon_up[verizon_up['nr_ssRsrp'].notnull()]
-verizon_up.to_csv('{}/s20_verizon_nsa_up.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+if SHOW_PLOT:
+    sns.scatterplot(data=verizon_up, x='avg_power', y='nr_ssRsrp')
+    plt.title('Uplink Data')
+    plt.show()
 
-verizon_all = df[(df['provider'] == 'Verizon')]
-verizon_all.to_csv('{}/s20_verizon_nsa_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+## create gaussian mixture model to separate low band and high band
+X = verizon_up[['avg_power', 'nr_ssRsrp']].values
+gmm = GaussianMixture(n_components=2).fit(X)
+labels = gmm.predict(X)
+if SHOW_PLOT:
+    plt.scatter(X[:, 0], X[:, 1], c=labels, s=20, cmap='viridis')
+    plt.title('Uplink Gaussian Mixture')
+    plt.show()
+lowband_up_df = verizon_up[np.array(labels, dtype=bool)]
+highband_up_df = verizon_up[~np.array(labels, dtype=bool)]
+verizon_up['mmwave_flag'] = ~np.array(labels, dtype=bool)
+
+verizon_lowband_all = lowband_down_df.append(lowband_up_df, ignore_index=True)
+verizon_highband_all = highband_down_df.append(highband_up_df, ignore_index=True)
+
+verizon_highband_all.to_csv('{}/s20_verizon_nsahigh_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+verizon_lowband_all.to_csv('{}/s20_verizon_nsalow_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+
 
 print('Complete../')

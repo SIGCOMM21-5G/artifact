@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 import os
+from os import path
 import pandas as pd
 import numpy as np
 import glob
-from set_paths import *
 
 '''
 Merge logs for each run
@@ -12,15 +12,20 @@ Merge logs for each run
 3. Power Monitor Logs
 '''
 
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
+
 ##########  CONFIG #############
 DEVICES = ['S20UPM']
 EXPR_TYPE = 'MN-Power-Wild'
-DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
-OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)
-OUTPUT_LOGS_DIR = '{}/merged-logs'.format(OUTPUT_DIR)
-IPERF_SUMMARY_FILE = '{}/Client/S20UPM-iPerfSummary.csv'.format(DATA_DIR)  # For Verizon and T-Mobile
-MN_WALKING_SUMMARY = '{}/{}-Summary.csv'.format(DATA_DIR, EXPR_TYPE)
-BASE_LINE_POWER = '{}/baseline_power.csv'.format(OUTPUT_DIR)
+DATA_DIR = data_dir
+OUTPUT_DIR = data_processed_dir
+OUTPUT_LOGS_DIR = path.join(OUTPUT_DIR, 'merged-logs')
+IPERF_SUMMARY_FILE = path.join(DATA_DIR, 'client', f"{DEVICES[0]}-iPerfSummary.csv")
+MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
+BASE_LINE_POWER = path.join(OUTPUT_DIR, 'baseline_power.csv')
 USE_PM_ROLLING = True
 PM_ROLLING_WINDOW = 10  # set to 0 if functionality not wanted
 SW_ROLLING_WINDOW = 10
@@ -28,11 +33,10 @@ LOGS_GRANULARITY = 1
 FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
 iperf_run_summary = pd.read_csv(IPERF_SUMMARY_FILE)
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
-summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left', left_on='Iperf run number',
-                   right_on='RunNumber')
-summary_filtered = summary[
-    summary['SessionID'].notna() & (summary['Successful?'] == 'yes')].copy(
-    deep=True)
+summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left',
+                   left_on='Iperf run number', right_on='RunNumber')
+summary_filtered = summary[summary['SessionID'].notna() &
+                           (summary['Successful?'] == 'yes')].copy(deep=True)
 summary_filtered['SessionID'] = summary_filtered['SessionID'].astype(int)
 summary_filtered['Iperf run number'] = summary_filtered['Iperf run number'].astype(int)
 summary_filtered.reset_index(drop=True, inplace=True)
@@ -78,7 +82,7 @@ for idx, row in summary_filtered.iterrows():
     ############ PM LOGS #####################
 
     ## Step 1. process PM Logs using rolling
-    pm_file = glob.glob('{}/PM/run{}*.csv'.format(DATA_DIR, row['Iperf run number']))[0]
+    pm_file = glob.glob('{}/power/run{}*.csv'.format(DATA_DIR, row['Iperf run number']))[0]
     header_list = ["time", "avg_power"]
     pm_logs = pd.read_csv(pm_file, names=header_list, skiprows=1)
     pm_logs['avg_power'] = pm_logs['avg_power'] * 1000
@@ -145,7 +149,7 @@ for idx, row in summary_filtered.iterrows():
         if col in merged_logs.columns.tolist():
             del merged_logs[col]
 
-    ## Step 7. TODO: filter rows when iperf was not running?
+    ## Step 7. filter rows when iperf was not running
     merged_logs.dropna(subset=['iperf_type'], inplace=True)
     merged_logs.sort_values(by=['run_number', 'seq_no', 'Fixedtimestamp'], ascending=True, inplace=True)
     merged_logs.drop_duplicates(subset=['Fixedtimestamp',	'_start',	'_end'], keep='first', inplace=True)

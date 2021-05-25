@@ -6,9 +6,9 @@ modified on 17 January, 2021
 """
 
 import os
+from os import path
 import numpy as np
 import pandas as pd
-from set_paths import *
 import re
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -17,28 +17,32 @@ Process 5GTracker Logs
 1b. Use tower info to get panel angles etc.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
+
 ##  Config
-MAX_NUM_PANELS = 9
-MAX_NUM_TOWERS = 3
 DEVICES = ['S20UPM']
 EXPR_TYPE = 'MN-Power-Wild'
-DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
-CLIENT_LOGS_DIR = '{}/Client'.format(DATA_DIR)
-OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)
-IPERF_SUMMARY_FILE = '{}/Client/{}-iPerfSummary.csv'.format(DATA_DIR, DEVICES[0])  # for Verizon and T-Mobile
-MN_WALKING_SUMMARY = '{}/{}-Summary.csv'.format(DATA_DIR, EXPR_TYPE)
+DATA_DIR = data_dir
+CLIENT_LOGS_DIR = path.join(DATA_DIR, 'client')
+OUTPUT_DIR = data_processed_dir
+IPERF_SUMMARY_FILE = path.join(CLIENT_LOGS_DIR, f"{DEVICES[0]}-iPerfSummary.csv")
+MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
 iperf_run_summary = pd.read_csv(IPERF_SUMMARY_FILE)
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
 FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
-summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left', left_on='Iperf run number',
-                   right_on='RunNumber')
-summary_filtered = summary[summary['SessionID'].notna() & (summary['Successful?'] == 'yes')].copy(deep=True)
+summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left',
+                   left_on='Iperf run number', right_on='RunNumber')
+summary_filtered = summary[summary['SessionID'].notna() &
+                           (summary['Successful?'] == 'yes')].copy(deep=True)
 del summary
 summary_filtered['SessionID'] = summary_filtered['SessionID'].astype(int)
 summary_filtered.reset_index(drop=True, inplace=True)
 
 # create output folders if not present
-OUTPUT_LOGS_DIR = '{}/session-logs'.format(OUTPUT_DIR)
+OUTPUT_LOGS_DIR = path.join(OUTPUT_DIR, 'session-logs')
 if not os.path.exists(OUTPUT_LOGS_DIR):
     os.makedirs(OUTPUT_LOGS_DIR)
     print('Directory created: {}'.format(OUTPUT_LOGS_DIR))

@@ -22,18 +22,23 @@ import pandas as pd
 from datetime import datetime
 import pytz
 import os
+from os import path
 import re
-from set_paths import *
 
 ## Config
 DEVICES = ['S20UPM']
 EXPR_TYPE = 'MN-Power-Wild'
 
-DATA_DIR = '{}{}'.format(DATA_FOLDER, EXPR_TYPE)
-CLIENT_LOGS_DIR = '{}/Client'.format(DATA_DIR)
-OUTPUT_DIR = '{}{}'.format(OUTPUT_FOLDER, EXPR_TYPE)
-OUTPUT_LOGS_DIR = '{}/iperf-logs'.format(OUTPUT_DIR)
-MN_WALKING_SUMMARY = '{}/{}-Summary.csv'.format(DATA_DIR, EXPR_TYPE)
+## Dataset Organization
+proj_dir = path.abspath(path.join(path.dirname(__file__)))
+data_dir = path.join(proj_dir, 'data')
+data_processed_dir = path.join(proj_dir, 'data-processed')
+
+DATA_DIR = data_dir
+CLIENT_LOGS_DIR = path.join(DATA_DIR, 'client')
+OUTPUT_DIR = data_processed_dir
+OUTPUT_LOGS_DIR = path.join(OUTPUT_DIR, 'iperf-logs')
+MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
 FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
 
 

@@ -1,7 +1,7 @@
 (Can be updated)
 # MN Power Walking Loops
 
-This folder contains the dataset, processing and modeling scripts for walking loops conducted using **5GTracker** and Monsoon Power Monitor at UMN. It covers power modeling results presented in Section 4.4 of the paper.
+This folder contains the dataset, processing and modeling scripts for walking loops conducted using **5GTracker** and Monsoon Power Monitor at UMN. It covers power modeling results presented in Section 4.4 of the paper. All the power related tests were conducted using Samsung S20U on MN side. Data was collected for two carriers (Verizon and T-Mobile).
 
 **Run the following command to generate results.**
 
@@ -84,7 +84,6 @@ Each walking loop can be uniquely identified using `Iperf Run Number`. Note that
 |`network_type`|Network Type for each run (NSA+LTE, SA, mmWave)|
 |`direction`|Direction of Iperf data transfer (Uplink, Downlink)|
 |`trajectory`|Trajectory for each walking loop (clockwise, anti-clockwise)|
-|`mlogs_filename`|Parsed 5GTracker log file used to for generating each data sample|
 
 
 ## Generating Results
@@ -96,15 +95,18 @@ Here are the software/package requirements. The version number in the bracket in
 - Python 3 (3.7.7 and higher)
 - Pandas (1.1.3 and higher)
 - scikit-learn	(0.24.1 and higher)
+- seaborn (0.11.1 and higher)
 
 ### Running code
-To regenerate the logs from scratch, the following commands can be used.
+To regenerate the logs from scratch, the following commands can be used. 
+
+Note that we have put some sample raw logs in the data folder. To regenerate complete results, download the data from [google-drive](https://drive.google.com/drive/folders/1yxmJr3zl5dn81d1LLHwyOI--6l0hOcYE?usp=sharing) and put it in the data folder.
 
 ```bash
-python3 01-Process-Iperf-Logs.py
-python3 02-Process-5GTracker-Logs.py
-python3 03-Merge-Walking-Loops.py
-python3 04-Combine-Walking-Loops.py
+python3 01-Process-Iperf-Logs.py && \
+python3 02-Process-5GTracker-Logs.py && \
+python3 03-Merge-Walking-Loops.py && \
+python3 04-Combine-Walking-Loops.py && \
 python3 05-Prepare-Data-Modeling.py
 ```
 
