@@ -52,4 +52,4 @@ python3 combine_dataset.py -t MI-VZ-HB -s data/
 python3 dtr.py -d data -k MI-VZ-HB -f 1
 ```
 
-The last two parameters indicate the time interval you want to generate the results for.
+The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS).

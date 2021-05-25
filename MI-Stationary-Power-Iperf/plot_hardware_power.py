@@ -1,6 +1,7 @@
 # !/usr/bin/python
 
 # Plot time-power figure from a Monsoon Power Tool log
+# Support processing two intervals
 
 # Usage: python plot_hardware_power.py /path/to/log.csv [new sampling rate] [xrange start] [xrange end] [xrange start2] [xrange end2]
 # Example: python plot_hardware_power.py data/PowerMonitor/20201130/screenmax-5g-udp-loc5-600m-1.csv 2 0 50
@@ -10,7 +11,24 @@ import csv
 import sys
 import math
 from matplotlib import pyplot as plt
-from utils import *
+import re
+
+
+def get_power_unit(headers):
+	# print(headers[1])
+	m = re.findall(r'\((.*?)\)', headers[1]) 
+	return m[0]
+
+def check_legal_interval(start, end):
+	if start >= end:
+		sys.exit("Left > Right !")
+
+def set_inteval(idx1, idx2, SAMPLING_RATE):
+	start_sec = float(sys.argv[idx1])
+	end_sec = float(sys.argv[idx2])
+	check_legal_interval(start_sec, end_sec)
+	return int(start_sec * SAMPLING_RATE), int(end_sec * SAMPLING_RATE)
+
 
 SAMPLING_RATE = 5000
 NEW_SAMPLING_RATE = int(sys.argv[2])
@@ -18,7 +36,6 @@ STEP = int(SAMPLING_RATE / NEW_SAMPLING_RATE)
 data_path = sys.argv[1]  # Path to the log file
 data_name = data_path.split('.')[0].split('/')[-1]
 isTwoInterval = (len(sys.argv) == 7)  # two intervals
-
 
 # Read results from the log
 with open(data_path) as f:

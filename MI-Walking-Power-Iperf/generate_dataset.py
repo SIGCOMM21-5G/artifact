@@ -12,9 +12,7 @@ import sys
 import re
 import argparse
 from matplotlib import pyplot as plt
-sys.path.append("../")
-from fivegtracker.ts_converter import extract_timestamp
-from power.utils import *
+from ts_converter import extract_timestamp
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-t", "--tracker", help = "path to 5gtracker log file")
@@ -26,6 +24,11 @@ ap.add_argument("-n", "--new", const=True, default=False, nargs='?', help = "new
 ap.add_argument("-a", "--sampling", const=True, default=False, nargs='?', help = "sampling instead of average of median")
 args = vars(ap.parse_args())
 
+def get_power_unit(headers):
+	# print(headers[1])
+	m = re.findall(r'\((.*?)\)', headers[1]) 
+	return m[0]
+
 SAMPLING_RATE = 1
 POWER_SAMPLING_RATE = 5000
 TRACK_SAMPLING_RATE = 10
@@ -33,8 +36,6 @@ POWER_STEP = int(POWER_SAMPLING_RATE / SAMPLING_RATE)
 TRACK_STEP = int(TRACK_SAMPLING_RATE / SAMPLING_RATE)
 tracker_data_path = args["tracker"] # Path to a 5G Tracker trace
 power_data_path = args["power"]  # Path to the log file
-
-
 
 
 # Power log
