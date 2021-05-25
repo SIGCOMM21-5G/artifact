@@ -2,12 +2,14 @@
 
 Since we run 7 different ABR algorithms over many traces (both 4G and 5G) sequentially, it will take longer than 24 hours to finish all the experiments. Hence we provide a **screencast** of running a subset of the traces to illustrate how the video emulation testbed works. We also provide the full results and ploting scripts for the figures in the paper.
 
-TODO: Add links to the screencast files.
+<!-- TODO: Add links to the screencast files. -->
 
-| Screencast | Description | Viewing time |
-| ---------- | ----------- | ------------ |
-| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~30%) in a bash terminal (using virtualdisplays) | 11 h |
-|An illustration example (w/ GUI) | We enable the display to showcase how our video streaming experiments can be done by controlling the Chrome browser (with different ABR algorithms) | 25 min |
+To view the screencast, just click the corresponding link.
+
+| Screencast | Description | Viewing time | Link to Screen cast | 
+| ---------- | ----------- | ------------ | ------------------- |
+| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~30%) in a bash terminal (using virtualdisplays) | 11 h | [Link](https://drive.google.com/file/d/1Dxu6IUIKMiHMFzGNYPUB9Z6wkTIYD69e/view?usp=sharing) |
+|An illustration example (w/ GUI) | We enable the display to showcase how our video streaming experiments can be done by controlling the Chrome browser (with different ABR algorithms) | 25 min | [Link](https://drive.google.com/file/d/1Nfnz0UuYKUpQ7KbkB51bGm__tqpgTZut/view?usp=sharing) |
 
 ## Folder Structure
 
