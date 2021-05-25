@@ -58,7 +58,7 @@ for server in server_list:
     servers_rtt_avg_dict[server] = ping_logs['RTT [ms]'].mean()
 
 ## Get distances for each server
-distance_df = pd.read_csv('{}/Azure-UE-Server-Distances.csv'.format(DATA_DIR))
+distance_df = pd.read_csv('{}/UE-Azure-Server-Distances.csv'.format(DATA_DIR))
 distance_list = pd.Series(distance_df.distance.values, index=distance_df.server).to_dict()
 
 rows_list = []

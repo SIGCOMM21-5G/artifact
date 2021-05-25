@@ -16,8 +16,7 @@ python3 plot-section3-figure8.py
 |`data/ping/az-[server_location].csv`|Ping tests for each azure server|
 |`data/client/[iperf_run_number].json`|Raw Iperf logs collected on client side|
 |`data/server/[iperf_run_number].json`|Raw Iperf logs collected on server side|
-|`data-processed/Iperf-Logs/[iperf_run_number].csv`|CSV-based parsed Iperf logs for each run|
-|`data-processed/Merged-Logs/[iperf_run_number].csv`|CSV-based logs containing detailed information for each run|
+|`data/UE-Azure-Server-Distance.csv`|CSV-based file containing distance between UE and Microsoft Azure servers tested|
 |`data-processed/TCP-Single-Conn-Perf_combined.csv`|CSV-based combined file containing summarized results for all runs. See the [Dataset Description](#dataset-description) section for more details|
 |`Process-Logs.py`|Python script to process logs for TCP single connection performance|
 |`plot-section3-figure8.py`|Python script to generate figure 8. See the [Generating Plots](#generating-plots) section for more details| 
@@ -28,7 +27,6 @@ python3 plot-section3-figure8.py
 |-------------|-------------|
 |`server_location`|Location of Microsoft Azure server in US
 |`latency_min`|Minimum latency seen for server in ping test (ms)
-|`month`|Month when test was done
 |`type`|Connection type used (TCP-1 default, UDP, TCP-8, TCP-1 tuned) 
 |`iperf_run_number`|Iperf run number in 5GTracker
 |`distance`|Distance between client and azure servers (miles)
