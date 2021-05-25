@@ -2,11 +2,17 @@
 import glob
 import pandas as pd
 import os
-from set_paths import *
+import argparse
 
-OUTPUT_FOLDER = '/home/harry/5g/ArtifactDataset_output/'
+# Usage: python combine_dataset.py -p [data path] -s [save path]
 
-EXPR_TYPE = 'MI-Walking-Power-Iperf'
+ap = argparse.ArgumentParser()
+ap.add_argument("-t", "--type", help = "experiment type")
+ap.add_argument("-s", "--save", help = "path to save the data")
+args = vars(ap.parse_args())
+
+EXPR_TYPE = args["type"]
+OUTPUT_FOLDER = args["save"]
 DATA_FOLDER = '{}{}/merged-logs/'.format(OUTPUT_FOLDER, EXPR_TYPE)
 
 # read all files names

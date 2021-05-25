@@ -45,26 +45,14 @@ print(f"Shape: {df.shape}")
 df_train, df_test = train_test_split(df, train_size = 0.7, test_size = 0.3, random_state = 5)
 
 
-# X_column = ["RSRP", "SINR", "DL", "UL", "SW_POWER"]
-# X_column = ["RSRP", "SINR", "DL", "UL"]
-# X_column = ["RSRP", "SINR"]
-
-# X_column = ["RSRP", "CPU_TEMP", "BATTERY_TEMP", "DL", "UL"]
-# X_column = ["RSRP", "CPU_TEMP", "BATTERY_TEMP", "DL"]
-# X_column = ["RSRP", "CPU_TEMP", "BATTERY_TEMP", "UL"]
-# X_column = ["RSRP", "CPU_TEMP", "DL", "UL"]
-# X_column = ["RSRP", "BATTERY_TEMP", "DL", "UL"]
-
-# X_column = ["RSRP", "DL", "UL", "SW_POWER"]
 X_column = ["RSRP", "DL", "UL"]
-# X_column = ["RSRP", "DL"]
-# X_column = ["RSRP", "UL"]
-# X_column = ["SW_POWER"]
 # X_column = ["RSRP"]
 # X_column = ["DL", "UL"]
+
+# X_column = ["RSRP", "DL", "UL", "SW_POWER"]
+# X_column = ["SW_POWER"]
 print(X_column)
 
-Y_column = ["POWER"]
 Y_column = ["POWER_FULL"]
 
 X = df[X_column].to_numpy()
@@ -145,18 +133,6 @@ for i in range(len(dtrs)):
 	X_Y_errors = np.hstack((X_test, Y_test.reshape(-1,1), Y_pred.reshape(-1,1), errors.reshape(-1,1)))
 	print(errors.mean())
 
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_thrpt_temp-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_dl_temp-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_ul_temp-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_thrpt_cputemp-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_thrpt_battemp-depth{i+5}.csv", header=None, index=None)
-
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_thrpt-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_dl-depth{i+5}.csv", header=None, index=None)
-	# pd.DataFrame(errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_ul-depth{i+5}.csv", header=None, index=None)
-
-	# pd.DataFrame(X_Y_errors).to_csv(f"/home/harry/5g/TCP-scripts/results/plots/model-error/add_temperature/rsrp_thrpt_temp-depth{i+5}_XYErr.csv", header=None, index=None, sep='\t')
-
 	# print(f"{mae}")
 	# print(f"{rmse}")
 	# print(f"{score}")
@@ -169,28 +145,3 @@ for i in range(len(dtrs)):
 	# predictions = cross_val_predict(model, X, Y, cv=10)
 	scores = cross_val_score(model, X, Y, cv=10, scoring='r2') 
 	print(f"{np.abs(scores.mean())}\t{scores.std()}\n")  # score
-	
-	# case = np.array([[-84,1751.462473,0]])
-	# case = np.array([[-90,249.147105,26.259730]])
-	# case = np.array([[-88,190.382472,25.120319]])
-	# case = np.array([[-100,707.428054,21.390884]])
-	# case = np.array([[-97,2360.556081,1.479861],
-	# 				[-92,2000.887389,1.330832],
-	# 				[-94,1703.345958,1.198197],
-	# 				[-96,2101.369972,1.477216],
-	# 				[-92,1759.536972,1.250720],
-	# 				[-92,1766.830579,1.300534],
-	# 				[-90,2136.989794,1.434982],
-	# 				[-90,2144.741260,1.370147],
-	# 				[-90,2040.357263,1.267918]])
-	# case = np.array([[-100,1132.174474,0.731258,8307.501300],
-	# 				[-98,1365.771350,0.855655,8721.435800],
-	# 				[-96,880.757335,0.601633,8324.642200],
-	# 				[-96,986.439241,0.758468,8117.492600],
-	# 				[-94,1155.437984,0.689125,7951.554100],
-	# 				[-95,1403.160979,0.910354,9346.896300],
-	# 				[-98,1069.212873,0.677835,9012.831100],
-	# 				[-99,818.886635,0.669581,7773.945200],
-	# 				[-100,895.321102,0.752615,7960.306900],
-	# 				[-96,1651.002118,1.152345,9153.240600]])
-	# print(model.predict(case))

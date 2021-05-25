@@ -141,8 +141,6 @@ send_thrpt = send_thrpt[range_l_5g:range_r_5g]
 
 
 
-
-
 # print(results[::POWER_STEP,0].shape, results[:int(len(results)/POWER_STEP)*POWER_STEP,1].reshape(-1, POWER_STEP).mean(axis=1).shape)
 # print(p_ts.shape, power.shape)
 
@@ -159,8 +157,6 @@ print(sw_power[idx].shape, sw_power[idx_ext].shape)
 print(recv_thrpt[idx].shape, recv_thrpt[idx_ext].shape)
 print(send_thrpt[idx].shape, send_thrpt[idx_ext].shape)
 print(power[idx].shape, power[idx_ext].shape)
-
-# sys.exit(0)
 
 
 # fig, ax1 = plt.subplots()
