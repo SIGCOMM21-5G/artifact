@@ -220,14 +220,14 @@ ax5.set_title('T-Mobile 4G', fontsize=18)
 plt.legend([fourg_conn, fourg_idle, inac_label], ['RRC_CONNECTED', 'RRC_IDLE', 'RRC_INACTIVE'], fontsize=15, ncol=3,
            loc='lower center', bbox_to_anchor=(0.2, -1.1), facecolor='whitesmoke')
 
-
-# set the spacing between subplots
-plt.subplots_adjust(left=0.01,
-                    bottom=0.1,
-                    right=0.02,
-                    top=0.09,
-                    wspace=0.1,
-                    hspace=0.4)
+#
+# # set the spacing between subplots
+# plt.subplots_adjust(left=0.01,
+#                     bottom=0.1,
+#                     right=0.02,
+#                     top=0.09,
+#                     wspace=0.1,
+#                     hspace=0.4)
 
 plt.tight_layout()
 plotme(plt, plot_id, plot_name, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
