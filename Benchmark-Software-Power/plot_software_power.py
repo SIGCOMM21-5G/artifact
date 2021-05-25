@@ -57,7 +57,6 @@ if len(sys.argv) >= 4:
 	if len(sys.argv) == 4:
 		sys.exit("Parameter not enough!")
 	start, end = set_inteval(3, 4, NEW_SAMPLING_RATE)
-	print(start,)
 else:
 	start = 0
 	end = results.shape[0] - 1
