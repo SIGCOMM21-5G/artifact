@@ -24,16 +24,18 @@ For the result of different ABR algorithms over 5G, the result will be in `run_e
 
 ### Run a specific set of experiments
 
+- Prepare trace data: put the network traces you want to test in the corresponding trace folder (see below table).
+
 - To run a specific experiment, see the corresponding scripts.
 
 
-| Experiment  | Script | Output Directory |
-| ----------- | ----------- | ----------- |
-| 7 ABR Algorithms (driving)   |   `run_exp/run_5g_driving.sh`  |  `run_exp/results_driving`|
-| 7 ABR Algorithms (walking)   | `run_exp/run_5g_driving.sh`    |  `run_exp/results_walking`|
-| Throughput Predictor   | `run_exp/run_5g_predict.sh`    |  `run_exp/results_predict`|
-| Different Chunk Length   | `run_exp/run_5g_chunklen.sh`    |  `run_exp/results_chunklen`|
-| Interface Selection   | `run_exp/run_5g_interface_sel.sh`    |  `run_exp/results_interface_sel`|
+| Experiment  | Script | Trace Folder | Output Directory | Expected Finish Time (Hours) | Expected Finish Time - Sampled Set (Hours) |
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| 7 ABR Algorithms (driving)   | `cooked_traces_driving`  |  `run_exp/run_5g_driving.sh`  |  `run_exp/results_driving`| 19 | 5.5 |
+| 7 ABR Algorithms (walking)   | `cooked_traces_walking`  | `run_exp/run_5g_driving.sh`    |  `run_exp/results_walking`| 31 | 1.5 |
+| Throughput Predictor   | `cooked_traces_pred`  | `run_exp/run_5g_predict.sh`    |  `run_exp/results_predict`| 1 | 1 |
+| Different Chunk Length   | `cooked_traces_chunklen`  | `run_exp/run_5g_chunklen.sh`    |  `run_exp/results_chunklen`| 5 | 1 |
+| Interface Selection   | `cooked_traces_multipath/driving`  | `run_exp/run_5g_interface_sel.sh`    |  `run_exp/results_interface_sel`| 5 | 2 |
 
 ### Output file format
 The output files will be logs recording information (bitrate, stall, etc) about each video session. The name will be in the format of `log_<ABR alrgoithm>_<trace_file>_<specific_setting(optional)>`. 
