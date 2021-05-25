@@ -21,11 +21,10 @@ IPERF_SUMMARY_FILE = path.join(CLIENT_LOGS_DIR, f"{DEVICES[0]}-iPerfSummary.csv"
 MN_WALKING_SUMMARY = path.join(DATA_DIR, f"{EXPR_TYPE}-Summary.csv")
 iperf_run_summary = pd.read_csv(IPERF_SUMMARY_FILE)
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
-FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
+FORCE_REGENERATE_FLAG = 1  # set to 1 if you want to do everything from scratch
 summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left',
                    left_on='Iperf run number', right_on='RunNumber')
-summary_filtered = summary[summary['SessionID'].notna() &
-                           (summary['Successful?'] == 'yes')].copy(deep=True)
+summary_filtered = summary[summary['SessionID'].notna()].copy(deep=True)
 del summary
 summary_filtered['SessionID'] = summary_filtered['SessionID'].astype(int)
 summary_filtered.reset_index(drop=True, inplace=True)
@@ -94,11 +93,8 @@ for idx, row in summary_filtered.iterrows():
     session_logs['r_time'] = session_logs['timestamp'].apply(lambda x: x.replace(microsecond=0)).astype(str).str[:-6]
     session_grp = session_logs.groupby(['r_time']).agg(latitude=('latitude', np.mean),
                                                        longitude=('longitude', np.mean),
-                                                       locationAccuracy=('locationAccuracy', np.mean),
                                                        movingSpeed=('movingSpeed', np.mean),
-                                                       movingSpeedAccuracyMPS=('movingSpeedAccuracyMPS', np.mean),
                                                        compassDirection=('compassDirection', np.mean),
-                                                       compassAccuracy=('compassAccuracy', np.mean),
                                                        nrStatus=('nrStatus', lambda x: list(x.unique())),
                                                        rsrp=('rsrp', np.max),
                                                        nr_ssRsrp=('nr_ssRsrp', np.max),

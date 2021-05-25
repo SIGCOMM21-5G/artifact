@@ -28,18 +28,17 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |`05-Prepare-Data-Modeling.py`|Python script to generate separate data files for each model/carrier/network-type/ configuration|
 
 ## Dataset Description
+Below is the description of [cleaned data](data-processed/Loc-A-Wild_combined.csv) generated after running the provided scripts.
+
 | Field Name | Description |
 |-------------|-------------|
-|`compassAccuracy`|Compass accuracy reported by Android API|
 |`compassDirection`|Compass direction reported by Android API|
 |`currentNow`|Current value exposed by sysfs interface|
 |`latitude`|Latitude position of mobile device|
-|`locationAccuracy`|Location accuracy reported by Android API|
 |`longitude`|Longitude position of mobile device|
 |`mobileRx`|Number of received bytes on cellular interface|
 |`mobileTx`|Number of transmitted bytes on cellular interface|
 |`movingSpeed`|Moving speed of the mobile device|
-|`movingSpeedAccuracyMPS`|Moving speed accuracy reported by Android API|
 |`nrStatus`|Mobile device connected to 5G NR or not|
 |`nrStatus_array`|NR status sequence seen in each second|
 |`nr_ssRsrp`|Max Reference Signal Received Power for current NR cell in each second|
@@ -61,7 +60,6 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |`avg_power_rolled`|Average power observed by Monsoon Power Monitor in each second after using a rolling window|
 |`avg_power_baseline`|Average power observed by Monsoon Power Monitor after subtracting baseline power|
 |`provider`|Service provider (Verizon, T-Mobile)|
-|`network_type`|Network Type for each run (NSA+LTE, SA, mmWave)|
 |`direction`|Direction of Iperf data transfer (Uplink, Downlink)|
 
 
@@ -73,8 +71,6 @@ Here are the software/package requirements. The version number in the bracket in
 
 - Python 3 (3.7.7 and higher)
 - Pandas (1.1.3 and higher)
-- scikit-learn	(0.24.1 and higher)
-- seaborn (0.11.1 and higher)
 
 ### Running code
 The processed logs can be found in `data-processed` folder. 

@@ -30,13 +30,12 @@ USE_PM_ROLLING = True
 PM_ROLLING_WINDOW = 10  # set to 0 if functionality not wanted
 SW_ROLLING_WINDOW = 10
 LOGS_GRANULARITY = 1
-FORCE_REGENERATE_FLAG = 0  # set to 1 if you want to do everything from scratch
+FORCE_REGENERATE_FLAG = 1  # set to 1 if you want to do everything from scratch
 iperf_run_summary = pd.read_csv(IPERF_SUMMARY_FILE)
 mn_walking_summary = pd.read_csv(MN_WALKING_SUMMARY)
 summary = pd.merge(mn_walking_summary, iperf_run_summary, how='left',
                    left_on='Iperf run number', right_on='RunNumber')
-summary_filtered = summary[summary['SessionID'].notna() &
-                           (summary['Successful?'] == 'yes')].copy(deep=True)
+summary_filtered = summary[summary['SessionID'].notna()].copy(deep=True)
 summary_filtered['SessionID'] = summary_filtered['SessionID'].astype(int)
 summary_filtered['Iperf run number'] = summary_filtered['Iperf run number'].astype(int)
 summary_filtered.reset_index(drop=True, inplace=True)
@@ -115,7 +114,8 @@ for idx, row in summary_filtered.iterrows():
 
     ## Step 2. Convert Iperf timestamps to datetime object
     iperf_logs['Fixedtimestamp'] = pd.to_datetime(iperf_logs['Fixedtimestamp'])
-    iperf_logs['timestamp'] = iperf_logs['Fixedtimestamp'].apply(lambda x: x.replace(microsecond=0)).astype(str).str[:-6]
+    iperf_logs['timestamp'] = iperf_logs['Fixedtimestamp'].apply(lambda x: x.replace(microsecond=0)).astype(str).str[
+                              :-6]
     iperf_logs['timestamp'] = pd.to_datetime(iperf_logs['timestamp'])
     del iperf_logs['time']
     iperf_logs.sort_values(by=['timestamp'], inplace=True, ascending=True)
@@ -138,12 +138,10 @@ for idx, row in summary_filtered.iterrows():
 
     ## Step 6. Filter columns
     merged_logs.rename(columns={'time_x': 'time_since_start', 'timestamp_x': 'timestamp'}, inplace=True)
-    columns_to_filter = ['exp_label', 'timestamp_y', 'time_y',
-                         '_socket', '_bytes', 'rtt', 'snd_cwnd']
-    merged_logs.drop(columns=columns_to_filter, inplace=True)
-
-    ## Columns that need to be deleted with special care as certain runs don't have these columns
-    columns_to_delete = 'rttvar', 'pmtu',  '_omitted'
+    columns_to_delete = ['parent_file', 'protocol', 'length',
+                         '_seconds', 'bits_per_second', 'rttvar', 'pmtu', '_omitted',
+                         'iperf_did', 'exp_label', 'timestamp_y', 'time_y', '_socket',
+                         '_bytes', 'rtt', 'snd_cwnd']
     for col in columns_to_delete:
         if col in merged_logs.columns.tolist():
             del merged_logs[col]
@@ -151,20 +149,13 @@ for idx, row in summary_filtered.iterrows():
     ## Step 7. filter rows when iperf was not running
     merged_logs.dropna(subset=['iperf_type'], inplace=True)
     merged_logs.sort_values(by=['run_number', 'seq_no', 'Fixedtimestamp'], ascending=True, inplace=True)
-    merged_logs.drop_duplicates(subset=['Fixedtimestamp',	'_start',	'_end'], keep='first', inplace=True)
+    merged_logs.drop_duplicates(subset=['Fixedtimestamp', '_start', '_end'], keep='first', inplace=True)
 
     ## Step 8. Correct time_since_start after trimming starting point
     merged_logs['time_since_start'] = merged_logs['time_since_start'] - merged_logs.iloc[0]['time_since_start']
     merged_logs['provider'] = row['Provider']
-    merged_logs['network_type'] = row['Network Type']
+    merged_logs['radio_type_used'] = row['Network Type']
     merged_logs['direction'] = row['Direction']
-    merged_logs = merged_logs.iloc[2:]
-
-    ## Step 9. Drop unnecessary columns
-    drop_col_list = ['parent_file', 'protocol', 'length', 'Fixedtimestamp', '_start', '_end',
-                     '_seconds', 'bits_per_second', 'session_num', 'conn_num', 'iperf_type',
-                     'iperf_did', 'seq_no']
-    merged_logs.drop(columns=drop_col_list, inplace=True)
 
     # export results
     print('saving file: {}'.format(out_name))
