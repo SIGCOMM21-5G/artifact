@@ -20,8 +20,7 @@ Target throughput range:
 - 4G: 10-200 Mbps for downlink and 5-30 Mbps for downlink
 - 5G: 10-3000 Mbps for downlink and 5-120 Mbps for uplink
 
-We only provide sample data in this repo. Please find the complete dataset and the data summary in:
-> (links here)
+We only provide sample data in this repo. Please find the complete dataset and the data summary on [Google drive](https://drive.google.com/drive/folders/1n7IoMMlTvHKtTibUMbzrdnAM2ToKdkdn?usp=sharing).
 
 ### Requirements
 

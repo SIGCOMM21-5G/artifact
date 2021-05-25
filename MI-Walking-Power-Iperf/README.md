@@ -31,8 +31,7 @@ The data were collected when walking through 5G areas while performing data down
 | `hardware_power`      | Power obtained by subtracting the base power from the total power measured by Monsoon power monitor (mW) |
 | `hardware_power_full`      | Total power measured by Monsoon power monitor (mW) |
 
-We only provide sample data in this repo. Please find the complete dataset and the data summary in:
-> (links here)
+We only provide sample data in this repo. Please find the complete dataset and the data summary on [Google drive](https://drive.google.com/drive/folders/17DBed12BaHQtEJmSdcZW2wM_sUwW29XO?usp=sharing).
 
 ### Requirements
 

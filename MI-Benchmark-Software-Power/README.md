@@ -21,8 +21,7 @@ The data were collected when running different types of test cases on the UE and
 | `currentNow`      | Instantaneous current readings |
 | `voltageNow`      | Instantaneous voltage readings |
 
-We only provide sample data in this repo. Please find the complete dataset and the data summary in:
-> (links here)
+We only provide sample data in this repo. Please find the complete dataset and the data summary on [Google drive](https://drive.google.com/drive/folders/1zTzPrJbJs_Z-P6sfPHZAgurgjWQuFI6O?usp=sharing).
 
 ### Requirements
 

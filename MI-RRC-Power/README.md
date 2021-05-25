@@ -15,8 +15,7 @@ The data were collected when repeating RRC state transitions under 4G and 5G (by
 - Trace 1-3 were collected when triggering the phone to enter RRC_CONNECTED after 20s inactivity (back to RRC_IDLE).
 - Trace 4-6 were collected when performing the same experiment under 5G.
 
-We only provide sample data in this repo. Please find the complete dataset and the data summary in:
-> (links here)
+We only provide sample data in this repo. Please find the complete dataset and the data summary on [Google drive](https://drive.google.com/drive/folders/13xJokrKJ6v8PdbgtD-xokCJuVyu_O4eZ?usp=sharing).
 
 ### Requirements
 
