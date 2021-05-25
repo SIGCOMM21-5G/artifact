@@ -13,3 +13,4 @@ Ratelimit-Iperf/00a-Change-Iperf-Date.py
 *.png
 *.pdf
 *.dot
+*.pickle
