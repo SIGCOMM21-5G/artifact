@@ -1,4 +1,4 @@
-radio_type,carrier,interval,timestamp,RTT1,RTT2,Network,KeepOrDrop
+enabled_radio_type,carrier,interval,timestamp,RTT1,RTT2,active_radio_type,KeepOrDrop
 4G-LTE,Verizon,0,1621792969951,52,51,4,YEP
 4G-LTE,Verizon,0.1,1621792970102,88,89,4,YEP
 4G-LTE,Verizon,0.2,1621792970391,90,90,4,YEP

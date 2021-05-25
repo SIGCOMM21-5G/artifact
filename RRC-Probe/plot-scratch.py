@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import matplotlib.patches as patches
+from utils import *
+
+SHOW_PLOT_FLAG = False
 
 
 def translate_network_type(net_type):
@@ -105,13 +108,16 @@ grp2['color'] = grp2.apply(lambda x: determine_color_net_type(translate_network_
 
 
 ### plotting
-# dfsatm = grp[(grp['carrier'] == 'TMobile') & (grp['enabled_radio_type'] == '5G-SA-Low-Band')]
-dfsatm = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '5G-NSA-mmWave')]
-fig = plt.figure(figsize=(13, 6))
-ax0 = fig.add_subplot(221)
-ax0.scatter(dfsatm['interval'], dfsatm['RTT_median'], c=dfsatm['color'])
-# ax0.set_title('T-Mobile SA 5G', fontsize=18)
-ax0.set_title('Verizon mmWave 5G', fontsize=18)
+plot_id = 10
+plot_name = 'figure'
+
+dfnsammvz = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '5G-NSA-mmWave')]
+fig = plt.figure(figsize=(15, 8))
+
+# ROW 1
+ax0 = fig.add_subplot(321)
+ax0.scatter(dfnsammvz['interval'], dfnsammvz['RTT_median'], c=dfnsammvz['color'])
+ax0.set_title('Verizon 5G NSA mmWave', fontsize=18)
 ax0.set_ylabel("RTT (ms)", fontsize=20)
 ax0.tick_params(axis="both", labelsize=18)
 ax0.set_ylim(0, 1880)
@@ -127,32 +133,10 @@ ax0.add_patch(sa_conn)
 ax0.add_patch(sa_inac)
 ax0.add_patch(sa_idle)
 
-# dfnsatm = grp[(grp['carrier'] == 'TMobile') & (grp['enabled_radio_type'] == '5G-NSA-Low-Band')]
-dfnsatm = grp2[(grp2['carrier'] == 'T-Mobile') & (grp2['enabled_radio_type'] == '5G-NSA-Low-Band')]
-ax1 = fig.add_subplot(222)
-ax1.scatter(dfnsatm['interval'], dfnsatm['RTT_median'], c=dfnsatm['color'])
 
-# dfnsavz = grp[(grp['carrier'] == 'Verizon') & (grp['enabled_radio_type'] == '5G-NSA-Low-Band')]
-dfnsavz = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '5G-NSA-Low-Band')]
-ax2 = fig.add_subplot(223)
-ax2.scatter(dfnsavz['interval'], dfnsavz['RTT_median'], c=dfnsavz['color'])
-
-# dfltetm = grp[(grp['carrier'] == 'TMobile') & (grp['enabled_radio_type'] == '4G-LTE')]
-dfltetm = grp2[(grp2['carrier'] == 'T-Mobile') & (grp2['enabled_radio_type'] == '4G-LTE')]
-ax3 = fig.add_subplot(224)
-ax3.scatter(dfltetm['interval'], dfltetm['RTT_median'], c=dfltetm['color'])
-
-ax2.set_ylim(0, 1780)
-ax2.set_yticks(np.arange(0, 1780, 500), minor=False)
-ax2.set_xlim(0, 19.0)
-nsa2_conn = patches.Rectangle((7.8, 1650), 10.2 - 7.8, 200, linewidth=1, edgecolor='forestgreen',
-                              facecolor='forestgreen')
-nsa2_idle = patches.Rectangle((10.2, 1650), 15.2 - 10.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
-ax2.add_patch(nsa2_conn)
-ax2.add_patch(nsa2_idle)
-
-
-
+dfsatm = grp[(grp['carrier'] == 'TMobile') & (grp['enabled_radio_type'] == '5G-SA-Low-Band')]
+ax1 = fig.add_subplot(322)
+ax1.scatter(dfsatm['interval'], dfsatm['RTT_median'], c=dfsatm['color'])
 ax1.set_ylim(0, 1880)
 ax1.set_yticks(np.arange(0, 1880, 500), minor=False)
 # ax1.set_xlim(7.8, 19.0)
@@ -163,7 +147,33 @@ nsa1_idle = patches.Rectangle((10.2, 1750), 19.0 - 10.2, 200, linewidth=1, edgec
                               label='RRC_IDLE')
 ax1.add_patch(nsa1_conn)
 ax1.add_patch(nsa1_idle)
+ax1.set_title('T-Mobile 5G SA Low-Band', fontsize=18)
+ax1.tick_params(axis="both", labelsize=18)
 
+
+
+## ROW 2
+dfnsalbvz = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '5G-NSA-Low-Band')]
+ax2 = fig.add_subplot(323)
+ax2.scatter(dfnsalbvz['interval'], dfnsalbvz['RTT_median'], c=dfnsalbvz['color'])
+ax2.set_title('Verizon NSA Low-Band 5G (DSS)', fontsize=18)
+ax2.set_ylim(0, 1780)
+ax2.set_yticks(np.arange(0, 1780, 500), minor=False)
+ax2.set_xlim(0, 19.0)
+nsa2_conn = patches.Rectangle((7.8, 1650), 10.2 - 7.8, 200, linewidth=1, edgecolor='forestgreen',
+                              facecolor='forestgreen')
+nsa2_idle = patches.Rectangle((10.2, 1650), 15.2 - 10.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
+ax2.add_patch(nsa2_conn)
+ax2.add_patch(nsa2_idle)
+# ax2.legend(loc='lower center', fontsize=15, bbox_to_anchor=(0.4, -0.8), ncol=2, facecolor='whitesmoke')
+ax2.set_ylabel("RTT (ms)", fontsize=20)
+ax2.tick_params(axis="both", labelsize=18)
+
+
+
+dfnsalbtm = grp2[(grp2['carrier'] == 'T-Mobile') & (grp2['enabled_radio_type'] == '5G-NSA-Low-Band')]
+ax3 = fig.add_subplot(324)
+ax3.scatter(dfnsalbtm['interval'], dfnsalbtm['RTT_median'], c=dfnsalbtm['color'])
 ax3.set_ylim(0, 1780)
 ax3.set_yticks(np.arange(0, 1780, 500), minor=False)
 # ax3.set_xlim(7.8, 15.2)
@@ -177,21 +187,47 @@ inac_label = patches.Rectangle((22, 1650), 23, 0, linewidth=1, edgecolor='crimso
 ax3.add_patch(fourg_conn)
 ax3.add_patch(fourg_idle)
 ax3.add_patch(inac_label)
-
-
-ax1.set_title('T-Mobile NSA 5G', fontsize=18)
-ax2.set_title('Verizon NSA 5G', fontsize=18)
-ax3.set_title('T-Mobile 4G', fontsize=18)
-ax2.legend(loc='lower center', fontsize=15, bbox_to_anchor=(0.4, -0.8), ncol=2, facecolor='whitesmoke')
-plt.legend([fourg_conn, fourg_idle, inac_label], ['RRC_CONNECTED', 'RRC_IDLE', 'RRC_INACTIVE'], fontsize=15, ncol=3,
-           loc='lower center', bbox_to_anchor=(0.2, -0.8), facecolor='whitesmoke')
-ax2.set_xlabel("Idle Time between Packets (s)", fontsize=18)
-ax3.set_xlabel("Idle Time between Packets (s)", fontsize=18)
-ax2.set_ylabel("RTT (ms)", fontsize=20)
-
+ax3.set_title('T-Mobile 5G NSA Low Band', fontsize=18)
 ax3.tick_params(axis="both", labelsize=18)
-ax1.tick_params(axis="both", labelsize=18)
-ax2.tick_params(axis="both", labelsize=18)
+
+# ROW 3
+df4gvz = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '4G-LTE')]
+ax4 = fig.add_subplot(325)
+ax4.scatter(df4gvz['interval'], df4gvz['RTT_median'], c=df4gvz['color'])
+ax4.set_xlabel("Idle Time between Packets (s)", fontsize=18)
+ax4.set_ylim(0, 1780)
+ax4.set_yticks(np.arange(0, 1780, 500), minor=False)
+# ax3.set_xlim(7.8, 15.2)
+ax4.set_xlim(0, 19)
+ax4.set_ylabel("RTT (ms)", fontsize=20)
+ax4.tick_params(axis="both", labelsize=18)
+ax4.set_title('Verizon 4G', fontsize=18)
+
+
+df4gtm = grp2[(grp2['carrier'] == 'T-Mobile') & (grp2['enabled_radio_type'] == '4G-LTE')]
+ax5 = fig.add_subplot(326)
+ax5.scatter(df4gtm['interval'], df4gtm['RTT_median'], c=df4gtm['color'])
+ax5.set_xlabel("Idle Time between Packets (s)", fontsize=18)
+ax5.set_ylim(0, 1780)
+ax5.set_yticks(np.arange(0, 1780, 500), minor=False)
+# ax3.set_xlim(7.8, 15.2)
+ax5.set_xlim(0, 19)
+ax5.set_ylabel("RTT (ms)", fontsize=20)
+ax5.tick_params(axis="both", labelsize=18)
+ax5.set_title('T-Mobile 4G', fontsize=18)
+
+
+plt.legend([fourg_conn, fourg_idle, inac_label], ['RRC_CONNECTED', 'RRC_IDLE', 'RRC_INACTIVE'], fontsize=15, ncol=3,
+           loc='lower center', bbox_to_anchor=(0.2, -1.1), facecolor='whitesmoke')
+
+
+# set the spacing between subplots
+plt.subplots_adjust(left=0.01,
+                    bottom=0.1,
+                    right=0.02,
+                    top=0.09,
+                    wspace=0.1,
+                    hspace=0.4)
 
 plt.tight_layout()
-plt.show()
+plotme(plt, plot_id, plot_name, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
