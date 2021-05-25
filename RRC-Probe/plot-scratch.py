@@ -112,7 +112,7 @@ plot_id = 10
 plot_name = 'figure'
 
 dfnsammvz = grp2[(grp2['carrier'] == 'Verizon') & (grp2['enabled_radio_type'] == '5G-NSA-mmWave')]
-fig = plt.figure(figsize=(15, 8))
+fig = plt.figure(figsize=(11, 8))
 
 # ROW 1
 ax0 = fig.add_subplot(321)
@@ -212,22 +212,23 @@ ax5.set_ylim(0, 1780)
 ax5.set_yticks(np.arange(0, 1780, 500), minor=False)
 # ax3.set_xlim(7.8, 15.2)
 ax5.set_xlim(0, 19)
-ax5.set_ylabel("RTT (ms)", fontsize=20)
+# ax5.set_ylabel("RTT (ms)", fontsize=20)
 ax5.tick_params(axis="both", labelsize=18)
 ax5.set_title('T-Mobile 4G', fontsize=18)
 
 
-plt.legend([fourg_conn, fourg_idle, inac_label], ['RRC_CONNECTED', 'RRC_IDLE', 'RRC_INACTIVE'], fontsize=15, ncol=3,
-           loc='lower center', bbox_to_anchor=(0.2, -1.1), facecolor='whitesmoke')
+fig.legend([fourg_conn, fourg_idle, inac_label], ['RRC_CONNECTED', 'RRC_IDLE', 'RRC_INACTIVE'], fontsize=15, ncol=3,
+           loc='lower center', bbox_to_anchor=(0.7, -0.05), facecolor='whitesmoke')
 
-#
-# # set the spacing between subplots
-# plt.subplots_adjust(left=0.01,
-#                     bottom=0.1,
-#                     right=0.02,
-#                     top=0.09,
-#                     wspace=0.1,
-#                     hspace=0.4)
+# # draw fake lines (for each unique radio interface) and use them to create a legend
+fourG, = ax4.plot([-500,-500],'o', color='#1f77b4')
+fiveG, = ax4.plot([-500,-500],'o', color='#ff7f0e')
+ph, = ax4.plot([],'', ls='')
+legend2 = fig.legend((ph, fourG, fiveG),('Radio type', '4G', '5G'), columnspacing=1.0, handletextpad=0.1, loc='lower center', facecolor='whitesmoke', ncol=3, fontsize=15, bbox_to_anchor=(0.2, -0.05), markerscale=2)
+for text in legend2.get_texts():
+    plt.setp(text, color = 'k')
+
+fig.add_artist(legend2)
 
 plt.tight_layout()
 plotme(plt, plot_id, plot_name, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_inches=0.07)
