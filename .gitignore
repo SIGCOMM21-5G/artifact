@@ -7,3 +7,5 @@ __pycache__
 
 # Ignore scripts
 Ratelimit-Iperf/00a-Change-Iperf-Date.py
+/.idea/
+.~*
