@@ -26,7 +26,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `MI-RRC-Power` folder and run the following command.
+After cloning the repository, navigate to `RRC-Power` folder and run the following command.
 
 ```
 python3 plot_hardware_power.py data/PowerMonitor/screenmax-5g-loop1-rrc-1.csv 2 0 360

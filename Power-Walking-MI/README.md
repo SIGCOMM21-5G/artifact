@@ -44,7 +44,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `MI-Walking-Power-Iperf` folder and run the following command.
+After cloning the repository, navigate to `Power-Walking-MI` folder and run the following command.
 
 ```
 python3 generate_dataset.py -t data/5GTracker_iPerf/APPLE-1609992831-01.csv -p data/PowerMonitor/20210106-screenmax-5g-dl-udp-loop1-1200m-1.csv -s data/processed_dataset/mi_0106_dl_udp_1200_1.csv -b 3105.223145

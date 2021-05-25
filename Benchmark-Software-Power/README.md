@@ -32,7 +32,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `MI-Benchmark-Software-Power` folder and run the following command.
+After cloning the repository, navigate to `Benchmark-Software-Power` folder and run the following command.
 
 ```
 python3 plot_hardware_power.py data/PowerMonitor/10Hz/screenmax-5g-dl-udp-loc5-50m-2-10hz.csv 2 0 60
