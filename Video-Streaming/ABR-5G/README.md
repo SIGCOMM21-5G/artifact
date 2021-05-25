@@ -29,7 +29,7 @@ For the result of different ABR algorithms over 5G, the result will be in `run_e
 - To run a specific experiment, see the corresponding scripts.
 
 
-| Experiment  | Script | Trace Folder | Output Directory | Expected Finish Time (Hours) | Expected Finish Time - Sampled Set (Hours) |
+| Experiment  | Trace Folder | Script | Output Directory | Expected Finish Time (Hours) | Expected Finish Time - Sampled Set (Hours) |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 7 ABR Algorithms (driving)   | `cooked_traces_driving`  |  `run_exp/run_5g_driving.sh`  |  `run_exp/results_driving`| 19 | 5.5 |
 | 7 ABR Algorithms (walking)   | `cooked_traces_walking`  | `run_exp/run_5g_driving.sh`    |  `run_exp/results_walking`| 31 | 1.5 |
