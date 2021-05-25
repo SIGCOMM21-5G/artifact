@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-'''
+"""
 Description:
 Utils file which has the analysis methods to parse the data
-'''
+"""
 import os
 import numpy as np
 import matplotlib.pyplot as plt

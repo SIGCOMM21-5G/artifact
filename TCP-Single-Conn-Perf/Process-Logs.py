@@ -7,8 +7,6 @@ from os import path
 
 from utils.IperfLogs import IperfLogs
 
-__author__ = "Ahmad Hassan"
-
 
 def combine_timestamp(t1, t2):
     if not pd.isnull(t1):

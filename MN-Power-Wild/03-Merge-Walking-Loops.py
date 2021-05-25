@@ -122,7 +122,6 @@ for idx, row in summary_filtered.iterrows():
     iperf_logs.index = iperf_logs['timestamp']
 
     ## Step 3. Merge 5GTracker and Iperf logs
-    print('merging {}...'.format(row['Iperf run number']))
     tol = pd.Timedelta('30 minutes')
     tracker_iperf_logs = pd.merge_asof(left=session_logs, right=iperf_logs, right_index=True,
                                        left_index=True, direction='backward', tolerance=tol)

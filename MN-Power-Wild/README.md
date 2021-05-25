@@ -82,7 +82,7 @@ Each walking loop can be uniquely identified using `Iperf Run Number`. Note that
 
 
 ## Generating Results
-The scripts will generate the data for power model presented in section 4.4
+The scripts will generate the data used for power model presented in section 4.4
 
 ### Requirements
 Here are the software/package requirements. The version number in the bracket indicates the minimum version that our script has been tested on.

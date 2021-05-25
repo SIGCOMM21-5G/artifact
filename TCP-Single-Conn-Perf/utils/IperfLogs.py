@@ -8,13 +8,11 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-__author__ = "Ahmad Hassan"
-__credits__ = ["Eman Ramadan"]
-
 
 class IperfLogs:
     """Converts the iperf3 json/txt logs to pandas dataframes
     """
+
     @staticmethod
     def parseLogs(filename, verbose=False, include_streams=False):
         """

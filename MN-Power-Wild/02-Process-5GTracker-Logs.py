@@ -1,21 +1,10 @@
 #!/usr/bin/python3
-"""
-authors: Rishabh, Xinyue Hu, Eman
-modified by: Ahmad
-modified on 17 January, 2021
-"""
 
 import os
 from os import path
 import numpy as np
 import pandas as pd
 import re
-
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Process 5GTracker Logs
-1a. Zoom Level and Geo-coordinates to pixel coordinates
-1b. Use tower info to get panel angles etc.
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 ## Dataset Organization
 proj_dir = path.abspath(path.join(path.dirname(__file__)))
@@ -139,5 +128,4 @@ for idx, row in summary_filtered.iterrows():
 
     # export results
     session_logs.to_csv(log_filename, index=False, header=True)
-    print('file saved ({})..'.format(log_filename))
-    print('=======================================================================')
+    print('file saved ({})..\n'.format(log_filename))

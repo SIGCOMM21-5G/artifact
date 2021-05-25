@@ -1,23 +1,5 @@
 #!/usr/bin/python3
 
-"""
-author: Eman
-date: June 22, 2019
-modified on January 17, 2021
-modified by: Ahmad
-Input
-    1. INPUT txt files should be placed in the directory DATA_FOLDER
-    4. FORCE_REGENERATE_FLAG: if one all the iperf3 files will be processed again, otherwise already processed
-        files are skipped
-    No need to update any of these parameters before running this script, this file is ready to run directly
-Description
-    1. read iperf txt file
-    2. preprocess the required fields and add additional columns
-    3. export each separate txt file to a csv file
-Output
-    1. processed files can be found in OUTPUT_FOLDER
-"""
-
 import pandas as pd
 from datetime import datetime
 import pytz
