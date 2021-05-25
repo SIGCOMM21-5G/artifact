@@ -52,4 +52,6 @@ python3 combine_dataset.py -t MI-VZ-HB -s data/
 python3 dtr.py -d data -k MI-VZ-HB -f 1
 ```
 
-The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS).
+The baseline power can be retrieved from the data summary on [Google drive](https://drive.google.com/drive/folders/17DBed12BaHQtEJmSdcZW2wM_sUwW29XO?usp=sharing).
+
+For the DTR (decision tree regression) step, we use `dtr.py` for all the processed data including MI-side (raw data located under this folder) and MN-side (raw data and processing scripts in [Power-Walking-MN](https://github.com/5G-Measurement/sigcomm21-artifact/tree/main/Power-Walking-MN)) ones. The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS).
