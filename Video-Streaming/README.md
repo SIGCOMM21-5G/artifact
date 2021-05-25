@@ -6,8 +6,8 @@ TODO: Add links to the screencast files.
 
 | Screencast | Description | Viewing time |
 | ---------- | ----------- | ------------ |
-| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~30%) | 11 h |
-|An illustration example (w/ GUI) | We enable the display to showcase how our video streaming experiments can be done by controlloing the Chrome browser (with different ABR algorithms) | 25 min |
+| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~30%) in a bash terminal (using virtualdisplays) | 11 h |
+|An illustration example (w/ GUI) | We enable the display to showcase how our video streaming experiments can be done by controlling the Chrome browser (with different ABR algorithms) | 25 min |
 
 ## Folder Structure
 
