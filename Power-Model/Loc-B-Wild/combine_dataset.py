@@ -15,7 +15,7 @@ args = vars(ap.parse_args())
 
 EXPR_TYPE = args["type"]
 OUTPUT_FOLDER = args["save"]
-DATA_FOLDER = '{}/processed_{}/'.format(OUTPUT_FOLDER, EXPR_TYPE)
+DATA_FOLDER = '{}/merged_{}/'.format(OUTPUT_FOLDER, EXPR_TYPE)
 
 
 # read all files names
@@ -32,6 +32,6 @@ for idx, file in enumerate(files):
 ############################
 # concat and export
 merged_data = pd.concat(dfs)
-merged_data.to_csv('{}{}_combined.csv'.format(OUTPUT_FOLDER, EXPR_TYPE), index=False, header=True)
+merged_data.to_csv('{}/{}_combined_test.csv'.format(OUTPUT_FOLDER, EXPR_TYPE), index=False, header=True)
 
 ############################

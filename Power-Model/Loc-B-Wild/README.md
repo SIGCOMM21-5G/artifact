@@ -43,11 +43,11 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `Power-Walking-MI` folder and run the following command.
+The following example commands process the raw data to combined data which is ready for regression.
 
 ```
 python3 generate_dataset.py -t data/5GTracker_iPerf/APPLE-1609992831-01.csv -p data/PowerMonitor/20210106-screenmax-5g-dl-udp-loop1-1200m-1.csv -s data-processed/merged_mi-vz-hb/mi_0106_dl_udp_1200_1.csv -b 3105.223145
-python3 combine_dataset.py -t MI-VZ-HB -s data/
+python3 combine_dataset.py -t mi-vz-hb -s data/
 ```
 
 The baseline power can be retrieved from the data summary on [Google drive](https://drive.google.com/drive/folders/17DBed12BaHQtEJmSdcZW2wM_sUwW29XO?usp=sharing).

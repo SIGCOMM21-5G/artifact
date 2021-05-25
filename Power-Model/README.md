@@ -21,7 +21,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `Power-Walking-MI` folder and run the following command.
+After cloning the repository, navigate to `Power-Model` folder and run the following command.
 
 ```
 python3 dtr_tm.py -d Loc-A-Wild/data-processed/cleaned-logs/ -k t-mobile_nsa -f 1
