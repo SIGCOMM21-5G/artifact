@@ -4,6 +4,12 @@ __pycache__
 
 # ENV/IDE files
 .venv
+.DS_Store
 
 # Ignore scripts
 Ratelimit-Iperf/00a-Change-Iperf-Date.py
+
+## pdf and picture files
+*.png
+*.pdf
+*.dot
