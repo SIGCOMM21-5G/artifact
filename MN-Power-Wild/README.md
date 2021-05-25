@@ -3,11 +3,6 @@
 
 This folder contains the dataset, processing and modeling scripts for walking loops conducted using **5GTracker** and Monsoon Power Monitor at UMN. It covers power modeling results presented in Section 4.4 of the paper. All the power related tests were conducted using Samsung S20U on MN side. Data was collected for two carriers (Verizon and T-Mobile).
 
-**Run the following command to generate results.**
-
-```bash
-python3 06-DRT-Model.py
-```
 
 ## Folder Structure
 The flow diagram below gives a brief overview of steps performed to generate data for MN Power Wild experiments.
@@ -87,7 +82,7 @@ Each walking loop can be uniquely identified using `Iperf Run Number`. Note that
 
 
 ## Generating Results
-The scripts will generate power model results for section 4.4
+The scripts will generate the data for power model presented in section 4.4
 
 ### Requirements
 Here are the software/package requirements. The version number in the bracket indicates the minimum version that our script has been tested on.
@@ -98,9 +93,11 @@ Here are the software/package requirements. The version number in the bracket in
 - seaborn (0.11.1 and higher)
 
 ### Running code
-To regenerate the logs from scratch, the following commands can be used. 
+The processed logs can be found in `data-processed` folder. 
 
-Note that we have put some sample raw logs in the data folder. To regenerate complete results, download the data from [google-drive](https://drive.google.com/drive/folders/1yxmJr3zl5dn81d1LLHwyOI--6l0hOcYE?usp=sharing) and put it in the data folder.
+Note that we have only put the experiment summary file `MN-Power-Wild-Summary.csv` in the data folder due to file size of raw logs. To regenerate complete logs, download the data from [google-drive](https://drive.google.com/drive/folders/1yxmJr3zl5dn81d1LLHwyOI--6l0hOcYE?usp=sharing) and put it in the `data` folder.
+
+To regenerate the logs from scratch, the following commands can be used. 
 
 ```bash
 python3 01-Process-Iperf-Logs.py && \
@@ -111,9 +108,3 @@ python3 05-Prepare-Data-Modeling.py
 ```
 
 The processed logs will be placed in `data-processed` folder. The [Folder Structure](#folder-structure) section gives a detailed overview of all the files in `data-processed` folder.
-
-To generate power model results, simply run the following command
-
-```bash
-python3 06-DRT-Model.py
-```
