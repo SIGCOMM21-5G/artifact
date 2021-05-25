@@ -7,7 +7,7 @@
 #	3: SS
 
 # Usage: python dtr.py -d [training data path] -k [keyword in filenames] -s [optional, save the improved model]
-# Example: python dtr.py -d data/ -k MI-VZ-HB -f 1
+# Example: python dtr_tm.py -d Loc-A-Wild/data-processed/cleaned-logs/ -k t-mobile_nsa -f 1
 
 import numpy as np
 import pandas as pd
@@ -39,7 +39,9 @@ for file in files:
     df_list.append(tmp)
     # print(tmp.head(), tmp.size)
 df = pd.concat(df_list, ignore_index=True)
-df.columns = ["Timestamp", "nrStatus", "LTE_RSRP", "nr_ssRsrp", "nr_ssSinr", "downlink_Mbps", "uplink_Mbps", "software_power", "hardware_power", "hardware_power_full"]
+df.columns = ["timestamp", "downlink_rolled_mbps_3", "uplink_rolled_mbps_3", "downlink_rolled_mbps_4", "uplink_rolled_mbps_4", "downlink_rolled_mbps_2", "uplink_rolled_mbps_2", 
+			"sw_power_baseline", "avg_power_baseline", "nr_ssRsrp_avg", "rsrp", "nr_ssRsrp", "nr_ssSinr", "rsrp_avg", "nrStatus", "nr_ssSinr_avg", "provider", "direction", 
+			"network_type", "sw_power_rolled", "avg_power_rolled", "avg_power", "sw_power", "downlink_mbps", "uplink_mbps", "Throughput"]
 # df = pd.read_csv(args["data"], header = None)
 # print(df.head())
 # print(f"Shape: {df.shape}")
@@ -47,15 +49,15 @@ df.columns = ["Timestamp", "nrStatus", "LTE_RSRP", "nr_ssRsrp", "nr_ssSinr", "do
 df_train, df_test = train_test_split(df, train_size = 0.7, test_size = 0.3, random_state = 5)
 
 
-feature_sets = [["nr_ssRsrp", "downlink_Mbps", "uplink_Mbps"],
-				["downlink_Mbps", "uplink_Mbps"],
+feature_sets = [["nr_ssRsrp", "downlink_mbps", "uplink_mbps"],
+				["downlink_mbps", "uplink_mbps"],
 				["nr_ssRsrp"]]
 # X_column = ["nr_ssRsrp", "downlink_Mbps", "uplink_Mbps", "software_power"]
 # X_column = ["software_power"]
 X_column = feature_sets[int(args["feature"])]
 print(X_column)
 
-Y_column = ["hardware_power_full"]
+Y_column = ["avg_power"]
 
 X = df[X_column].to_numpy()
 Y = df[Y_column].to_numpy().reshape(-1)

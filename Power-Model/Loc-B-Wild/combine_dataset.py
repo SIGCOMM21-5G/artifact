@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Usage: python combine_dataset.py -p [data path] -s [save path]
-# Example: python combine_dataset.py -t MI-VZ-HB -s data/
+# Example: python combine_dataset.py -t mi-vz-hb -s data/
 
 import glob
 import pandas as pd
