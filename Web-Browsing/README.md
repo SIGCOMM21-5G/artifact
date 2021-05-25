@@ -19,9 +19,9 @@ This folder contains the dataset and plotting scripts for the Web Browsing measu
 
 ## Data Folder Structure
 
-Since the dataset is too large, We release the data folder in [Google Drive](). 
+Since the dataset is too large, We release the data folder in [Google Drive](https://drive.google.com/drive/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0?usp=sharing). 
 
-We describe the dataset information in `Web Page Experiments Log.csv` File in the data folder. The Log File's structure is formed like the table below.
+We describe the dataset information in [Web Page Experiments Log.csv](https://drive.google.com/file/d/1ShOFsJ22KvY4ImFQZgnAl3GaHWOwb2Y6/view?usp=sharing) File in the data folder. The Log File's structure is formed like the table below.
 
 | TimestampID | Directory | Carrier | Network Type | websitesRange |
 | :---------: | :-------: | :-----: | :----------: | :-----------: |
@@ -33,7 +33,7 @@ We describe the dataset information in `Web Page Experiments Log.csv` File in th
 * `TimestampID` is the timestamp ID when the experiment started.
 * `DirectoryID` is the directory name to locate the experiment data folder.
 * `Carrier` is the carrier Type we used in the experiment. 
-* `Network Type` is the network type when we did the 
+* `Network Type` is the network type when we did the experiment. It will be 4G or 5G.
 * `websiteRange` will indicate the collected websitesID range. For example, 1-1500 means collect the Top 1-1500 websites in the [Alexa Rankings](https://www.alexa.com/topsites).
 
 Thus, to access `nth` round of experiment, the collected har file data can be accessed using `Dn/har-file/Tn` path under data folder. And the collected TCPDUMP file can be accessed using `Dn/tcpdump-file/Tn` path under data folder.
