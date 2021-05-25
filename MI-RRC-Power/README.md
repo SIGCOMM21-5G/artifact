@@ -26,10 +26,10 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `MI-Benchmark-Software-Power` folder and run the following command.
+After cloning the repository, navigate to `MI-RRC-Power` folder and run the following command.
 
 ```
-python3 plot_hardware_power.py data/PowerMonitor/screenmax-5g-loop1-rrc-1.csv 2 0 60
+python3 plot_hardware_power.py data/PowerMonitor/screenmax-5g-loop1-rrc-1.csv 2 0 360
 ```
 
 The last two parameters indicate the time interval you want to generate the results for. By default the script will process the entire data.

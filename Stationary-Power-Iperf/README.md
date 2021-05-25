@@ -1,4 +1,4 @@
-# Benchmarking Software-based Power Monitor
+# Stationary Power experiments
 
 This folder contains the dataset and scripts for controlled power experiments. It covers all the figures referred om Section 4.3 which include Figures 11, 12, 13, 14.
 
@@ -32,7 +32,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `MI-Benchmark-Software-Power` folder and run the following command.
+After cloning the repository, navigate to `Stationary-Power-Iperf` folder and run the following command.
 
 ```
 python3 plot_hardware_power.py data/PowerMonitor/20201130/screenmax-5g-udp-loc5-600m-1.csv 2 0 60
