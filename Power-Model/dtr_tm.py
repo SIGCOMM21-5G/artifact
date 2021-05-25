@@ -41,7 +41,7 @@ for file in files:
 df = pd.concat(df_list, ignore_index=True)
 df.columns = ["timestamp", "downlink_rolled_mbps_3", "uplink_rolled_mbps_3", "downlink_rolled_mbps_4", "uplink_rolled_mbps_4", "downlink_rolled_mbps_2", "uplink_rolled_mbps_2", 
 			"sw_power_baseline", "avg_power_baseline", "nr_ssRsrp_avg", "rsrp", "nr_ssRsrp", "nr_ssSinr", "rsrp_avg", "nrStatus", "nr_ssSinr_avg", "provider", "direction", 
-			"network_type", "sw_power_rolled", "avg_power_rolled", "avg_power", "sw_power", "downlink_mbps", "uplink_mbps", "Throughput"]
+			"radio_type_used", "sw_power_rolled", "avg_power_rolled", "avg_power", "sw_power", "downlink_mbps", "uplink_mbps", "Throughput"]
 # df = pd.read_csv(args["data"], header = None)
 # print(df.head())
 # print(f"Shape: {df.shape}")
