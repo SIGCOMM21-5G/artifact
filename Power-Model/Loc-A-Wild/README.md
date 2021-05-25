@@ -32,34 +32,34 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |-------------|-------------|
 |`compassAccuracy`|Compass accuracy reported by Android API|
 |`compassDirection`|Compass direction reported by Android API|
-|`currentNow`|Current value exposed by sysfs interface (unit)|
+|`currentNow`|Current value exposed by sysfs interface|
 |`latitude`|Latitude position of mobile device|
 |`locationAccuracy`|Location accuracy reported by Android API|
 |`longitude`|Longitude position of mobile device|
 |`mobileRx`|Number of received bytes on cellular interface|
 |`mobileTx`|Number of transmitted bytes on cellular interface|
-|`movingSpeed`|Moving speed of the mobile device (unit)|
+|`movingSpeed`|Moving speed of the mobile device|
 |`movingSpeedAccuracyMPS`|Moving speed accuracy reported by Android API|
 |`nrStatus`|Mobile device connected to 5G NR or not|
 |`nrStatus_array`|NR status sequence seen in each second|
-|`nr_ssRsrp`|Max Reference Signal Received Power for current NR cell in each second (unit)|
-|`nr_ssRsrp_avg`|Average Reference Signal Received Power for current NR cell in each second (unit)|
-|`nr_ssSinr`|Max Signal to Interference & Noise Ratio for current NR cell in each second (unit)|
-|`nr_ssSinr_avg`|Average Signal to Interference & Noise Ratio for current NR cell in each second (unit)|
-|`rsrp`|Max Reference Signal Received Power for current LTE cell in each second (unit)|
-|`rsrp_avg`|Average Reference Signal Received Power for current LTE cell in each second (unit)|
-|`voltageNow`|Voltage value exposed by sysfs interface (unit)|
-|`downlink_mbps`|Downlink throughput observed (Mbps)|
-|`uplink_mbps`|Uplink throughput observed (Mbps)|
-|`sw_power`|Raw Power calculated using current and voltage values exposed by sysfs interface (unit)|
-|`sw_power_rolled`|Power calculated using current and voltage values after with a rolling window (unit)|
-|`sw_power_baseline`|Power calculated using current and voltage values after subtracting baseline power (unit)|
+|`nr_ssRsrp`|Max Reference Signal Received Power for current NR cell in each second|
+|`nr_ssRsrp_avg`|Average Reference Signal Received Power for current NR cell in each second|
+|`nr_ssSinr`|Max Signal to Interference & Noise Ratio for current NR cell in each second|
+|`nr_ssSinr_avg`|Average Signal to Interference & Noise Ratio for current NR cell in each second|
+|`rsrp`|Max Reference Signal Received Power for current LTE cell in each second|
+|`rsrp_avg`|Average Reference Signal Received Power for current LTE cell in each second|
+|`voltageNow`|Voltage value exposed by sysfs interface|
+|`downlink_mbps`|Downlink throughput observed |
+|`uplink_mbps`|Uplink throughput observed |
+|`sw_power`|Raw Power calculated using current and voltage values exposed by sysfs interface|
+|`sw_power_rolled`|Power calculated using current and voltage values after with a rolling window|
+|`sw_power_baseline`|Power calculated using current and voltage values after subtracting baseline power |
 |`Throughput`|Throughput seen during Iperf interval (Mbps)|
 |`run_number`|Iperf run number for current data sample|
 |`time_since_start`|relative time since the start of an experiment (sec)|
-|`avg_power`|Average power observed by Monsoon Power Monitor in each second (unit)|
-|`avg_power_rolled`|Average power observed by Monsoon Power Monitor in each second after using a rolling window (unit)|
-|`avg_power_baseline`|Average power observed by Monsoon Power Monitor after subtracting baseline power (unit)|
+|`avg_power`|Average power observed by Monsoon Power Monitor in each second|
+|`avg_power_rolled`|Average power observed by Monsoon Power Monitor in each second after using a rolling window|
+|`avg_power_baseline`|Average power observed by Monsoon Power Monitor after subtracting baseline power|
 |`provider`|Service provider (Verizon, T-Mobile)|
 |`network_type`|Network Type for each run (NSA+LTE, SA, mmWave)|
 |`direction`|Direction of Iperf data transfer (Uplink, Downlink)|

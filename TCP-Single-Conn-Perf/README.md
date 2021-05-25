@@ -36,7 +36,6 @@ python3 plot-section3-figure8.py
 |`throughput_90tile`|90th percentile throughput seen for each run (Mbps)
 |`throughput_95tile`|95th percentile throughput seen for each run (Mbps)
 |`throughput_median`|Median throughput seen for run (Mbps)
-|`retransmits`|Number of retransmits seen during each run (only for TCP)
 
 ## Generating Plots
 

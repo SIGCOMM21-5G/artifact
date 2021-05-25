@@ -117,8 +117,9 @@ verizon_up['mmwave_flag'] = ~np.array(labels, dtype=bool)
 verizon_lowband_all = lowband_down_df.append(lowband_up_df, ignore_index=True)
 verizon_highband_all = highband_down_df.append(highband_up_df, ignore_index=True)
 
-verizon_highband_all.to_csv('{}/s20_verizon_nsahigh_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
-verizon_lowband_all.to_csv('{}/s20_verizon_nsalow_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+## Uncomment to generate these files: not needed for model
+# verizon_highband_all.to_csv('{}/s20_verizon_nsahigh_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
+# verizon_lowband_all.to_csv('{}/s20_verizon_nsalow_all.csv'.format(OUTPUT_LOGS_DIR), index=False, header=True)
 
 
 print('Complete../')
