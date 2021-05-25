@@ -13,7 +13,7 @@ The setup scripts should take around 5-10 minitues to finish.
 
 To run experiments over the `tc` controlled emulated network, go to `run_exp` folder and run the corresponding scripts.
 
-### Run all the 5G experiments the paper have in one script
+### Run all the experiments the paper have in one script
 
 Inside `run_exp/`, run
 ```
@@ -38,6 +38,8 @@ For the result of different ABR algorithms over 5G, the result will be in `run_e
 | Throughput Predictor   | `cooked_traces_pred`  | `run_exp/run_5g_predict.sh`    |  `run_exp/results_predict`| 1 | 1 |
 | Different Chunk Length   | `cooked_traces_chunklen`  | `run_exp/run_5g_chunklen.sh`    |  `run_exp/results_chunklen`| 5 | 1 |
 | Interface Selection   | `cooked_traces_multipath/driving`  | `run_exp/run_5g_interface_sel.sh`    |  `run_exp/results_interface_sel`| 5 | 2 |
+| 4G 7 ABR Algorithms (driving)   | `../ABR-4G/cooked_traces/driving`  | `../ABR-4G/run_exp/run_4g.sh`    |  `run_exp/results_driving`| 27 | 1.5 |
+
 
 ### Output file format
 The output files will be logs recording information (bitrate, stall, etc) about each video session. The name will be in the format of `log_<ABR alrgoithm>_<trace_file>_<specific_setting(optional)>`. 
