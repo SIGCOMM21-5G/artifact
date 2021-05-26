@@ -6,7 +6,7 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 |     Foldername/Filename      |                         Description                          |
 | --------------- | ---------------------------------------------------------- |
 | raw_dataset/[date]/har-file/[timeStampID]    | The collected HAR dataset.      |
-| raw_dataset/[date]/tcpdump-file/[timeStampID]    | The collected HAR dataset.      |
+| raw_dataset/[date]/tcpdump-file/[timeStampID]    | The collected TCPDUMP dataset.      |
 | processed_dataset | Processed data can be found here         |
 | scripts      | Scripts for generating plots and results. |
 | preprocessing.py | Preprocessing Script |
