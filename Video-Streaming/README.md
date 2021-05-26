@@ -55,7 +55,7 @@ We have built scripts that uses the results provided to generate the plots shown
 * Python >= 2.7.17, matplotlib >= 2.1.1, scipy >= 0.19.1, numpy >= 1.16.6
 
 
-To generate the figures, run `bash plot-section5.sh`. A `plots` folder should be created with the figures.
+To generate the figures, run `bash plot-section5.sh`. A `plots` folder should be created with the figures (`.pdf`, `.png` and `.eps` formats).
 
 ## Real test experiments
 
