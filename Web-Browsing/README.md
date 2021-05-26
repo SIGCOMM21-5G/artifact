@@ -3,7 +3,6 @@
 This folder contains the dataset and plotting scripts for the Section 6. Web Browsing Part. It contain the codes to generate the Figure. 19 to Figure 22 and Table 6.
 
 ## Folder structure
-
 |     Filename      |                         Description                          |
 | :---------------: | :----------------------------------------------------------: |
 |    raw_dataset    |      The raw collected dataset and detailed description      |
@@ -11,7 +10,6 @@ This folder contains the dataset and plotting scripts for the Section 6. Web Bro
 |      scripts      | Scripts Folder for generating all the Figure and Table results. |
 | plot-section6.sh  |             One command to run all the scripts.              |
 | generated_figure  |            Bash Scripts generated results' folder            |
-
 ## Generate Plots
 
 ### Requirements

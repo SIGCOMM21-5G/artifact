@@ -8,4 +8,4 @@
 |     `energy-time-analysis.py`      |                     Generate Figure 21.                      |
 |      `tree-generation-M1.py`       |                    Generate Figure 22.a.                     |
 |      `tree-generation-M4.py`       |                    Generate Figure 22.b.                     |
-|      `interface-selection.py`      |            Model Training and Inference, Table 66.            |
+|      `interface-selection.py`      |            Model Training and Inference, Table 6.            |
