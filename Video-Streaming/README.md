@@ -50,9 +50,13 @@ The video session files inside `Full-Results` are the logs containing informatio
 
 We have built scripts that uses the results provided to generate the plots shown in our paper. More specifically, the scripts will generate Figure 18 and 19.
 
-### Prerequisites
+### Requirements
 
-* Python >= 2.7.17, matplotlib >= 2.1.1, scipy >= 0.19.1, numpy >= 1.16.6
+Here are the software/package requirements. The version number in the bracket indicates the minimum version that our script has been tested on.
+- Python >= 2.7.17
+- matplotlib >= 2.1.1
+- scipy >= 0.19.1
+- numpy >= 1.16.6
 
 
 To generate the figures, run `bash plot-section5.sh`. A `plots` folder should be created with the figures (`.pdf`, `.png` and `.eps` formats).
