@@ -11,7 +11,7 @@ import numpy as np
 from utils import mergeList
 
 
-webset_threshold = 4
+webset_threshold = 3
 manual_seed = 42
 random.seed(manual_seed)
 
@@ -135,6 +135,8 @@ Ylabel5g = []
 energy5g = []
 energy4g = []
 for k in asset_number_plt_final_dict_4g.keys():
+    if (len(asset_number_plt_final_dict_4g[k])) == 0:
+        continue
     labelList.append(k)
     mean4g = sum(asset_number_plt_final_dict_4g[k]) / len(asset_number_plt_final_dict_5g[k]) * 0.001
     Ylabel4g.append(mean4g)
@@ -181,7 +183,7 @@ ax2.legend(fontsize=16)
 fig.tight_layout()
 plt.subplots_adjust(hspace=.12)
 
-plt.savefig('./generated_figure/objectnum-plt-energy-relation.pdf')
+plt.savefig('./results/objectnum-plt-energy-relation.pdf')
 plt.close('all')
 
 

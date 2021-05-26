@@ -17,7 +17,7 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
 
-webset_threshold = 4
+webset_threshold = 3
 lambda_ratio = 2
 lambda_power_ratio = 1
 manual_seed = 42

@@ -9,7 +9,7 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 | processed_dataset | Processed data can be found here         |
 | scripts      | Scripts for generating plots and results. |
 | plot-section6.sh  | One command to run all the scripts              |
-| generated_figure  | Bash Scripts generated results' folder            |
+| results  | Bash Scripts generated results and save in results folder            |
 
 ---
 
@@ -34,7 +34,7 @@ The dataset is large due to which the preprocessing can take X to Y hours to com
 
 *Follow these instructions to skip preprocessing step*
    - Download the repository to your computer
-   - Replace `dataset_processed` folder with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
+   - Replace `processed_dataset` folder with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
    - Proceed to step 2
 
 *Follow these instructions to preprocess complete dataset*

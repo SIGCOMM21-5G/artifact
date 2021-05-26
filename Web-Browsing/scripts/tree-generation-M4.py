@@ -16,7 +16,7 @@ import random
 import numpy as np
 
 
-webset_threshold = 4
+webset_threshold = 3
 alpha = 0.6
 beta = 0.4
 manual_seed = 42
@@ -229,4 +229,4 @@ graph = graphviz.Source(dot_data)
 
 
 treePredict()
-os.system('dot -Tpng tree.dot -o ./generated_figure/tree-M4.png')
+os.system('dot -Tpng tree.dot -o ./results/tree-M4.png')

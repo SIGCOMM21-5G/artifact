@@ -1,0 +1,3 @@
+timestamp,website_url,successful_or_not,har_path,tcpdump_path
+20201224-010218,http://google.com,true,./data/12-24-2020/har-file/20201224-010218/us_alexa_google-1-20201224-010218.har,./data/12-24-2020/tcpdump-file/20201224-010218/us_alexa_google-1-20201224-010218.pcap
+20201224-010218,http://youtube.com,true,./data/12-24-2020/har-file/20201224-010218/us_alexa_youtube-1-20201224-010218.har,./data/12-24-2020/tcpdump-file/20201224-010218/us_alexa_youtube-1-20201224-010218.pcap

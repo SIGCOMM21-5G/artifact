@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir results
 python scripts/objectnum-plt-energy-analysis.py # generates objectnum-plt-energy-relation.pdf i.e. Figure 19a
 python scripts/pagesize-plt-energy-analysis.py # generates objectnum-plt-energy-relation.pdf i.e. Figure 19b
 python scripts/draw-cdf.py # generates cdf-energy.pdf and cdf-plt.pdf i.e. Figure 20

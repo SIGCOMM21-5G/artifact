@@ -12,7 +12,7 @@ import random
 import numpy as np
 from utils import mergeList
 
-webset_threshold = 4
+webset_threshold = 3
 manual_seed = 42
                         
 
@@ -71,7 +71,7 @@ for i in filtered_webSet:
 
 key_list = list(energy_plt_dict.keys())
 key_list.sort()
-
+print(key_list)
 box_list = []
 
 x = []
@@ -85,7 +85,13 @@ for i in key_list:
         box_list.append(energy_plt_dict[i])
 
 fig = plt.figure(figsize=(8.5, 4.3))
-final_labels = ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60"]#, "60-70"]
+
+
+if (len(x) < 5):
+    #for toy example 
+    final_labels = ["0-10",  "30-40", "40-50", "50-60"]
+else:
+    final_labels = ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60"]
 b = plt.boxplot(box_list, labels = final_labels, showfliers=False, patch_artist=True)
 for box in b['boxes']:
     box.set(color='lightblue')
@@ -102,4 +108,4 @@ plt.ylabel("% of energy saving over\nthe penalised PLT")
 plt.rcParams['pdf.fonttype'] = 42
 fig.tight_layout()
 # Show the plot
-plt.savefig('./generated_figure/energy-plt-relation.pdf')
+plt.savefig('./results/energy-plt-relation.pdf')

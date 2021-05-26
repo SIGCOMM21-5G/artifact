@@ -12,7 +12,7 @@ import random
 import numpy as np
 from utils import mergeList
 
-webset_threshold = 4
+webset_threshold = 3
 
 manual_seed = 42
 random.seed(manual_seed)
@@ -140,6 +140,8 @@ energy5g = []
 energy4g = []
 
 for k in pageSize_plt_final_dict_4g.keys():
+    if (len(pageSize_plt_final_dict_4g[k])) == 0:
+        continue
     labelList.append(k)
     mean4g = sum(pageSize_plt_final_dict_4g[k]) / len(pageSize_plt_final_dict_4g[k]) * 0.001
     Ylabel4g.append(mean4g)
@@ -149,8 +151,11 @@ for k in pageSize_plt_final_dict_4g.keys():
     energy4g.append(sum(pageSize_energy_final_dict_4g[k]) / len(pageSize_energy_final_dict_4g[k]) * 0.001 * 0.001)
 # ipdb.set_trace()
 
-labelList = ['<1', '1-10', '>10']
-print('keys', pageSize_plt_final_dict_5g.keys())
+
+if (len(labelList) > 2):
+    labelList = ['<1', '1-10', '>10']
+else:
+    labelList = ['<1', '1-10']
 
 fig = plt.figure(figsize=(5.32, 5))
 ax = fig.add_subplot(211) 
@@ -187,5 +192,5 @@ ax.legend(fontsize=18)
 ax2.legend(fontsize=16)
 fig.tight_layout()
 plt.subplots_adjust(hspace=.12)
-plt.savefig('./generated_figure/pagesize-plt-energy-relation.pdf')
+plt.savefig('./results/pagesize-plt-energy-relation.pdf')
 plt.close('all')
