@@ -16,11 +16,11 @@ The dataset file `dataset_rrc_probe.csv` contains several fields. We provide des
 | Field name           | Description of the field                                           |
 |----------------------|--------------------------------------------------------------------|
 | `enabled_radio_type`               | The radio types (e.g. 4G, low-band 5G NSA, etc.) enabled for the test.                        |
-| `carrier`      | Name of the commercial carrier                  |
-| `interval`        | Idle time between packets in seconds                    |
-| `RTT1`         | ToDO: XX                             |
-| `RTT2`    | ToDo: YYY       |
-| `active_radio_type`       | Radio type active at the time of responding back to the server                            |
+| `carrier`      | Name of the commercial carrier.                  |
+| `interval`        | Idle time between packets in seconds.                    |
+| `RTT1`         | Round trip time of the packet calculated using C++ `std::chrono` library (`system_clock`).                            |
+| `RTT2`    | Round trip time of the packet calculated using C `timeb` library (we use two methods to make sure the measured RTT value is correct). |
+| `active_radio_type`       | Radio type active at the time of responding back to the server.                            |
 | `KeepOrDrop`           | We `keep` the data point if there were no other RX/TX transfer on the UE side between two consecutive RRC-Probe packet arrivals. If some other data transmission occured, we mark them as `bad` and remove such noisy data point from the dataset.              |
 
 ## Generating plots

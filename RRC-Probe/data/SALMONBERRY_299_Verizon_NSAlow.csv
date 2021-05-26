@@ -1814,7 +1814,7 @@ enabled_radio_type,carrier,interval,RTT1,RTT2,active_radio_type,KeepOrDrop
 5G-NSA-Low-Band,Verizon,21.2,512,512,4,YEP
 5G-NSA-Low-Band,Verizon,21.3,484,484,4,YEP
 5G-NSA-Low-Band,Verizon,21.4,1624,1623,4,YEP
-5G-NSA-Low-Band,Verizon,21.5,80,79,5,YEP
+5G-NSA-Low-Band,Verizon,21.5,80,79,5,BAD
 5G-NSA-Low-Band,Verizon,21.6,320,319,4,YEP
 5G-NSA-Low-Band,Verizon,21.7,1346,1345,4,YEP
 5G-NSA-Low-Band,Verizon,21.8,1243,1242,4,YEP
