@@ -1,6 +1,6 @@
 # Power Wild Experiments (data for Power model)
 
-This dataset consists of data collected at two locations. It covers power modeling results presented in Section 4.4 of the paper.
+This dataset consists of data collected at two locations. It covers power modeling results (Figures 15 and 16) presented in Section 4.4 of the paper.
 
 ## Folder Structure   
 
