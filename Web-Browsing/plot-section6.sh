@@ -1,10 +1,10 @@
 #!/bin/bash
 
-python scripts/objectnum-plt-energy-analysis.py #generate objectnum-plt-energy-relation.pdf for Figure 19.a
-python scripts/pagesize-plt-energy-analysis.py #generate objectnum-plt-energy-relation.pdf for Figure 19.b
-python scripts/draw-cdf.py # generate cdf-energy.pdf and cdf-plt.pdf for Figure 20
-python scripts/energy-time-analysis.py #generate energy-plt-relation.pdf for Figure 21
-python scripts/tree-generation-M1.py #generate tree-M1.png for Figure 22.a.
-python scripts/tree-generation-M4.py #generate tree-M4.png for Figure 22.b.
-python scripts/interface-selection.py #generate Table6.
+python scripts/objectnum-plt-energy-analysis.py # generates objectnum-plt-energy-relation.pdf i.e. Figure 19a
+python scripts/pagesize-plt-energy-analysis.py # generates objectnum-plt-energy-relation.pdf i.e. Figure 19b
+python scripts/draw-cdf.py # generates cdf-energy.pdf and cdf-plt.pdf i.e. Figure 20
+python scripts/energy-time-analysis.py # generates energy-plt-relation.pdf i.e. Figure 21
+python scripts/tree-generation-M1.py # generates tree-M1.png i.e. Figure 22a.
+python scripts/tree-generation-M4.py # generates tree-M4.png i.e. Figure 22b.
+python scripts/interface-selection.py # generates Table 6.
 echo "Success."
