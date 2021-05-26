@@ -144,8 +144,6 @@ for k in asset_number_plt_final_dict_4g.keys():
     Ylabel5g.append(mean5g)
     energy5g.append(sum(asset_number_energy_final_dict_5g[k]) / len(asset_number_energy_final_dict_5g[k]) * 0.001 * 0.001)
     energy4g.append(sum(asset_number_energy_final_dict_4g[k]) / len(asset_number_energy_final_dict_4g[k]) * 0.001 * 0.001)
-    if len(labelList) == 2:
-        show_label_list = ['11-100', '100-1000']
 
 if (len(labelList) == 2):
     show_label_list = ['11-100', '100-1000']
