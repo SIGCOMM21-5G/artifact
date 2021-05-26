@@ -5,10 +5,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import scipy.stats
+import matplotlib.gridspec as gridspec
 
 
-RESULTS_FOLDER = './Full-Results/Sec. 5.2 Existing ABR/5G/results_driving/'
-RESULTS_FOLDER_4G = './Full-Results/Sec. 5.2 Existing ABR/4G/results_driving/'
+RESULTS_FOLDER = './Full-Results/Sec. 5.4 Interface Sel/'
+RESULTS_FOLDER_PRED = './Full-Results/Sec. 5.3 Prediction/thrpt_prediction/'
 NUM_BINS = 100
 BITS_IN_BYTE = 8.0
 MILLISEC_IN_SEC = 1000.0
@@ -17,10 +18,21 @@ VIDEO_LEN = 158
 VIDEO_BIT_RATE = [20000, 40000, 60000, 80000, 110000, 160000]
 COLOR_MAP = plt.cm.jet #nipy_spectral, Set1,Paired 
 SIM_DP = 'sim_dp'
-SCHEMES = ['BB', 'RB', 'BOLA', 'fastMPC', 'robustMPC', 'RL', 'FESTIVE']
+SCHEMES = ['fastMPC', 'interface', 'overhead']
 
-SCHEMES_NEW = ['BBA', 'RB', 'BOLA', 'fastMPC', 'rMPC', 'RL', 'FESTIVE'] #label for plot
+SCHEMES_NEW = ['fastMPC\n (5G only)', 'intfMPC', 'intfMPC\n(no-overhead)'] #label for plot
+
 LABEL = ['4G', '5G']
+
+RESULTS_FOLDER_CHK = './Full-Results/Sec. 5.3 Prediction/chunk_length/'
+SCHEMES_CHK = ['_4s', '_2s', 'fastMPC']
+VIDEO_LEN_CHK = {'_4s': 40, '_2s': 80, 'fastMPC': 158}
+
+SCHEMES_NEW_CHK = ['4s\n', '2s', '1s'] #label for plot
+
+SCHEMES_PRED = ['hmMPC', 'MPC_GDBT', 'truthMPC']
+SCHEMES_NEW_PRED = ['hmMPC', 'MPC_GDBT', 'truthMPC']
+
 
 def mean_confidence_interval(data, confidence=0.95):
     a = 1.0 * np.array(data)
@@ -56,27 +68,45 @@ def main():
         stall = []
         reward = []
 
-        with open(RESULTS_FOLDER + log_file, 'rb') as f:
-            for line in f:
-                try:
-                    parse = line.split()
-                    if len(parse) <= 1:
-                        break
-                    time_ms.append(float(parse[0]))
-                    bit_rate.append(int(parse[1]))
-                    buff.append(float(parse[2]))
-                    stall.append(float(parse[3]))
-                    # stall_total += float(parse[3])
-                    bw.append(float(parse[4]) / float(parse[5]) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
-                    reward.append(float(parse[6]))
-                except ZeroDivisionError:
-                    bw.append(float(parse[4]) / (float(parse[5])+1) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
-                    reward.append(float(parse[6]))
 
-        if len(time_ms) == 0:
-            continue
+        with open(RESULTS_FOLDER + log_file, 'rb') as f:
+            if SIM_DP in log_file:
+                for line in f:
+                    parse = line.split()
+                    if len(parse) == 1:
+                        reward = float(parse[0])
+                    elif len(parse) >= 6:
+                        time_ms.append(float(parse[3]))
+                        bit_rate.append(VIDEO_BIT_RATE[int(parse[6])])
+                        buff.append(float(parse[4]))
+                        bw.append(float(parse[5]))
+
+            else:
+                for line in f:
+                    try:
+                        parse = line.split()
+                        if len(parse) <= 1:
+                            break
+                        time_ms.append(float(parse[0]))
+                        bit_rate.append(int(parse[1]))
+                        buff.append(float(parse[2]))
+                        stall.append(float(parse[3]))
+                        # stall_total += float(parse[3])
+                        bw.append(float(parse[4]) / float(parse[5]) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
+                        reward.append(float(parse[6]))
+                    except ZeroDivisionError:
+                        bw.append(float(parse[4]) / (float(parse[5])+1) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
+                        reward.append(float(parse[6]))
+
+        if SIM_DP in log_file:
+            time_ms = time_ms[::-1]
+            bit_rate = bit_rate[::-1]
+            buff = buff[::-1]
+            bw = bw[::-1]
+        
         time_ms = np.array(time_ms)
         time_ms -= time_ms[0]
+        
 
         for scheme in SCHEMES:
             if scheme in log_file :
@@ -99,77 +129,6 @@ def main():
                 bw_all[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bw
                 raw_reward_all[scheme][log_file[len('log_' + str(scheme) + '_'):]] = reward
                 break
-    
-
-    # parse the 4G results
-    time_all_4G = {}
-    bit_rate_all_4G = {}
-    buff_all_4G = {}
-    stall_all_4G = {}
-    bw_all_4G= {}
-    raw_reward_all_4G = {}
-    summay_all_4G = {}
-    for scheme in SCHEMES:
-        time_all_4G[scheme] = {}
-        raw_reward_all_4G[scheme] = {}
-        bit_rate_all_4G[scheme] = {}
-        buff_all_4G[scheme] = {}
-        stall_all_4G[scheme] = {}
-        bw_all_4G[scheme] = {}
-
-    # stall_total = 0.0
-    log_files = os.listdir(RESULTS_FOLDER_4G)
-    for log_file in log_files:
-
-        time_ms = []
-        bit_rate = []
-        buff = []
-        bw = []
-        stall = []
-        reward = []
-
-        with open(RESULTS_FOLDER_4G + log_file, 'rb') as f:
-            for line in f:
-                try:
-                    parse = line.split()
-                    if len(parse) <= 1:
-                        break
-                    time_ms.append(float(parse[0]))
-                    bit_rate.append(int(parse[1]))
-                    buff.append(float(parse[2]))
-                    stall.append(float(parse[3]))
-                    bw.append(float(parse[4]) / float(parse[5]) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
-                    reward.append(float(parse[6]))
-                except ZeroDivisionError:
-                    bw.append(float(parse[4]) / (float(parse[5])+1) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
-                    reward.append(float(parse[6]))
-
-        
-        time_ms = np.array(time_ms)
-        time_ms -= time_ms[0]
-
-        for scheme in SCHEMES:
-            if scheme in log_file :
-                if scheme == 'fastMPC' and 'interface' in log_file:
-                    continue
-                if scheme == 'fastMPC' and '4s' in log_file:
-                    continue
-                if scheme == 'interface' and 'interfaceMPC' in log_file:
-                    continue
-                if scheme == 'robustMPC' and 'truthrobustMPC' in log_file:
-                    continue
-                if scheme == 'rollbackMPC' and 'rollbackMPC4s' in log_file:
-                    continue
-                if scheme == 'RB' and 'truthRB' in log_file:
-                    continue
-                time_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = time_ms
-                bit_rate_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bit_rate
-                buff_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = buff
-                stall_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = stall
-                bw_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bw
-                raw_reward_all_4G[scheme][log_file[len('log_' + str(scheme) + '_'):]] = reward
-                break
-
 
     # calculate mean bitrate and stall rate
     for scheme in SCHEMES:
@@ -199,11 +158,6 @@ def main():
                     bitrate_avg_arr.append(np.mean(bit_rate_all[scheme][log])/1000)
                     bitrate_total += np.sum(np.array(bit_rate_all[scheme][log])/1000) #Mbis
                     total_chunk += len(bit_rate_all[scheme][log])
-        # print(scheme)
-        # print(bitrate_total)
-        # print(total_chunk)
-        # print(float(bitrate_total)/total_chunk)
-        # print(bitrate_avg_arr)
         summay_all[scheme]['avg_br'] = np.mean(bitrate_avg_arr)
         summay_all[scheme]['all_br'] = bitrate_avg_arr
 
@@ -221,8 +175,6 @@ def main():
 
         summay_all[scheme]['reward'] = reward_avg_arr
 
-        # print("avg reward for scheme %s is %f", (scheme, np.mean(reward_avg_arr)))
-
         # avg stall rate
         stall_time_all = float(0)
         total_playback_time = 0
@@ -233,7 +185,7 @@ def main():
                 if len(stall_all[scheme][log]) >= VIDEO_LEN:
                     avg_stall_arr.append(np.sum(np.array(stall_all[scheme][log][1:VIDEO_LEN]))/(158+np.sum(np.array(stall_all[scheme][log][1:VIDEO_LEN]))))
                     stall_time_all += float(np.sum(np.array(stall_all[scheme][log][1:VIDEO_LEN], dtype=float))) # seconds
-                    total_playback_time = total_playback_time + 158 + np.sum(np.array(stall_all[scheme][log][:40]))
+                    total_playback_time = total_playback_time + 158 + np.sum(np.array(stall_all[scheme][log][:VIDEO_LEN]))
                 else:
                     avg_stall_arr.append(np.sum(np.array(stall_all[scheme][log]))/(len(stall_all[scheme][log])+np.sum(np.array(stall_all[scheme][log]))))
                     stall_time_all += float(np.sum(np.array(stall_all[scheme][log], dtype=float))) # seconds
@@ -253,191 +205,322 @@ def main():
         summay_all[scheme]['time_stalled_rate'] = np.mean(avg_stall_arr) * 100 # percentage
         summay_all[scheme]['all_stalled_rate'] = np.array(avg_stall_arr) * 100
 
-        # 4G summarize
-        summay_all_4G[scheme] = {}
-        bitrate_avg_arr_4G = []
-        for log in bit_rate_all_4G[scheme]:
-            if len(bit_rate_all_4G[scheme][log]) >= VIDEO_LEN:
-                bitrate_avg_arr_4G.append(np.mean(bit_rate_all_4G[scheme][log][1:VIDEO_LEN])/1000)
-            else:
-                bitrate_avg_arr_4G.append(np.mean(bit_rate_all_4G[scheme][log])/1000)
-        summay_all_4G[scheme]['avg_br'] = np.mean(bitrate_avg_arr_4G)
-        summay_all_4G[scheme]['all_br'] = bitrate_avg_arr_4G
+
+    time_all_chk = {}
+    bit_rate_all_chk = {}
+    buff_all_chk = {}
+    stall_all_chk = {}
+    bw_all_chk = {}
+    raw_reward_all_chk = {}
+    summary_all_chk = {}
+    for scheme in SCHEMES_CHK:
+        time_all_chk[scheme] = {}
+        raw_reward_all_chk[scheme] = {}
+        bit_rate_all_chk[scheme] = {}
+        buff_all_chk[scheme] = {}
+        stall_all_chk[scheme] = {}
+        bw_all_chk[scheme] = {}
+
+    log_files = os.listdir(RESULTS_FOLDER_CHK)
+    for log_file in log_files:
+
+        time_ms = []
+        bit_rate = []
+        buff = []
+        bw = []
+        stall = []
+        reward = []
+
+
+        with open(RESULTS_FOLDER_CHK + log_file, 'rb') as f:
+            for line in f:
+                try:
+                    parse = line.split()
+                    if len(parse) <= 1:
+                        break
+                    time_ms.append(float(parse[0]))
+                    bit_rate.append(int(parse[1]))
+                    buff.append(float(parse[2]))
+                    stall.append(float(parse[3]))
+                    bw.append(float(parse[4]) / float(parse[5]) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
+                    reward.append(float(parse[6]))
+                except ZeroDivisionError:
+                    bw.append(float(parse[4]) / (float(parse[5])+1) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
+                    reward.append(float(parse[6]))
+        
+        time_ms = np.array(time_ms)
+        time_ms -= time_ms[0]
+
+        for scheme in SCHEMES_CHK:
+            if scheme in log_file :
+                if scheme == 'fastMPC' and 'interface' in log_file:
+                    continue
+                if scheme == 'fastMPC' and '_4s' in log_file:
+                    continue
+                if scheme == 'fastMPC' and '_2s' in log_file:
+                    continue
+                if scheme == 'interface' and 'interfaceMPC' in log_file:
+                    continue
+                if scheme == 'robustMPC' and 'truthrobustMPC' in log_file:
+                    continue
+                if scheme == 'rollbackMPC' and 'rollbackMPC4s' in log_file:
+                    continue
+                if scheme == 'RB' and 'truthRB' in log_file:
+                    continue
+                time_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = time_ms
+                bit_rate_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bit_rate
+                buff_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = buff
+                stall_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = stall
+                bw_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bw
+                raw_reward_all_chk[scheme][log_file[len('log_' + str(scheme) + '_'):]] = reward
+                break
+    
+
+
+    # calculate mean bitrate and stall rate
+    for scheme in SCHEMES_CHK:
+        summary_all_chk[scheme] = {}
+        # avg bitrate
+        bitrate_avg_arr = []
+        bitrate_total = 0
+        total_chunk = 0
+        summary_all_chk[scheme]['all_br'] = []
+
+        for log in bit_rate_all_chk[scheme]:
+            if len(bit_rate_all_chk[scheme][log]) >= VIDEO_LEN_CHK[scheme]:
+                bitrate_avg_arr.append(np.mean(bit_rate_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]])/1000)
+                bitrate_total += np.sum(np.array(bit_rate_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]])/1000) #Mbis
+                total_chunk += (VIDEO_LEN_CHK[scheme]-1)
+
+        
+        summary_all_chk[scheme]['avg_br'] = np.mean(bitrate_avg_arr)
+        summary_all_chk[scheme]['all_br'] = bitrate_avg_arr
+
+        reward_avg_arr = []
+        reward_total = 0
 
         # reward 
-        reward_avg_arr_4G = []
-        for log in raw_reward_all_4G[scheme]:
-            # print raw_reward_all_4G[scheme][log]
-            if len(raw_reward_all_4G[scheme][log]) >= VIDEO_LEN:
-                reward_avg_arr_4G.append(np.mean(raw_reward_all_4G[scheme][log][1:VIDEO_LEN]))
-            else:
-                reward_avg_arr_4G.append(np.mean(raw_reward_all_4G[scheme][log]))
-        summay_all_4G[scheme]['reward'] = reward_avg_arr
+        for log in raw_reward_all_chk[scheme]:
+            reward_avg_arr.append(np.mean(raw_reward_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]]))
+            reward_total += np.sum(np.array(raw_reward_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]])) 
+
+        summary_all_chk[scheme]['reward'] = reward_avg_arr
 
         # avg stall rate
-        avg_stall_arr_4G = []
-        summay_all_4G[scheme]['all_stalled_rate'] = []
-        for log in stall_all_4G[scheme]:
-            if len(stall_all_4G[scheme][log]) >= VIDEO_LEN:
-                avg_stall_arr_4G.append(np.sum(np.array(stall_all_4G[scheme][log][1:VIDEO_LEN]))/(158+np.sum(np.array(stall_all_4G[scheme][log][1:VIDEO_LEN]))))
-            else:
-                avg_stall_arr_4G.append(np.sum(np.array(stall_all_4G[scheme][log]))/(len(stall_all_4G[scheme][log])+np.sum(np.array(stall_all_4G[scheme][log]))))
-        summay_all_4G[scheme]['time_stalled_rate'] = np.mean(avg_stall_arr_4G) * 100 # percentage
-        summay_all_4G[scheme]['all_stalled_rate'] = np.array(avg_stall_arr_4G) * 100
+        stall_time_all = float(0)
+        total_playback_time = 0
+        avg_stall_arr = []
+        summary_all_chk[scheme]['all_stalled_rate'] = []
+
+        for log in stall_all_chk[scheme]:
+            if len(stall_all_chk[scheme][log]) >= VIDEO_LEN_CHK[scheme]:
+                avg_stall_arr.append(np.sum(np.array(stall_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]]))/(158+np.sum(np.array(stall_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]]))))
+                stall_time_all += float(np.sum(stall_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]], dtype=float)) # seconds
+                total_playback_time = total_playback_time + 158 + np.sum(np.array(stall_all_chk[scheme][log][1:VIDEO_LEN_CHK[scheme]]))
+
+        summary_all_chk[scheme]['time_stalled_rate'] = np.mean(avg_stall_arr) * 100 # percentage
+        summary_all_chk[scheme]['all_stalled_rate'] = np.array(avg_stall_arr) * 100
 
 
-    fig, (ax, ax2, ax3) = plt.subplots(1, 3, figsize=(20,4))
-    # ax = fig.add_subplot(111)
-    ax.set_xlim(12, 0)
-    ax.set_ylim(0.5, 1)
-    ax.hlines(0.8, 0, 5, linestyle='--', color='maroon')
-    ax.vlines(5, 0.8, 1, linestyle='--', color='maroon')
-    ax.set_axisbelow(True)
-    ax.xaxis.grid(linestyle='dashed')
-    ax.yaxis.grid(linestyle='dashed')
-    plt.xticks(np.arange(12, 0.0, -4.0))
-    # ax.xaxis.set_major_formatter(mtick.PercentFormatter())
-    for scheme in SCHEMES:
-        # print(np.mean(summay_all[scheme]['reward']))
-        # print("mean for scheme %s are %f, %f" % (scheme, np.mean(summay_all[scheme]['all_stalled_rate']), np.mean(summay_all[scheme]['all_br'])))
-        m_x, left_m_x, right_m_x = mean_confidence_interval(summay_all[scheme]['all_stalled_rate'])
-        m_y, left_m_y, right_m_y = mean_confidence_interval(summay_all[scheme]['all_br'])
-        # print("confidence interval scheme %s are %f, %f" % (scheme, m_x-left_m_x, m_y-left_m_y))
-        # print("variance scheme %s are %f, %f" % (scheme, np.std(summay_all[scheme]['all_stalled_rate']), np.std(summay_all[scheme]['all_br'])))
-        ax.errorbar(summay_all[scheme]['time_stalled_rate'], summay_all[scheme]['avg_br']/160.0, xerr=m_x-left_m_x, yerr=(m_y-left_m_y)/160.0, capsize=4)
-        ax.scatter(summay_all[scheme]['time_stalled_rate'], summay_all[scheme]['avg_br']/160.0)
-        if scheme == "interfaceMPC":
-            ax.annotate(scheme + ' (no overhead)', (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']+0.01), fontsize=19)
-        elif scheme == "interface":
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']+1.3, summay_all[scheme]['avg_br']/160.0-0.6/160.0), fontsize=19)
-        elif scheme == "truthMPC":
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0+0.1/160.0), fontsize=19)
-        elif scheme == "BB":
-            ax.annotate("BBA", (summay_all[scheme]['time_stalled_rate']+1.3, summay_all[scheme]['avg_br']/160.0-0.05), fontsize=19)
-        elif scheme == 'RL':
-            ax.annotate("Pensieve", (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0+2/160.0), fontsize=19)
-        elif scheme == 'BOLA':
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0-0.05), fontsize=19)
-        elif scheme == 'rollbackMPC4s':
-            ax.annotate("4s (w/ rollback)", (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0+0.1/160.0), fontsize=19)
-        elif scheme == 'fastMPC':
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0-0.05), fontsize=19)
-        elif scheme == 'FESTIVE':
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']+2.5, summay_all[scheme]['avg_br']/160.0+0.01), fontsize=19)
-        elif scheme == 'robustMPC':
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']+1.6, summay_all[scheme]['avg_br']/160.0+0.04), fontsize=19)
-        else:
-            ax.annotate(scheme, (summay_all[scheme]['time_stalled_rate']-0.1, summay_all[scheme]['avg_br']/160.0+2/160.0), fontsize=19)
+    time_all_pred = {}
+    bit_rate_all_pred = {}
+    buff_all_pred = {}
+    bw_all_pred = {}
+    raw_reward_all_pred = {}
+    for scheme in SCHEMES_PRED:
+        time_all_pred[scheme] = {}
+        raw_reward_all_pred[scheme] = {}
+        bit_rate_all_pred[scheme] = {}
+        buff_all_pred[scheme] = {}
+        bw_all_pred[scheme] = {}
+
+    log_files = os.listdir(RESULTS_FOLDER_PRED)
+    for log_file in log_files:
+
+        time_ms = []
+        bit_rate = []
+        buff = []
+        bw = []
+        reward = []
+
+
+        with open(RESULTS_FOLDER_PRED + log_file, 'rb') as f:
+            for line in f:
+                parse = line.split()
+                if len(parse) <= 1:
+                    break
+                time_ms.append(float(parse[0]))
+                bit_rate.append(int(parse[1]))
+                buff.append(float(parse[2]))
+                bw.append(float(parse[4]) / (float(parse[5])+1) * BITS_IN_BYTE * MILLISEC_IN_SEC / M_IN_B)
+                reward.append(float(parse[6]))
+        
+        time_ms = np.array(time_ms)
+        time_ms -= time_ms[0]
+        
+
+        for scheme in SCHEMES_PRED:
+            if scheme in log_file:
+                if scheme == 'robustMPC' and 'truthrobustMPC' in log_file:
+                    continue
+                if scheme == 'RB' and 'truthRB' in log_file:
+                    continue
+                if scheme == 'fastMPC' and 'interface' in log_file:
+                    continue
+                if scheme == 'rollbackMPC' and 'rollbackMPC4s' in log_file:
+                    continue
+                if scheme == 'fastMPC' and '4s' in log_file:
+                    continue
+                time_all_pred[scheme][log_file[len('log_' + str(scheme) + '_'):]] = time_ms
+                bit_rate_all_pred[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bit_rate
+                buff_all_pred[scheme][log_file[len('log_' + str(scheme) + '_'):]] = buff
+                bw_all_pred[scheme][log_file[len('log_' + str(scheme) + '_'):]] = bw
+                raw_reward_all_pred[scheme][log_file[len('log_' + str(scheme) + '_'):]] = reward
+                break
+
+    # ---- ---- ---- ----
+    # Reward records
+    # ---- ---- ---- ----
+
+
+    log_file_all = []
+    reward_all = {}
+    for scheme in SCHEMES_PRED:
+        reward_all[scheme] = []
+
+    for l in time_all_pred[SCHEMES_PRED[0]]:
+        schemes_check = True
+        if schemes_check:
+            log_file_all.append(l)
+            for scheme in SCHEMES_PRED:
+                if scheme == SIM_DP:
+                    reward_all[scheme].append(raw_reward_all_pred[scheme][l])
+                elif scheme == '_4s' or scheme == 'rollbackMPC4s':
+                    reward_all[scheme].append(np.sum(raw_reward_all_pred[scheme][l][1:40])/40)
+                else:
+                    reward_all[scheme].append(np.sum(raw_reward_all_pred[scheme][l][1:VIDEO_LEN])/VIDEO_LEN)
+
+    mean_rewards = {}
+    std_rewards = {}
+    for scheme in SCHEMES_PRED:
+        mean_rewards[scheme] = np.mean(reward_all[scheme])
+        std_rewards[scheme] = np.std(reward_all[scheme])
+
+    reward_values = [mean_rewards[k] for k in SCHEMES_PRED]
+    reward_err = [std_rewards[k] for k in SCHEMES_PRED]
+
+
+    width=0.35
+    gs1 = gridspec.GridSpec(3, 1)
+    fig, (pred, ax0, ax) = plt.subplots(1, 3, figsize=(15, 4.3))
+    pred.set_ylabel('Normalized QoE', fontsize=20)
+    pred.set_xlabel('(a) Throughput Prediction Scheme', fontsize=20)
+    pred.bar(SCHEMES_NEW_PRED[0], np.array(reward_values[0])/np.max(np.array(list(mean_rewards.values()))), width, color='r', edgecolor='darkred', ecolor='r', linewidth=2)
+    pred.bar(SCHEMES_NEW_PRED[1], np.array(reward_values[1])/np.max(np.array(list(mean_rewards.values()))), width, color='r', edgecolor='darkred', ecolor='r', linewidth=2)
+    pred.bar(SCHEMES_NEW_PRED[2], np.array(reward_values[2])/np.max(np.array(list(mean_rewards.values()))), width, color='r', edgecolor='darkred', ecolor='r', linewidth=2)
+    pred.tick_params(axis='both', which='major', labelsize=20)
+    pred.set_xticklabels(SCHEMES_NEW_PRED, fontsize=16, rotation=8)
     
-    ax.annotate("Better QoE", fontsize=20,
-        horizontalalignment="center",
-        xy=(11, 0.55), xycoords='data',
-        xytext=(9, 0.63), textcoords='data',
-        arrowprops=dict(arrowstyle="<-, head_width=0.3",
-                        connectionstyle="arc3", lw=3)
-            )
-
-    # bb = t.get_bbox_patch()
-    # bb.set_boxstyle("rarrow", pad=0.6)
-    ax.set_xlabel('Time Spent on Stall (%)', fontsize=20)
-    ax.set_ylabel('Normalized Bitrate', fontsize=20)
-    ax.tick_params(axis='both', which='major', labelsize=20)
-
-    # fig = plt.figure(figsize=(8,6))
-    # ax2 = fig.add_subplot(111)
-    ax2.set_xlim(12, 0)
-    ax2.set_ylim(0.5, 1)
-    ax2.hlines(0.8, 0, 5, linestyle='--', color='maroon')
-    ax2.vlines(5, 0.8, 1, linestyle='--', color='maroon')
-    ax2.set_axisbelow(True)
-    ax2.xaxis.grid(linestyle='dashed')
-    ax2.yaxis.grid(linestyle='dashed')
-    plt.xticks(np.arange(12, 0.0, -4.0))
-    for scheme in SCHEMES:
-        m_x, left_m_x, right_m_x = mean_confidence_interval(summay_all_4G[scheme]['all_stalled_rate'])
-        m_y, left_m_y, right_m_y = mean_confidence_interval(summay_all_4G[scheme]['all_br'])
-        # print("mean for scheme %s are %f, %f" % (scheme, np.mean(summay_all_4G[scheme]['all_stalled_rate']), np.mean(summay_all_4G[scheme]['all_br'])))
-        ax2.errorbar(summay_all_4G[scheme]['time_stalled_rate'], summay_all_4G[scheme]['avg_br']/20.0, xerr=m_x-left_m_x, yerr=(m_y-left_m_y)/20.0, capsize=4)
-        ax2.scatter(summay_all_4G[scheme]['time_stalled_rate'], summay_all_4G[scheme]['avg_br']/20.0)
-        if scheme == 'fastMPC':
-            ax2.annotate(scheme, (summay_all_4G[scheme]['time_stalled_rate']+2.5, summay_all_4G[scheme]['avg_br']/20.0-0.05), fontsize=19)
-        elif scheme == 'robustMPC':
-            ax2.annotate(scheme, (summay_all_4G[scheme]['time_stalled_rate']+1.55, summay_all_4G[scheme]['avg_br']/20.0-0.053), fontsize=19)
-        elif scheme == 'RL':
-            # ax2.annotate('Pensieve', (summay_all_4G[scheme]['time_stalled_rate']+6, summay_all_4G[scheme]['avg_br']/20.0-0.03), fontsize=15)
-            pass
-        elif scheme == 'BB':
-            ax2.annotate('BBA', (summay_all_4G[scheme]['time_stalled_rate']-0.15, summay_all_4G[scheme]['avg_br']/20.0-0.05), fontsize=19)
-        elif scheme == 'FESTIVE':
-            ax2.annotate(scheme, (summay_all_4G[scheme]['time_stalled_rate']+3.55, summay_all_4G[scheme]['avg_br']/20.0-0.02), fontsize=19)
-        else:
-            ax2.annotate(scheme, (summay_all_4G[scheme]['time_stalled_rate']-0.15, summay_all_4G[scheme]['avg_br']/20.0+0.01), fontsize=19)
-
-    ax2.set_xlabel('Time Spent on Stall (%)', fontsize=20)
-    ax2.set_ylabel('Normalized Bitrate', fontsize=20)
-    ax2.tick_params(axis='both', which='major', labelsize=20)
-
-    ax2.annotate("Better QoE", fontsize=20,
-        horizontalalignment="center",
-        xy=(11, 0.55), xycoords='data',
-        xytext=(9, 0.63), textcoords='data',
-        arrowprops=dict(arrowstyle="<-, head_width=0.3",
-                        connectionstyle="arc3", lw=3)
-        )
-    ax2.annotate("Pensieve", fontsize=19,
-        horizontalalignment="center",
-        xy=(summay_all_4G['RL']['time_stalled_rate'], summay_all_4G['RL']['avg_br']/20.0), xycoords='data',
-        xytext=(10, 0.9), textcoords='data',
-        arrowprops=dict(arrowstyle="<-, head_width=0.1",
-            connectionstyle="arc3, rad=0.3", lw=1, ls='--', color='saddlebrown'
-        )
-    )
-
-
-    # fig = plt.figure(figsize=(8,6))
-    # ax3 = fig.add_subplot(111)
-    ax3.yaxis.grid(linestyle='dashed')
-    ax3.set_ylabel('Playback Time\n Spent on Stall (%)', fontsize=20)
-    # ax.set_xlabel('ABR Algorithm', fontsize=20)
-    width=1.0
+    ax.set_xlabel('(c) Interface Selection Scheme', fontsize=20)
     x = np.arange(1,len(SCHEMES)+1)  # the label locations
-    # colors = [COLOR_MAP(i) for i in np.linspace(0, 1, len(mean_rewards.keys()))]
+    ax.set_xticks(x)
+    ax.set_ylim(0,1.2)
+    ax.set_yticks(np.arange(0, 1.2, 0.25), minor=False)
+    ax.tick_params(axis='both', which='major', labelsize=20)
+    ax.set_xticklabels(SCHEMES_NEW, fontsize=16)
+    ax2 = ax.twinx()
+    ax2.set_ylim(0,12)
+    ax2.tick_params(axis='both', which='major', labelsize=20)
+    ax2.yaxis.label.set_color('blue')
+    ax2.set_ylabel('Playback Time\n Spent on Stall (%)', fontsize=20, rotation=270, labelpad=45, color='blue')
+    x = np.arange(1, len(SCHEMES)+1)  # the label locations
+
+    bitrates = []
+    std_bitrates = []
+    stalls = []
+    conf_stalls = []
     for idx in range(len(SCHEMES)):
-        # print(SCHEMES[idx] + " median 5G: " + str(np.min(summay_all[SCHEMES[idx]]['all_stalled_rate'])) + " median 4G: " + str(np.min(summay_all_4G[SCHEMES[idx]]['all_stalled_rate'])))
-        # print(np.median(summay_all[SCHEMES[idx]]['all_stalled_rate'])/np.median(summay_all_4G[SCHEMES[idx]]['all_stalled_rate']))
-        b1 = ax3.boxplot(summay_all_4G[SCHEMES[idx]]['all_stalled_rate'], positions=np.array([x[idx]-width/5]), autorange=True, showfliers=False, widths=0.25, patch_artist=True)
-        b1['boxes'][0].set(color='saddlebrown')
-        b1['boxes'][0].set(linewidth=2)
-        b1['boxes'][0].set(facecolor = 'sandybrown')
-        b1['boxes'][0].set(label=LABEL[0])
-        for cap in b1['caps']:
-            cap.set(color='saddlebrown', linewidth=2)
-        b1['medians'][0].set(color='saddlebrown', linewidth=2)
-        for whisker in b1['whiskers']:
-            whisker.set(color='saddlebrown', linewidth=1.5, linestyle=':')
-        b2 = ax3.boxplot(summay_all[SCHEMES[idx]]['all_stalled_rate'], positions=np.array([x[idx]+width/5]), autorange=True, showfliers=False, widths=0.25, patch_artist=True)
-        b2['boxes'][0].set(color='blue')
-        b2['boxes'][0].set(linewidth=2)
-        b2['boxes'][0].set(facecolor = 'white')
-        b2['boxes'][0].set(hatch='/')
-        b2['boxes'][0].set(label=LABEL[1])
-        for cap in b2['caps']:
-            cap.set(color='blue', linewidth=2)
-        b2['medians'][0].set(color='blue', linewidth=2)
-        for whisker in b2['whiskers']:
-            whisker.set(color='blue', linewidth=1.5, linestyle=':')
-    ax3.set_xticks(x)
-    ax3.set_xticklabels(SCHEMES_NEW, fontsize=17, rotation=25)
-    ax3.set_xlim([0.2, 8])
+        m_x, left_m_x, right_m_x = mean_confidence_interval(summay_all[SCHEMES[idx]]['all_stalled_rate'])
+        bitrates.append(summay_all[SCHEMES[idx]]['avg_br']/160.0)
+        std_bitrates.append(np.std(summay_all[SCHEMES[idx]]['all_br'])/160.0)
+        stalls.append(summay_all[SCHEMES[idx]]['time_stalled_rate'])  
+        conf_stalls.append(right_m_x-m_x)
+
+
+    bar1 = ax.bar(x-width/2, bitrates, width/1.2, yerr=std_bitrates, capsize=4, color='sandybrown', edgecolor='saddlebrown', ecolor='saddlebrown', linewidth=2, label='Bitrate')
+    bar2 = ax2.bar(x+width/2, stalls, width/1.2, yerr=conf_stalls, capsize=4, color='white', edgecolor='blue', ecolor='blue', linewidth=2, label='Video Stall', hatch='/')
+
+
+    ax.spines['top'].set_visible(False)
+    ax2.spines['top'].set_visible(False)
+    ax2.tick_params(axis='y', which='major', labelsize=20, colors='blue')
+
+    ax0.set_ylabel('Normalized Bitrate', fontsize=20)
+    ax0.set_xlabel('(b) Chunk Length', fontsize=20)
+    x = np.arange(1,len(SCHEMES)+1)  # the label locations
+    ax0.set_ylim(0,1.2)
+    ax0.tick_params(axis='both', which='major', labelsize=15)
+    ax3 = ax0.twinx()
+    ax3.set_ylim(0,25)
+    ax3.set_yticks(np.arange(0, 25.0, 5.0), minor=False)
     ax3.tick_params(axis='both', which='major', labelsize=20)
-    plt.yticks(np.arange(0, 20.0, 5.0))
-    plt.legend([b1["boxes"][0], b2["boxes"][0]], ['4G', '5G'], fontsize=20, facecolor='whitesmoke')
+    width=0.35
+    x = np.arange(1, len(SCHEMES)+1)  # the label locations
+
+    bitrates = []
+    std_bitrates = []
+    stalls = []
+    conf_stalls = []
+    all_stalls = []
+    for idx in range(len(SCHEMES_CHK)):
+        m_x, left_m_x, right_m_x = mean_confidence_interval(summary_all_chk[SCHEMES_CHK[idx]]['all_stalled_rate'])
+        bitrates.append(summary_all_chk[SCHEMES_CHK[idx]]['avg_br']/160.0)
+        std_bitrates.append(np.std(summary_all_chk[SCHEMES_CHK[idx]]['all_br'])/160.0)
+        stalls.append(summary_all_chk[SCHEMES_CHK[idx]]['time_stalled_rate'])  
+        conf_stalls.append(right_m_x-m_x)
+        all_stalls.append(summary_all_chk[SCHEMES_CHK[idx]]['all_stalled_rate'])
+        
+
+    bar1 = ax0.bar(x-width/2, bitrates, width/1.2, yerr=std_bitrates, capsize=4, color='sandybrown', edgecolor='saddlebrown', ecolor='saddlebrown', linewidth=2, label='Bitrate')
+
+    shifted_X = x + width/2
+
+    bp = ax3.boxplot(all_stalls, positions=shifted_X, autorange=True, showfliers=False, widths=0.25, patch_artist=True)
+    for cap in bp['caps']:
+        cap.set(color='blue', linewidth=2)
+    for med in bp['medians']:
+        med.set(color='blue', linewidth=2)
+    # bp['medians'][0].set(color='blue', linewidth=2)
+    for whisker in bp['whiskers']:
+        whisker.set(color='blue', linewidth=1.5, linestyle=':')
+    for box in bp['boxes']:
+        box.set(color='blue')
+        box.set(linewidth=2)
+        box.set(facecolor = 'white')
+        box.set(hatch='/')
+    bp['boxes'][0].set(label='Video Stall')
+    ax0.tick_params(axis='both', which='major', labelsize=20)
+    ax0.set_xlim(0.5, 3.5)
+    ax0.set_xticks(x)
+    ax0.set_xticklabels(SCHEMES_NEW_CHK, fontsize=16)
+    ax0.spines['top'].set_visible(False)
+    ax3.spines['top'].set_visible(False)
+    ax3.tick_params(axis='both', which='major', labelsize=20)
+    ax3.tick_params(axis='y', which='major', labelsize=20, colors='blue')
+    # ax0.legend([bar1, bp["boxes"][0]], ['Bitrate', 'Video Stall'], loc='upper center', bbox_to_anchor=(0.50, 1.08), fontsize=15, facecolor='whitesmoke') #bbox_to_anchor=(0.42, 1.00),
+    # ax2.legend([bar1, bp["boxes"][0]], ['Bitrate', 'Video Stall'], loc='upper right', fontsize=15, facecolor='whitesmoke')
+    ax0.legend([bar1], ['Bitrate'], fontsize=15, loc='upper center', bbox_to_anchor=(0.7, 1.1), facecolor='whitesmoke') #bbox_to_anchor=(0.15, 1.2),
+    ax.legend([bar2], ['Video Stall'], fontsize=15, loc='upper center', bbox_to_anchor=(0.1, 1.1), facecolor='whitesmoke')
+    ax0.set_axisbelow(True)
+    ax.set_axisbelow(True)
+    ax0.yaxis.grid(linestyle='dashed')
+    ax.set_axisbelow(True)
+    ax.yaxis.grid(linestyle='dashed')
+    plt.subplots_adjust(wspace=.02)
     fig.tight_layout()
-    # plt.show()
     plt.savefig("plots/figure18.pdf")
     plt.savefig("plots/figure18.png")
     plt.savefig("plots/figure18.eps")
-
     return
 
 if __name__ == '__main__':

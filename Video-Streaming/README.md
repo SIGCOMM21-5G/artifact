@@ -48,7 +48,7 @@ The video session files inside `Full-Results` are the logs containing informatio
 
 ## Generating Plots
 
-We have built scripts that uses the results provided to generate the plots shown in our paper. More specifically, the scripts will generate Figure 18 and 19.
+We have built scripts that uses the results provided to generate the plots shown in our paper. More specifically, the scripts will generate Figure 17 and 18.
 
 ### Requirements
 
