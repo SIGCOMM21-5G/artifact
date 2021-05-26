@@ -1,4 +1,3 @@
-(Can be updated)
 # LTE, SA-5G, NSA-5G Driving Experiments
 This folder contains the dataset, processing and plotting scripts for LTE, SA-5G, NSA-5G Driving experiments conducted using T-Mobile. It covers Figure 9 referenced in Section 3.2 of the paper.
 
