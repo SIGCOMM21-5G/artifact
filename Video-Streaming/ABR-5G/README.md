@@ -20,7 +20,7 @@ Inside `run_exp/`, run
 bash run_all_experiments.sh
 ```
 
-This script will run all set of 5G related experiments (7 ABR algorithms, throughput predictiors, different chunk length and interface selection).
+This script will run all set of related experiments (7 ABR algorithms in 4G and 5G, throughput predictiors, different chunk length and interface selection).
 
 For the result of different ABR algorithms over 5G, the result will be in `run_exp/results_driving` and `run_exp/results_walking` folder. For throughput predictors, the result will be in `run_exp/results_predict`. For different chunk length, the results will be in `run_exp/results_chunk_length`. For interface selection, the results will be in `run_exp/results_interface_sel`.
 
@@ -38,7 +38,7 @@ For the result of different ABR algorithms over 5G, the result will be in `run_e
 | Throughput Predictor   | `cooked_traces_pred`  | `run_exp/run_5g_predict.sh`    |  `run_exp/results_predict`| 1 | 1 |
 | Different Chunk Length   | `cooked_traces_chunklen`  | `run_exp/run_5g_chunklen.sh`    |  `run_exp/results_chunklen`| 5 | 1 |
 | Interface Selection   | `cooked_traces_multipath/driving`  | `run_exp/run_5g_interface_sel.sh`    |  `run_exp/results_interface_sel`| 5 | 2 |
-| 4G 7 ABR Algorithms (driving)   | `../ABR-4G/cooked_traces/driving`  | `../ABR-4G/run_exp/run_4g.sh`    |  `run_exp/results_driving`| 27 | 1.5 |
+| 4G 7 ABR Algorithms (driving)   | `../ABR-4G/cooked_traces/driving`  | `../ABR-4G/run_exp/run_4g.sh`    |  `../ABR-4G/run_exp/results_driving`| 27 | 1.5 |
 
 
 ### Output file format

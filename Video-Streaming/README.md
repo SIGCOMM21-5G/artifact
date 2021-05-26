@@ -30,7 +30,7 @@ The network traces are in the format of `[Timestamp (s) Throughput(Mbps)]` (sepe
 
 ### Throughput Prediction Trace Format
 
-The traces are in numpy (.npy) format, load the data by `trace = np.load(tracefile)`. Then `trace` will be an 1D array where each element is the throughput (Mbps) at each 1 second interval.
+The traces are in numpy (.npy) format, load the data by `trace = np.load(tracefile)`. Then `trace` will be a 1D array where each element is the throughput (Mbps) at a 1 second interval.
 
 ## Video Session Log Structure
 
