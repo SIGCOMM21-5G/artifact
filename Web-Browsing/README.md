@@ -11,6 +11,7 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 | plot-section6.sh  | One command to run all the scripts              |
 | generated_figure  | Bash Scripts generated results' folder            |
 
+---
 
 ## Requirements
 
@@ -23,29 +24,30 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 * Matplotlib (>=3.1.3)
 * graphviz (>=0.16)
 
-
+---
 
 ## Data Analysis
 
 #### Step 1 (Data Preprocessing)
 
-* The dataset is large due to which the preprocessing can take X to Y hours to complete on a normal laptop. To save time, we provide fully processed dataset. 
+The dataset is large due to which the preprocessing can take X to Y hours to complete on a normal laptop. To save time, we provide fully processed dataset. 
 
-Skip preprocessing step
+*Follow these instructions to skip preprocessing step*
    - Download the repository to your computer
    - Replace `dataset_processed` folder with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
    - Proceed to step 2
 
-Preprocess complete dataset
+*Follow these instructions to preprocess complete dataset*
    - Download the repository to your computer
    - Replace the `raw_dataset` with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
    - Run `python preprocessing.py`
+   - After the preprocessing is complete, two pickle files `WebSet.pickle` and `fileStatistics.pickle` will be saved in the `processed_dataset` folder. Details of the pickle files can be found [here](the WebSet.pickle and fileStatistics.pickle will be saved in your current directory.).
 
 By default, `raw_dataset` and `processed_data` contain sample files that one could use to test the environment or play with it. 
 
-#### 2. Generate the Plots and Results 
+#### Step 2 (Generate the plots)
 
-Once the full pickle files are ready, we can use the following bash command to generate all the results and plots.
+Once the both pickle files are present in `processed_dataset` folder, we can use the following bash command to generate all the results and plots.
 
 ```bash
 bash plot-section6.sh
