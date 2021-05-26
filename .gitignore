@@ -7,4 +7,6 @@ __pycache__
 .idea
 
 # Ignore scripts
-TCP-Single-Conn-Perf/Change-Iperf-Date.py
+Ratelimit-Iperf/00a-Change-Iperf-Date.py
+/.idea/
+.~*
