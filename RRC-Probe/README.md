@@ -8,6 +8,7 @@ This folder contains the dataset and plotting scripts for Figure 10. For details
 |-----------------------------|------------------------------------------------------------------------------------------------------------|
 | `dataset_rrc_probe.csv` | CSV-based dataset containing the Speedtest results. See **_Dataset Description_** section below for more details |
 | `plot-section4-figure10.py`           | Python script to process the data and generate the plot. See **_Generating Plots_** section below for more details.                      |
+| `plot-section4-figure25.py`           | Python script to process the data and generate Figure 25 in the Appendix. See **_Generating Plots_** section below for more details.                      |
 
 ## Dataset Description
 
@@ -38,6 +39,6 @@ Here are the software/package requirements.
 
 After cloning the repository, navigate to `RRC-Probe` folder and simply run the following command.
 
-`python plot-section4-figure10.py`
+`python plot-section4-figure10.py && python plot-section4-figure25.py`
 
 If everything succeeded, a `plots` folder should be created with the figure (in 3 formats `.png`, `.pdf` and `.eps`).
