@@ -41,12 +41,12 @@ The dataset is large due to which the preprocessing can take X to Y hours to com
 
 *Follow these instructions to skip preprocessing step*
    - Download the repository to your computer
-   - Replace `processed_dataset` folder with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
+   - Replace `processed_dataset` folder with the one in [Google Drive](https://drive.google.com/drive/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0?usp=sharing)
    - Proceed to step 2
 
 *Follow these instructions to preprocess complete dataset*
    - Download the repository to your computer
-   - Replace the `raw_dataset` with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
+   - Replace the `raw_dataset` with the one in [Google Drive](https://drive.google.com/drive/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0?usp=sharing)
    - Run `python preprocessing.py`
    - After the preprocessing is complete, two pickle files `WebSet.pickle` and `fileStatistics.pickle` will be saved in the `processed_dataset` folder. Details of the pickle files can be found [here](processed_dataset).
 
