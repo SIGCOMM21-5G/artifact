@@ -26,7 +26,4 @@ For each webpage loading, we will save these attributes. Data for all the websit
 ```
 
 We pickled the processed dicts of all the websites into `fileStatistics.pickle`.
-
-We pickle the same data in another file `WebSet.pickle`. The only difference here is it is `set`-based data structure to store the unique names of all the websites visited in our dataset.
-
-Both these two pickles form as the output of the preprocessing step. They will be used to generate scripts and other results.
+We created another pickled file `WebSet.pickle`. This file represents a `set`-based data structure containing the unique names of all the websites visited in our dataset. Both of these pickled files form are saved as output of the preprocessing script. They will be used to generate scripts and other results.
