@@ -12,7 +12,7 @@ This is a measurement paper with several types of experiments conducted for diff
 #### Data Analysis, Model/Plot Generation
 
 - If data analysis is involved, our instructions will contain information on how to process the data. 
-- No matter what the dataset size is, we provide the fully generated results and/or plots. If you decides to run the analysis and/or plotting scripts, the outcome of processing will simply replace the existing files in the repository.
+- No matter what the dataset size is, we provide the fully generated results and/or plots. If you decide to run the analysis and/or plotting scripts, the outcome of processing will simply replace the existing files in the repository.
 - For the artifacts involved in section 5 (ABR video streaming), a lot of computing resources are required. We have therefore provided:
     1. a screencast to show how the results were generated
     2. output logs
@@ -20,11 +20,16 @@ This is a measurement paper with several types of experiments conducted for diff
 
 #### User-side Measurement tools (todo)
 
-- 5G Tracker (ToDo)
+- 5G Tracker (to use this tool, one will require access to 5G data services/sim cards and be in areas with 5G coverage)
    - Passive measurements using Android APIs
    - iPerf
    - RRC-Probe 
    - TCPDUMP    
 - Monsoon Power Monitor
+
+
+##### Folder Structure
+
+
 
 As always, if there are any questions, feel free to reach out to us (<arvind@cs.umn.edu>, <xumiao@umich.edu>)! 
