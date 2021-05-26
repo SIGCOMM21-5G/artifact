@@ -3,11 +3,13 @@
 This folder contains details of the artifacts related to Section 6 (Web Browsing). We provide details of the dataset, analysis scripts as well as plotting scripts to generate Figures 19 to 22 and Table 6.
 
 ## Folder structure
-|     Filename      |                         Description                          |
+|     Foldername/Filename      |                         Description                          |
 | --------------- | ---------------------------------------------------------- |
-| raw_dataset    | The raw collected dataset.      |
+| raw_dataset/[date]/har-file/[timeStampID]    | The collected HAR dataset.      |
+| raw_dataset/[date]/tcpdump-file/[timeStampID]    | The collected HAR dataset.      |
 | processed_dataset | Processed data can be found here         |
 | scripts      | Scripts for generating plots and results. |
+| preprocessing.py | Preprocessing Script |
 | plot-section6.sh  | One command to run all the scripts              |
 | results  | Bash Scripts generated results and save in results folder            |
 
