@@ -1,7 +1,7 @@
 # LTE, SA-5G, NSA-5G Driving Experiments
 This folder contains the dataset, processing and plotting scripts for LTE, SA-5G, NSA-5G Driving experiments conducted using T-Mobile. It covers Figure 9 referenced in Section 3.2 of the paper.
 
-Note that we don't have access to RRC messages to accurately determine the handoff event, so we use Samsung Service Code `*#0101#*` to watch the screen and map the handoff events with the overlaid clock app built by us.
+Note that we don't have access to RRC messages to accurately determine the handoff event, so we use Samsung Service Code `*#0011#*` to watch the screen and map the handoff events with the overlaid clock app built by us.
 We also provide a few sample video recordings of the experiment which can be found [here](https://drive.google.com/drive/folders/13hVPulm6r9PMWZ_gHw1o-2sYh5_6L78_?usp=sharing). Using these video recordings, we can verify the handoff events for a run.
 
 **Run the following command to generate plots.**
