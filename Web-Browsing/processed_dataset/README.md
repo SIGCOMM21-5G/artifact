@@ -1,37 +1,32 @@
-## Processing the raw dataset
+## Structure of the Pickle Files
+The preprocessing script will take as input the HAR file and packet trace and extract the following attributes:
 
-After cloning the repo and download the contents from google drive's `raw_dataset` directory to repo's `raw_dataset` directory. Then we can apply `preprocessing.py` to generate the processed data and save it to `WebSet.pickle` and `fileStatistics.pickle`.
+* Total page size in bytes
+* Average throughput information?
+* Average object size in bytes
+* Number of objects in web page (e.g. `.js`, `.css`, etc.)
+* Page load time 
+* Each object's URL information
+* Object response's protocol information 
+* Number of images and videos
 
-```shell
-python preprocessing.py --data_path ../raw_dataset
+For each webpage loading, we will save these attributes. Data for all the websites is stored in Python-based `dict` data structure as shown below.  into the dict format and save it into the `fileStatistics.pickle`. The dict format is like:
+
+```dict
+{
+  ('websiteName1' , '4G') : [
+    {pageSize:xxx, objectNum:xxx...},
+    {pageSize:xxx, objectNum:xxx...},
+    {pageSize:xxx, objectNum:xxx...}], 
+  ('websiteName2' , '5G') : [
+    {pageSize:xxx, objectNum:xxx...},
+    {pageSize:xxx, objectNum:xxx...},
+    {pageSize:xxx, objectNum:xxx...}]
+}
 ```
 
-When the preprocessing is done, the  `WebSet.pickle` and `fileStatistics.pickle` will be saved in your current directory. (This step usually takes several hours.)
+We pickled the processed dicts of all the websites into `fileStatistics.pickle`.
 
-**To save your time, we have offered our generated whole pickle file `WebSet.pickle` and `fileStatistics.pickle` in the `processed_dataset` folder in Shared Google Folder. You can directly download and use these two files instead of re-processing from the beginning.**
+We pickle the same data in another file `WebSet.pickle`. The only difference here is it is set-based data structure to store the unique names of all the websites visited in our dataset.
 
-We also provide incomplete toy pickle file in this Github repo for quick trial run. You can replace the toy pickle file with downloaded full version from Google drive to get correct final results.
-
-## Processed Pickle File structure
-Using the processing script, we will analyze both the HAR file and Tcpdump file. We will get the following attributes:
-* pageSize
-* average throughput information
-* average object size 
-* object number 
-* page load time 
-* each object's url information
-* object response's protocol information 
-* image/video number
-
-We will save such attribute into the dict format and save it into the `fileStatistics.pickle`. The dict format is like:
-
-```python
-{('websiteName1','4G'):[{pageSize:xxx, objectNum:xxx...},{pageSize:xxx, objectNum:xxx...},{pageSize:xxx, objectNum:xxx...}], ('websiteName2','5G'):[{pageSize:xxx, objectNum:xxx...},{pageSize:xxx, objectNum:xxx...},{pageSize:xxx, objectNum:xxx...}] }
-```
-
-The combination of website's name and the network Type is the key in the dict. The corresponding value is a list. Each member of the list is the analyzed attributes for each round's loading.
-
-In `WebSet.pickle` , it will be a `set` structure to contain all the websites' names we have collected.
-
-We will utilize these two pickle file for futher analysis.
-
+Both these two pickles form as the output of the preprocessing step. They will be used to generate scripts and other results.
