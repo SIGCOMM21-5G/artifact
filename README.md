@@ -42,7 +42,7 @@ This is a measurement paper with several types of experiments conducted for diff
 |             Table 2 (Section 4.2)             |         [RRC-Power](RRC-Power)        | Use RRC-Probe + Power Monitor to measure power during RRC state transitions.              |
 |         Figures 11 to 14 (Section 4.3)        |    [Data-Transfer-Power](Data-Transfer-Power)   | Conduct controlled to measure power during data transfers in multiple settings.           |
 |        Figures 15 and 16 (Section 4.4)        |        [Power-Model](Power-Model)       | Power Model Construction and Evaluation                                                   |
-| Table 3 (Section 4.5)  Table 8 (Appendix A.4) | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
+| Table 3 (Section 4.5)  Table 8 (Appendix A.5) | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
 |         Figures 17 and 18 (Section 5)         |      [Video-Streaming](Video-Streaming)     | Evaluate ABR algorithms for video streaming using real-world 5G and 4G throughput traces. |
 |      Figures 19 to 22 Table 6 (Section 6)     |       [Web-Browsing](Web-Browsing)       | QoE implications (performance v/s energy efficiency) of using 4G v/s 5G for web-browsing. |
 
