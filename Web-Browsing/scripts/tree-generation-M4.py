@@ -142,7 +142,6 @@ standard_plt = StandardScaler()
 for i in filtered_webSet:
     if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
         continue
-    #ipdb.set_trace()
     if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
         continue
     dict_4g = mergeList(fileStatistics[(i, '4G')])
@@ -168,7 +167,6 @@ mn_energy.fit(energy_all_list)
 for i in webSet_train:
     if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
         continue
-    #ipdb.set_trace()
     if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
         continue
     final_statistics[(i, "4G")] = mergeList(fileStatistics[(i, '4G')])

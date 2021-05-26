@@ -5,7 +5,6 @@ import pickle
 from haralyzer import HarParser, HarPage
 import pickle
 import matplotlib.pyplot as plt
-import ipdb
 from sklearn import tree
 import graphviz
 import seaborn as sns
