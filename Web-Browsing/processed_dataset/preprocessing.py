@@ -121,7 +121,7 @@ def parseHarFile(fileName):
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--data_path', type=str,  help='dataset directory path', required=True)
+parser.add_argument('--data_path', type=str, default='raw_dataset', help='dataset directory path', required=True)
 args = parser.parse_args()
 
 parentPath = args.data_path+'/'
