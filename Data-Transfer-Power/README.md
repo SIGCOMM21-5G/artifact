@@ -1,6 +1,6 @@
 # Power for Data Transfer
 
-This folder contains the dataset and scripts for controlled data transfer power experiments. It covers all the figures referred om Section 4.3 which include Figures 11, 12, 13, 14.
+This folder contains the dataset and scripts for controlled data transfer power experiments. It covers all the figures referred in Section 4.3 which include Figures 11, 12, 13, 14.
 
 ## Folder Structure   
 
@@ -32,7 +32,7 @@ Here are the software/package requirements. The version number in the bracket in
 
 ### Running code
 
-After cloning the repository, navigate to `Data-Transfer-Power` folder and run the following command.
+After cloning the repository, navigate to `Data-Transfer-Power` folder and run the following command to parse Monsoon power logs and iPerf logs.
 
 ```
 python3 plot_hardware_power.py data/PowerMonitor/20201130/screenmax-5g-udp-loc5-600m-1.csv 2 0.2 62.3
