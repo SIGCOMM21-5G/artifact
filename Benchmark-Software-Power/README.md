@@ -1,6 +1,6 @@
 # Benchmarking Software-based Power Monitor
 
-This folder contains the dataset and scripts for the experiments of benchamarking software-based power monitor. It covers the Table 8 in Appendix A.4 (also see Section 4.5).
+This folder contains the dataset and scripts for the experiments of benchamarking software-based power monitor. It covers the Table 8 in Appendix A.5 (also see Section 4.5).
 
 ## Folder Structure   
 
