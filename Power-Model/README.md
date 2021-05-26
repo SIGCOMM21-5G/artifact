@@ -30,4 +30,4 @@ python3 dtr_vz.py -d Loc-B-Wild/data-processed/ -k mi-vz-hb -f 1
 python3 dtr_vz.py -d Loc-B-Wild/data-processed/ -k mn-vz-hb -f 1
 python3 dtr_vz.py -d Loc-B-Wild/data-processed/ -k mn-vz-lb -f 1
 ```
-For the DTR (decision tree regression) step, we use `dtr_vz.py` for all the VZ data and use `dtr_tm.py` for all the TM data. The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS), the example commands above are using TH feature for modeling.
+For the DTR (decision tree regression) step, we use `dtr_vz.py` for all the VZ data and use `dtr_tm.py` for all the TM data. The "f" parameter in `dtr.py` indicates the feature set (1: TH + SS; 2: TH; 3: SS), the example commands above are using "TH" feature for modeling.
