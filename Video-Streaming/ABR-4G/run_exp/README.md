@@ -1,0 +1,1 @@
+This set of code runs experiments over `tc`. To run all ABR algorithms over the 4G traces, execute `bash run_4g_driving.sh`.

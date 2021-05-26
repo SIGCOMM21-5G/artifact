@@ -4,6 +4,7 @@ __pycache__
 
 # ENV/IDE files
 .venv
+.idea
 
 # Ignore scripts
 Ratelimit-Iperf/00a-Change-Iperf-Date.py
