@@ -27,11 +27,21 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 
 ## Data Analysis
 
-#### 1.Preprocessing Steps
+#### Step 1 (Data Preprocessing)
 
-* The dataset is large. The preprocessing takes X to Y hours to run on a normal laptop. To save this time, we provide fully processed dataset which can be found in `processed_dataset`. It contains the pickled data structure of the processed data. If you want to preprocess the data from the beginning, you can continue. First follow the description in `raw_dataset` folder, to download the content in the raw_dataset folder.
-* Follow the description in `processed_dataset` folder to process the dataset.
-* **We have provided the incomplete toy pickle files in `processed_dataset` folder. You can first play with it on the following steps**
+* The dataset is large due to which the preprocessing can take X to Y hours to complete on a normal laptop. To save time, we provide fully processed dataset. 
+
+Skip preprocessing step
+   - Download the repository to your computer
+   - Replace `dataset_processed` folder with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
+   - Proceed to step 2
+
+Preprocess complete dataset
+   - Download the repository to your computer
+   - Replace the `raw_dataset` with the one in [Google Drive](https://drive.google.com/drive/u/1/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0)
+   - Run `python preprocessing.py`
+
+By default, `raw_dataset` and `processed_data` contain sample files that one could use to test the environment or play with it. 
 
 #### 2. Generate the graphs
 
