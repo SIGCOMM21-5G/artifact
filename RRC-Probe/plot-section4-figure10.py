@@ -128,7 +128,7 @@ ax2.set_yticks(np.arange(0, 1780, 500), minor=False)
 ax2.set_xlim(0, 41.0)
 nsa2_conn = patches.Rectangle((0.0, 1650), 10.2 - 0.0, 200, linewidth=1, edgecolor='forestgreen',
                               facecolor='forestgreen')
-nsa2_idle = patches.Rectangle((20.0, 1650), 41.0 - 20.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
+nsa2_idle = patches.Rectangle((19.5, 1650), 41.0 - 19.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
 ax2.add_patch(nsa2_conn)
 ax2.add_patch(nsa2_idle)
 ax2.set_ylabel("RTT (ms)", fontsize=20)
