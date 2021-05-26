@@ -89,14 +89,12 @@ ax0.tick_params(axis="both", labelsize=18)
 ax0.set_ylim(0, 1880)
 ax0.set_yticks(np.arange(0, 1880, 500), minor=False)
 ax0.set_xlim(0, 19)
-sa_conn = patches.Rectangle((7.8, 1750), 10.2 - 7.8, 200, linewidth=1, edgecolor='forestgreen', facecolor='forestgreen',
+sa_conn = patches.Rectangle((0.0, 1750), 11.2, 200, linewidth=1, edgecolor='forestgreen', facecolor='forestgreen',
                             label='RRC_CONNECTED')
-sa_inac = patches.Rectangle((10.2, 1750), 15.0 - 10.2, 200, linewidth=1, edgecolor='crimson', facecolor='crimson',
-                            label='RRC_INACTIVE')
-sa_idle = patches.Rectangle((15.0, 1750), 20.2 - 15, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
+sa_idle = patches.Rectangle((11.2, 1750), 20.2 - 11.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
                             label='RRC_IDLE')
 ax0.add_patch(sa_conn)
-ax0.add_patch(sa_inac)
+
 ax0.add_patch(sa_idle)
 
 
@@ -106,12 +104,15 @@ ax1.scatter(dfsatm['interval'], dfsatm['RTT_median'], c=dfsatm['color'])
 ax1.set_ylim(0, 1880)
 ax1.set_yticks(np.arange(0, 1880, 500), minor=False)
 ax1.set_xlim(0, 19.0)
-nsa1_conn = patches.Rectangle((7.8, 1750), 10.2 - 7.8, 200, linewidth=1, edgecolor='forestgreen',
+nsa1_conn = patches.Rectangle((0.0, 1750), 10.2 - 0.0, 200, linewidth=1, edgecolor='forestgreen',
                               facecolor='forestgreen', label='RRC_CONNECTED')
-nsa1_idle = patches.Rectangle((10.2, 1750), 19.0 - 10.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
+sa_inac = patches.Rectangle((10.2, 1750), 15.0 - 10.2, 200, linewidth=1, edgecolor='crimson', facecolor='crimson',
+                            label='RRC_INACTIVE')
+nsa1_idle = patches.Rectangle((15.0, 1750), 19.0 - 15.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
                               label='RRC_IDLE')
 ax1.add_patch(nsa1_conn)
 ax1.add_patch(nsa1_idle)
+ax1.add_patch(sa_inac)
 ax1.set_title('T-Mobile 5G SA Low-Band', fontsize=18)
 ax1.tick_params(axis="both", labelsize=18)
 
@@ -125,9 +126,9 @@ ax2.set_title('Verizon NSA Low-Band 5G (DSS)', fontsize=18)
 ax2.set_ylim(0, 1780)
 ax2.set_yticks(np.arange(0, 1780, 500), minor=False)
 ax2.set_xlim(0, 41.0)
-nsa2_conn = patches.Rectangle((7.8, 1650), 10.2 - 7.8, 200, linewidth=1, edgecolor='forestgreen',
+nsa2_conn = patches.Rectangle((0.0, 1650), 10.2 - 0.0, 200, linewidth=1, edgecolor='forestgreen',
                               facecolor='forestgreen')
-nsa2_idle = patches.Rectangle((10.2, 1650), 15.2 - 10.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
+nsa2_idle = patches.Rectangle((20.0, 1650), 41.0 - 20.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta')
 ax2.add_patch(nsa2_conn)
 ax2.add_patch(nsa2_idle)
 ax2.set_ylabel("RTT (ms)", fontsize=20)
@@ -141,9 +142,9 @@ ax3.scatter(dfnsalbtm['interval'], dfnsalbtm['RTT_median'], c=dfnsalbtm['color']
 ax3.set_ylim(0, 1780)
 ax3.set_yticks(np.arange(0, 1780, 500), minor=False)
 ax3.set_xlim(0, 19)
-fourg_conn = patches.Rectangle((0, 1650), 5, 200, linewidth=1, edgecolor='forestgreen',
+fourg_conn = patches.Rectangle((0, 1650), 10.2, 200, linewidth=1, edgecolor='forestgreen',
                                facecolor='forestgreen', label='RRC_CONNECTED')
-fourg_idle = patches.Rectangle((5, 1650), 20, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
+fourg_idle = patches.Rectangle((10.2, 1650), 20 - 10.2, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
                                label='RRC_IDLE')
 inac_label = patches.Rectangle((22, 1650), 23, 0, linewidth=1, edgecolor='crimson', facecolor='crimson',
                                label='RRC_INACTIVE')
@@ -162,6 +163,14 @@ ax4.set_ylim(0, 1780)
 ax4.set_yticks(np.arange(0, 1780, 500), minor=False)
 # ax3.set_xlim(7.8, 15.2)
 ax4.set_xlim(0, 19)
+
+fourg_conn = patches.Rectangle((0, 1650), 10.0, 200, linewidth=1, edgecolor='forestgreen',
+                               facecolor='forestgreen', label='RRC_CONNECTED')
+fourg_idle = patches.Rectangle((10.0, 1650), 20 - 10.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
+                               label='RRC_IDLE')
+ax4.add_patch(fourg_conn)
+ax4.add_patch(fourg_idle)
+
 ax4.set_ylabel("RTT (ms)", fontsize=20)
 ax4.tick_params(axis="both", labelsize=18)
 ax4.set_title('Verizon 4G', fontsize=18)
@@ -174,6 +183,12 @@ ax5.set_xlabel("Idle Time between Packets (s)", fontsize=18)
 ax5.set_ylim(0, 1780)
 ax5.set_yticks(np.arange(0, 1780, 500), minor=False)
 ax5.set_xlim(0, 19)
+fourg_conn = patches.Rectangle((0, 1650), 5.0, 200, linewidth=1, edgecolor='forestgreen',
+                               facecolor='forestgreen', label='RRC_CONNECTED')
+fourg_idle = patches.Rectangle((5.0, 1650), 20 - 5.0, 200, linewidth=1, edgecolor='magenta', facecolor='magenta',
+                               label='RRC_IDLE')
+ax5.add_patch(fourg_conn)
+ax5.add_patch(fourg_idle)
 ax5.tick_params(axis="both", labelsize=18)
 ax5.set_title('T-Mobile 4G', fontsize=18)
 
