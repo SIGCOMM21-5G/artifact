@@ -48,7 +48,7 @@ The content in the logs are in format of `[timestamp(s)   bitrate(kbps) buffer_l
 
 ## Real test experiments
 
-Since we do the experiments on AWS instances and the price is quite high, we currently have the VMs released. If required, we can provide two AWS VMs (a client-server pair) for tesing all the experiments.
+Since we perform the experiments on AWS VM instances and the price is quite high to keep them running, we have currently terminated them. If required, we can provision and provide two AWS VMs (a client-server pair) for tesing all the experiments.
 
 
 
