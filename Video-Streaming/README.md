@@ -1,6 +1,6 @@
 # Adaptive Video Streaming
 
-Since we run 7 different ABR algorithms over many traces (both 4G and 5G) sequentially, it will take longer than 24 hours to finish all the experiments. Hence we provide a **screencast** of running a subset of the traces to illustrate how the video emulation testbed works. We also provide the **full results** and ploting scripts (see the **Genearting Plots** section) for the figures in the paper.
+Since we run 7 different ABR algorithms over many traces (both 4G and 5G) sequentially, it will take longer than 24 hours to finish all the experiments. Hence we provide a **screencast** of running a subset of the traces to illustrate how the video emulation testbed works. We also provide the **full results** and ploting scripts (see the **Generating Plots** section) for the figures in the paper.
 
 <!-- TODO: Add links to the screencast files. -->
 
