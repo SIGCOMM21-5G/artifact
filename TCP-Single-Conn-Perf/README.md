@@ -1,4 +1,3 @@
-(Can be updated)
 # TCP Single Connection Performance
 This folder contains the dataset, processing and plotting scripts for TCP single connection performance measurements conducted using **5GTracker** and Azure VMs. It covers Figure 8 referred in Section 3.2 of the paper.
 
