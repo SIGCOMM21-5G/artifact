@@ -1,0 +1,53 @@
+Index,Provider,Network Type,Direction,Iperf run number,Device
+1,Verizon,DEFAULT,downlink,63,S20UPM
+2,Verizon,DEFAULT,downlink,64,S20UPM
+4,Verizon,DEFAULT,downlink,68,S20UPM
+5,Verizon,DEFAULT,uplink,69,S20UPM
+6,Verizon,DEFAULT,uplink,70,S20UPM
+7,Verizon,DEFAULT,uplink,77,S20UPM
+9,Verizon,DEFAULT,downlink,123,S20UPM
+10,Verizon,DEFAULT,downlink,131,S20UPM
+11,Verizon,DEFAULT,downlink,133,S20UPM
+12,Verizon,DEFAULT,downlink,148,S20UPM
+13,Verizon,DEFAULT,downlink,151,S20UPM
+16,Verizon,DEFAULT,downlink,154,S20UPM
+18,Verizon,DEFAULT,downlink,156,S20UPM
+19,Verizon,DEFAULT,downlink,157,S20UPM
+21,Verizon,DEFAULT,downlink,161,S20UPM
+22,Verizon,DEFAULT,downlink,163,S20UPM
+23,Verizon,DEFAULT,downlink,168,S20UPM
+24,Verizon,DEFAULT,downlink,169,S20UPM
+26,Verizon,DEFAULT,downlink,171,S20UPM
+27,Verizon,DEFAULT,downlink,172,S20UPM
+28,Verizon,DEFAULT,downlink,173,S20UPM
+29,Verizon,DEFAULT,uplink,195,S20UPM
+30,Verizon,DEFAULT,uplink,196,S20UPM
+31,Verizon,DEFAULT,uplink,197,S20UPM
+32,Verizon,DEFAULT,uplink,199,S20UPM
+33,Verizon,DEFAULT,uplink,331,S20UPM
+34,TMobile,SA only,downlink,20036,S20UPM
+35,TMobile,SA only,downlink,20046,S20UPM
+36,TMobile,SA only,downlink,20048,S20UPM
+37,TMobile,SA only,downlink,20060,S20UPM
+38,TMobile,SA only,downlink,20061,S20UPM
+40,TMobile,NSA+LTE,downlink,20065,S20UPM
+41,TMobile,NSA+LTE,downlink,20066,S20UPM
+42,TMobile,NSA+LTE,downlink,20067,S20UPM
+43,TMobile,NSA+LTE,downlink,20068,S20UPM
+44,TMobile,NSA+LTE,downlink,20069,S20UPM
+45,TMobile,SA only,uplink,20070,S20UPM
+46,TMobile,SA only,uplink,20073,S20UPM
+47,TMobile,SA only,uplink,20074,S20UPM
+48,TMobile,NSA+LTE,uplink,20075,S20UPM
+49,TMobile,NSA+LTE,uplink,20076,S20UPM
+50,TMobile,NSA+LTE,uplink,20077,S20UPM
+51,TMobile,SA only,uplink,20078,S20UPM
+52,TMobile,SA only,uplink,20079,S20UPM
+53,TMobile,NSA+LTE,uplink,20085,S20UPM
+54,TMobile,NSA+LTE,uplink,20086,S20UPM
+55,TMobile,SA only,downlink,20090,S20UPM
+56,TMobile,SA only,downlink,20091,S20UPM
+57,TMobile,NSA+LTE,downlink,20092,S20UPM
+58,Verizon,DEFAULT,downlink,15652,ELDERBERRY_374
+59,Verizon,DEFAULT,uplink,15656,ELDERBERRY_374
+60,Verizon,DEFAULT,uplink,15657,ELDERBERRY_374

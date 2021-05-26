@@ -5,11 +5,10 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 from utils import *
 
-df = pd.read_csv('dataset_speedtest_ookla.csv')
-SHOW_PLOT_FLAG = True
+df = pd.read_csv('speedtest_ookla.csv')
+SHOW_PLOT_FLAG = False
 
 ##########################################
 # Figure 2 # Verizon (mmWave, 4G/NSA-5G)
@@ -386,3 +385,5 @@ plotme(plt, plot_id, plot_name, show_flag=SHOW_PLOT_FLAG, png_only=False, pad_in
 del df_f7
 
 ###################################################################
+
+print('Complete./')
