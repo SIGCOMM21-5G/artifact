@@ -43,12 +43,11 @@ Preprocess complete dataset
 
 By default, `raw_dataset` and `processed_data` contain sample files that one could use to test the environment or play with it. 
 
-#### 2. Generate the graphs
+#### 2. Generate the Plots and Results 
 
-After the pickle file is ready, you can use the provided bash command to generate all the results.
+Once the full pickle files are ready, we can use the following bash command to generate all the results and plots.
 
 ```bash
 bash plot-section6.sh
 ```
-
-The generated results will be saved in the `generated_figure` folder.
+The generated results will be saved in the `results` folder.
