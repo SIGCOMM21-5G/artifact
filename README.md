@@ -17,7 +17,14 @@ This is a measurement paper with several types of experiments conducted for diff
     1. a screencast to show how the results were generated
     2. output logs
     3. if one has their own compute resources, we provide instructions on how to evaluate.
-    
 
+#### User-side Measurement tools (todo)
+
+- 5G Tracker (ToDo)
+   - Passive measurements using Android APIs
+   - iPerf
+   - RRC-Probe 
+   - TCPDUMP    
+- Monsoon Power Monitor
 
 As always, if there are any questions, feel free to reach out to us (<arvind@cs.umn.edu>, <xumiao@umich.edu>)! 
