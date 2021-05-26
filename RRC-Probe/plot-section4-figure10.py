@@ -130,6 +130,7 @@ ax0.scatter(dfnsammvz['interval'], dfnsammvz['RTT_median'], c=dfnsammvz['color']
 ax0.set_title('Verizon 5G NSA mmWave', fontsize=18)
 ax0.set_ylabel("RTT (ms)", fontsize=20)
 ax0.tick_params(axis="both", labelsize=18)
+ax0.set_xlabel("Idle Time between Packets (s)", fontsize=18)
 ax0.set_ylim(0, 1880)
 ax0.set_yticks(np.arange(0, 1880, 500), minor=False)
 ax0.set_xlim(0, 19)
