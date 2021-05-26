@@ -8,7 +8,7 @@ To view the screencast, just click the corresponding link.
 
 | Screencast | Description | Viewing time | Link to Screen cast | 
 | ---------- | ----------- | ------------ | ------------------- |
-| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~30%) in a bash terminal (using virtualdisplays) | 11 h | [Link](https://drive.google.com/file/d/1Dxu6IUIKMiHMFzGNYPUB9Z6wkTIYD69e/view?usp=sharing) |
+| Full experiments (w/o GUI, in terminal) | Perform all experiments using a subset of traces (~20%) in a bash terminal (using virtualdisplays) | 11 h | [Link](https://drive.google.com/file/d/1Dxu6IUIKMiHMFzGNYPUB9Z6wkTIYD69e/view?usp=sharing) |
 |An illustration example (w/ GUI) | We enable the display to showcase how our video streaming experiments can be done by controlling the Chrome browser (with different ABR algorithms) | 25 min | [Link](https://drive.google.com/file/d/1Nfnz0UuYKUpQ7KbkB51bGm__tqpgTZut/view?usp=sharing) |
 
 ## Folder Structure
@@ -26,7 +26,7 @@ Inside `Network-Traces/`, there are two sets of traces. `Network-Traces/Lumos5G`
 
 ### Lumos Network Traces Format
 
-The network traces are in the format of `[Timestamp (s) Throughput(Mbps)]` (seperated by a space).
+The network traces are in the format of `[Timestamp(s) Throughput(Mbps)]` (seperated by a space).
 
 ### Throughput Prediction Trace Format
 
