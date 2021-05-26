@@ -26,6 +26,11 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 * Matplotlib (>=3.1.3)
 * graphviz (>=0.16)
 
+Also, install the `graphviz` package using the following commands on Ubuntu:
+```bash
+sudo apt-get install graphviz
+```
+
 ---
 
 ## Data Analysis
