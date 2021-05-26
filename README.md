@@ -37,7 +37,7 @@ This is a measurement paper with several types of experiments conducted for diff
 |:---------------------------------------------:|:------------------------:|-------------------------------------------------------------------------------------------|
 |          Figures 1 to 7  (Section 3)          |     NW-Perf-Speedtest    | Network performance measurements and analysis.                                            |
 |             Figure 8  (Section 3)             |   TCP-Single-Conn-Perf   | Single conn. downlink throughput performance under different transport layer settings.    |
-|             Figure 9  (Section 3)             |       Driving-Wild       | Handoff frequency while driving across different Low-Band frequency settings.             |
+|             Figure 9  (Section 3)             |       [Driving-Wild](Driving-Wild)       | Handoff frequency while driving across different Low-Band frequency settings.             |
 |            Figure 10  (Section 4.2)           |         RRC-Probe        | Inferring RRC states for different carrier/frequency band setting.                        |
 |             Table 2 (Section 4.2)             |         RRC-Power        | Use RRC-Probe + Power Monitor to measure power during RRC state transitions.              |
 |         Figures 11 to 14 (Section 4.3)        |    Data-Transfer-Power   | Conduct controlled to measure power during data transfers in multiple settings.           |
