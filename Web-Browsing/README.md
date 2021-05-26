@@ -11,7 +11,6 @@ This folder contains the dataset and plotting scripts for the Section 6. Web Bro
 |      scripts      | Scripts Folder for generating all the Figure and Table results. |
 | plot-section6.sh  |             One command to run all the scripts.              |
 | generated_figure  |            Bash Scripts generated results' folder            |
-​        
 
 ## Generate Plots
 
