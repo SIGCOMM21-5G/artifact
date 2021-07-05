@@ -7,7 +7,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from utils import *
 
-df = pd.read_csv('speedtest_ookla.csv')
+# ## enable if you have latex package 
+# plt.rc('font', family='sans-serif', serif='cm10')
+# plt.rc('text', usetex=True)
+
+df = pd.read_csv('dataset_speedtest_ookla.csv')
 SHOW_PLOT_FLAG = False
 
 ##########################################
@@ -104,7 +108,7 @@ plt.plot(df_fig3_m['UE_Server_distance_km'], df_fig3_m['downlink_Mbps'], linesty
 plt.plot(df_fig3_s['UE_Server_distance_km'], df_fig3_s['downlink_Mbps'], linestyle='--', ms=6.5, marker='>', c=colorlist10[3], label='single conn.')
 plt.grid()
 plt.ylabel('Downlink\nThroughput (in Mbps)', fontsize=14, color=colorlist10[3])
-plt.xlabel('Distance (in km)', fontsize=14)
+plt.xlabel('UE-Server Distance (in km)', fontsize=14)
 plt.ylim(0, 3500)
 
 plt.text(1700, 2550, 'mmWave', color='black', fontsize=15,
@@ -157,7 +161,7 @@ plt.plot(df_fig4_s['UE_Server_distance_km'], df_fig4_s['uplink_Mbps'], linestyle
 
 plt.grid()
 plt.ylabel('Uplink\nThroughput (in Mbps)', fontsize=14)
-plt.xlabel('Distance (in km)', fontsize=14)
+plt.xlabel('UE-Server Distance (in km)', fontsize=14)
 plt.ylim(0, 250)
 
 plt.text(1700, 50, 'mmWave', color='black', fontsize=15,
@@ -208,7 +212,7 @@ for radio_idx, radio_type in enumerate(['5G-SA-Low-Band', '5G-NSA-Low-Band']):
 
 plt.grid()
 plt.ylabel('RTT (in ms)', fontsize=14)
-plt.xlabel('Distance (in km)', fontsize=14)
+plt.xlabel('UE-Server Distance (in km)', fontsize=14)
 plt.ylim(0, 110)
 
 ax = plt.gca()
@@ -277,7 +281,7 @@ for radio_idx, radio_type in enumerate(df_f6['radio_type'].unique()):
 
 plt.grid()
 plt.ylabel('Downlink\nThroughput (in Mbps)', fontsize=14)
-plt.xlabel('Distance (in km)', fontsize=14)
+plt.xlabel('UE-Server Distance (in km)', fontsize=14)
 
 ax = plt.gca()
 # We change the fontsize of minor ticks label
@@ -350,7 +354,7 @@ for radio_idx, radio_type in enumerate(df_f7['radio_type'].unique()):
 
 plt.grid()
 plt.ylabel('Uplink\nThroughput (in Mbps)', fontsize=14)
-plt.xlabel('Distance (in km)', fontsize=14)
+plt.xlabel('UE-Server Distance (in km)', fontsize=14)
 
 ax = plt.gca()
 
