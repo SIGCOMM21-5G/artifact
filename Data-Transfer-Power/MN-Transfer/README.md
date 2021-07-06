@@ -1,4 +1,4 @@
-# Power for Data Transfer
+# MN Data Transfer Power Experiments
 
 This folder contains the dataset and scripts for controlled data transfer power experiments. It covers figures 11 and 12 referred in Section 4.3.
 

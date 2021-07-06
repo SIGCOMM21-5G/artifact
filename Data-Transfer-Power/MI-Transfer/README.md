@@ -1,4 +1,4 @@
-# MI Power for Data Transfer Experiments
+# MI Data Transfer Power Experiments
 
 This folder contains the dataset and scripts for controlled data transfer power experiments. It covers all the figures referred in Appendix A.4 which include Figures 26, 27.
 
