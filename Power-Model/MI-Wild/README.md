@@ -1,6 +1,6 @@
-# LocB Power Wild Experiments
+# MI Power Wild Experiments
 
-This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at LocB.
+This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at Ann Arbor, MI.
 
 ## Folder Structure   
 
