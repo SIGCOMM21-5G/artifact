@@ -10,13 +10,22 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList
+from utils import mergeList, picklePreprocessing
 
 webset_threshold = 3
 
 manual_seed = 42
 random.seed(manual_seed)
 
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
+
+pagesize_plt_4g_dict = preprocessed_result['pagesize_plt_4g_dict']
+pagesize_plt_5g_dict = preprocessed_result['pagesize_plt_5g_dict']
+energy_pagesize_5g_dict = preprocessed_result['energy_pagesize_5g_dict']
+energy_pagesize_4g_dict = preprocessed_result['energy_pagesize_4g_dict']
+"""
 with open('./processed_dataset/WebSet.pickle', 'rb') as f:
     webSet = pickle.load(f)
 with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
@@ -88,11 +97,8 @@ for i in filtered_webSet:
 
     energy_plt_4g_dict[pageSize].append(dict_4g['network_energy'])
     energy_plt_5g_dict[pageSize].append(dict_5g['network_energy'])
-
-    feature_list = [merge_feature_dict["pageSize"], merge_feature_dict["objectNumber"], merge_feature_dict["averageObjectSize"], merge_feature_dict["protocolCounter"][0], 
-        merge_feature_dict["protocolCounter"][1], merge_feature_dict["protocolCounter"][2], merge_feature_dict["memeCounter"][0], merge_feature_dict["memeCounter"][1], 
-        merge_feature_dict["staticObjratio"], merge_feature_dict["dynamicObjratio"], merge_feature_dict["staticObjNum"], merge_feature_dict["dynamicObjNum"]]
-
+"""
+    
 
 
 
@@ -120,18 +126,18 @@ for key in pagesize_plt_4g_dict.keys():
     if (key < 1024):
         pageSize_plt_final_dict_4g["100KB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["100KB"] += pagesize_plt_5g_dict[key]  
-        pageSize_energy_final_dict_5g["100KB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["100KB"] += energy_plt_4g_dict[key]
+        pageSize_energy_final_dict_5g["100KB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["100KB"] += energy_pagesize_4g_dict[key]
     elif (key < 10240):
         pageSize_plt_final_dict_4g["1MB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["1MB"] += pagesize_plt_5g_dict[key]  
-        pageSize_energy_final_dict_5g["1MB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["1MB"] += energy_plt_4g_dict[key] 
+        pageSize_energy_final_dict_5g["1MB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["1MB"] += energy_pagesize_4g_dict[key] 
     else:
         pageSize_plt_final_dict_4g["33MB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["33MB"] += pagesize_plt_5g_dict[key] 
-        pageSize_energy_final_dict_5g["33MB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["33MB"] += energy_plt_4g_dict[key]         
+        pageSize_energy_final_dict_5g["33MB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["33MB"] += energy_pagesize_4g_dict[key]         
 
 
 Ylabel4g = []

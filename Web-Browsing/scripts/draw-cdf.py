@@ -16,7 +16,7 @@ from sklearn.preprocessing import MaxAbsScaler
 import random
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-from utils import mergeList
+from utils import mergeList, picklePreprocessing
 from matplotlib.font_manager import FontProperties
 
 
@@ -26,6 +26,16 @@ manual_seed = 42
 random.seed(manual_seed)
 
 
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
+                
+plt_5g_energy_list = preprocessed_result['plt_5g_energy_list']
+plt_4g_energy_list = preprocessed_result['plt_4g_energy_list']
+plt_5g_plt_list = preprocessed_result['plt_5g_plt_list']
+plt_4g_plt_list = preprocessed_result['plt_4g_plt_list']
+
+"""
 with open('./processed_dataset/WebSet.pickle', 'rb') as f:
     webSet = pickle.load(f)
 with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
@@ -48,7 +58,6 @@ for i in webSet:
     filtered_webSet.append(i)
 
 
-webSet_train, webSet_test = sklearn.model_selection.train_test_split(filtered_webSet, test_size = 0.3, random_state = manual_seed)
 
 final_statistics = {}
 
@@ -69,7 +78,6 @@ total_num = 0
 for i in filtered_webSet:
     if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
         continue
-    #ipdb.set_trace()
     if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
         continue
     final_statistics[(i, "4G")] = mergeList(fileStatistics[(i, '4G')])
@@ -90,7 +98,7 @@ for i in filtered_webSet:
     plt_5g_plt_list.append(dict_5g['onLoad']*1e-3)
     plt_4g_plt_list.append(dict_4g['onLoad']*1e-3)
 
-
+"""
 
 fig = plt.figure(figsize=(8, 4))
 ax = fig.add_subplot(111)

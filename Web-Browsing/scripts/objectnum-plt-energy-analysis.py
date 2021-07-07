@@ -8,14 +8,21 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList
+from utils import mergeList, picklePreprocessing
 
 
 webset_threshold = 3
 manual_seed = 42
 random.seed(manual_seed)
 
-
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
+asset_number_plt_5g_dict = preprocessed_result['asset_number_plt_5g_dict']
+asset_number_plt_4g_dict = preprocessed_result['asset_number_plt_4g_dict']
+energy_plt_5g_dict = preprocessed_result['energy_plt_5g_dict']
+energy_plt_4g_dict = preprocessed_result['energy_plt_4g_dict']
+"""
 with open('./processed_dataset/WebSet.pickle', 'rb') as f:
     webSet = pickle.load(f)
 with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
@@ -91,7 +98,7 @@ for i in filtered_webSet:
 
     energy_plt_4g_dict[objNum].append(dict_4g['network_energy'])
     energy_plt_5g_dict[objNum].append(dict_5g['network_energy'])
-
+"""
   
 
 #deal with the asset_number_plt relationship drawing

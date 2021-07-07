@@ -10,12 +10,16 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList
+from utils import mergeList, picklePreprocessing
 
 webset_threshold = 3
 manual_seed = 42
-                        
 
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
+energy_plt_dict = preprocessed_result['energy_plt_dict']   
+"""
 with open('./processed_dataset/WebSet.pickle', 'rb') as f:
     webSet = pickle.load(f)
 with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
@@ -68,6 +72,7 @@ for i in filtered_webSet:
             energy_plt_dict[time_percent_cost] = []
         energy_plt_dict[time_percent_cost].append(energy_reduction*100)
 
+"""
 
 key_list = list(energy_plt_dict.keys())
 key_list.sort()
@@ -79,7 +84,7 @@ y_min = []
 y_max = []
 y_average = []
 for i in key_list:
-    if (i < 60):
+    if (i < 50):
         x.append(i)
         temp_list = energy_plt_dict[i]
         box_list.append(energy_plt_dict[i])
@@ -88,10 +93,10 @@ fig = plt.figure(figsize=(8.5, 4.3))
 
 
 if (len(x) < 5):
-    #for toy example 
-    final_labels = ["0-10",  "30-40", "40-50", "50-60"]
+    #for toy demo
+    final_labels = ["0-10",  "30-40", "40-50"]
 else:
-    final_labels = ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60"]
+    final_labels = ["0-10", "10-20", "20-30", "30-40", "40-50"]
 b = plt.boxplot(box_list, labels = final_labels, showfliers=False, patch_artist=True)
 for box in b['boxes']:
     box.set(color='lightblue')
