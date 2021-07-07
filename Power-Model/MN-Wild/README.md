@@ -1,6 +1,6 @@
-# LocA Power Wild Experiments
+# MN Power Wild Experiments
 
-This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at LocA.
+This folder contains the dataset and processing scripts for power experiments conducted using **5GTracker** and Monsoon Power Monitor at Minneapolis, MN.
 
 ## Data Processing Steps
 The flow diagram below gives a brief overview of steps performed for processing the data for power experiments.
@@ -10,7 +10,7 @@ The flow diagram below gives a brief overview of steps performed for processing 
 ## Folder Structure
 | Filename | Description |
 |----------|-------------|
-|`data/Loc-A-Wild-Summary.csv`|Summary file containing description for all the runs done|
+|`data/MN-Wild-Summary.csv`|Summary file containing description for all the runs done|
 |`data/client/[Device ID]-[5GTracker Session ID]-01.csv`|Raw session logs collected using 5GTracker|
 |`data/client/[Device ID]-run[Iperf Run Number]-iPerf.txt`|Raw Iperf logs collected using 5GTracker|
 |`data/baseline/base[Iperf Run Number].csv`|Baseline power collected using Monsoon Power Monitor|
@@ -18,7 +18,7 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |`data-processed/iperf-logs/[Device ID]-run[Iperf Run Number].csv`|Processed iperf logs for each run|
 |`data-processed/session-logs/[Device ID]-[5GTracker Session ID]-01.csv`|Processed 5GTracker logs for each run|
 |`data-processed/merged-logs/[Device ID]-run[Iperf Run Number]`|Processed logs generated after merging processed iperf logs, processed 5GTracker logs and raw power logs|
-|`data-processed/Loc-A-Wild_combined.csv`|Combined file containing merged logs for all runs. See the [Dataset Description](#dataset-description) section for more details|
+|`data-processed/MN-Wild_combined.csv`|Combined file containing merged logs for all runs. See the [Dataset Description](#dataset-description) section for more details|
 |`data-processed/cleaned-logs/[Model]_[Carrier]_[Network Type]_[Direction].csv`|Cleaned data for each Model [S20, S10], Carrier [Verizon, T-Mobile], Network Type [NSA+LTE, SA, mmWave] and Direction [uplink, downlink]| 
 |`01-Process-Iperf-Logs.py`|Python script to process raw Iperf logs for each run|
 |`02-Process-5GTracker-Logs.py`|Python script to process raw 5GTracker logs for each run|
@@ -27,7 +27,7 @@ The flow diagram below gives a brief overview of steps performed for processing 
 |`05-Prepare-Data-Modeling.py`|Python script to generate separate data files for each model/carrier/network-type/ configuration|
 
 ## Dataset Description
-Below is the description of [cleaned data](data-processed/Loc-A-Wild_combined.csv) generated after running the provided scripts.
+Below is the description of [cleaned data](data-processed/MN-Wild_combined.csv) generated after running the provided scripts.
 
 | Field Name | Description |
 |-------------|-------------|
@@ -74,7 +74,7 @@ Here are the software/package requirements. The version number in the bracket in
 ### Running code
 The processed logs can be found in `data-processed` folder. 
 
-Note that we have only put the experiment summary file `Loc-A-Wild-Summary.csv` in the `data` folder due to the file size of raw logs. To regenerate all logs, download the data from [google-drive](https://drive.google.com/drive/folders/1yxmJr3zl5dn81d1LLHwyOI--6l0hOcYE?usp=sharing) and put it in the `data` folder.
+Note that we have only put the experiment summary file `MN-Wild-Summary.csv` in the `data` folder due to the file size of raw logs. To regenerate all logs, download the data from [google-drive](https://drive.google.com/drive/folders/1yxmJr3zl5dn81d1LLHwyOI--6l0hOcYE?usp=sharing) and put it in the `data` folder.
 
 To generate the logs from scratch, the following commands can be used. 
 

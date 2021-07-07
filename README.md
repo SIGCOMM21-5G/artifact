@@ -33,18 +33,19 @@ This is a measurement paper with several types of experiments conducted for diff
  
   
 
-|                Content in Paper               |      Folder in Repo.     | Description                                                                               |
-|:---------------------------------------------:|:------------------------:|-------------------------------------------------------------------------------------------|
-|          Figures 1 to 7  (Section 3)          |     [NW-Perf-Speedtest](NW-Perf-Speedtest)    | Network performance measurements and analysis.                                            |
-|             Figure 8  (Section 3)             |   [TCP-Single-Conn-Perf](TCP-Single-Conn-Perf)   | Single conn. downlink throughput performance under different transport layer settings.    |
-|             Figure 9  (Section 3)             |       [Driving-Wild](Driving-Wild)       | Handoff frequency while driving across different Low-Band frequency settings.             |
-|            Figure 10  (Section 4.2)           |         [RRC-Probe](RRC-Probe)        | Inferring RRC states for different carrier/frequency band setting.                        |
-|             Table 2 (Section 4.2)             |         [RRC-Power](RRC-Power)        | Use RRC-Probe + Power Monitor to measure power during RRC state transitions.              |
-|         Figures 11 to 14 (Section 4.3)        |    [Data-Transfer-Power](Data-Transfer-Power)   | Conduct controlled to measure power during data transfers in multiple settings.           |
-|        Figures 15 and 16 (Section 4.4)        |        [Power-Model](Power-Model)       | Power Model Construction and Evaluation                                                   |
-| Table 3 (Section 4.5)  Table 8 (Appendix A.5) | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
-|         Figures 17 and 18 (Section 5)         |      [Video-Streaming](Video-Streaming)     | Evaluate ABR algorithms for video streaming using real-world 5G and 4G throughput traces. |
-|      Figures 19 to 22 Table 6 (Section 6)     |       [Web-Browsing](Web-Browsing)       | QoE implications (performance v/s energy efficiency) of using 4G v/s 5G for web-browsing. |
+|                Content in Paper                     |      Folder in Repo.     | Description                                                                               |
+|:---------------------------------------------------:|:------------------------:|-------------------------------------------------------------------------------------------|
+|            Figures 1 to 7  (Section 3)              |     [NW-Perf-Speedtest](NW-Perf-Speedtest)    | Network performance measurements and analysis.                                            |
+|               Figure 8  (Section 3)                 |   [TCP-Single-Conn-Perf](TCP-Single-Conn-Perf)   | Single conn. downlink throughput performance under different transport layer settings.    |
+|               Figure 9  (Section 3)                 |       [Driving-Wild](Driving-Wild)       | Handoff frequency while driving across different Low-Band frequency settings.             |
+|              Figure 10  (Section 4.2)               |         [RRC-Probe](RRC-Probe)        | Inferring RRC states for different carrier/frequency band setting.                        |
+|               Table 2 (Section 4.2)                 |         [RRC-Power](RRC-Power)        | Use RRC-Probe + Power Monitor to measure power during RRC state transitions.              |
+| Figures 11, 12 (Section 4.3), 26, 27 (Appendix A.4) |    [Data-Transfer-Power](Data-Transfer-Power)   | Conduct controlled to measure power during data transfers in multiple settings.           |
+|           Figures 13 and 14 (Section 4.4)           |  [Power-SignalStrength](Power-SignalStrength)    | Orangized data to study the relationship between power/energy efficiency and signal strength  |
+|          Figures 15 and 16 (Section 4.5)            |        [Power-Model](Power-Model)       | Power Model Construction and Evaluation                                                   |
+|   Table 3 (Section 4.6)  Table 9 (Appendix A.5)     | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
+|           Figures 17 and 18 (Section 5)             |      [Video-Streaming](Video-Streaming)     | Evaluate ABR algorithms for video streaming using real-world 5G and 4G throughput traces. |
+|        Figures 19 to 22 Table 6 (Section 6)         |       [Web-Browsing](Web-Browsing)       | QoE implications (performance v/s energy efficiency) of using 4G v/s 5G for web-browsing. |
 
 ---
 
