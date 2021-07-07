@@ -42,37 +42,7 @@ def treePredict():
         dict_4g = final_statistics[(i, "4G")]
         dict_5g = final_statistics[(i, "5G")]
 
-        #add the energy consumption calculated from the throughput
-        dict_4g['power'] = 13.38 * float(dict_4g['throughput']) + 936.1
-        dict_5g['power'] = 2.062 * float(dict_5g['throughput']) + 3352
-        dict_4g['network_energy'] = dict_4g['power'] * dict_4g['onContentLoad']
-        dict_5g['network_energy'] = dict_5g['power'] * dict_5g['onContentLoad']
-
-
-      
-        #standarization part
-        dict_4g['onLoad'] = standard_plt.transform([[dict_4g['onLoad']]])[0][0]
-        dict_5g['onLoad'] = standard_plt.transform([[dict_5g['onLoad']]])[0][0]
-        dict_4g['power'] = standard_power.transform([[dict_4g['power']]])[0][0]
-        dict_5g['power'] = standard_power.transform([[dict_5g['power']]])[0][0]
-        dict_4g['network_energy'] = standard_energy.transform([[dict_4g['network_energy']]])[0][0]
-        dict_5g['network_energy'] = standard_energy.transform([[dict_5g['network_energy']]])[0][0]
-
-        #normalization
-        
-        dict_4g['onLoad'] = mn_plt.transform([[dict_4g['onLoad']]])[0][0]
-        dict_5g['onLoad'] = mn_plt.transform([[dict_5g['onLoad']]])[0][0]
-        dict_4g['power'] = mn_power.transform([[dict_4g['power']]])[0][0]
-        dict_5g['power'] = mn_power.transform([[dict_5g['power']]])[0][0]
-        dict_4g['network_energy'] = mn_energy.transform([[dict_4g['network_energy']]])[0][0]
-        dict_5g['network_energy'] = mn_energy.transform([[dict_5g['network_energy']]])[0][0]
-  
-       
-        dict_4g['comparison_metric'] = dict_4g['network_energy'] * alpha + dict_4g['onLoad'] * beta
-        dict_5g['comparison_metric'] = dict_5g['network_energy'] * alpha + dict_5g['onLoad'] * beta
-        total_num += 1
-
-
+        dict_4g, dict_5g = treeFeatureGeneration(alpha, beta, dict_4g, dict_5g, standard_tuple, mn_tuple)
         #construct the decision tree dataset
         if (dict_4g['comparison_metric'] < dict_5g['comparison_metric']):
             label_list.append(0)
