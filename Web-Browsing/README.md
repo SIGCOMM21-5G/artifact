@@ -33,30 +33,30 @@ sudo apt-get install graphviz
 
 ---
 
-## Data Analysis
+## Generating Plots
 
-#### Step 1 (Data Preprocessing)
+### Step 1 (Data Preprocessing)
 
-The dataset is large due to which the preprocessing can take X to Y hours to complete on a normal laptop. To save time, we provide fully processed dataset. 
+The dataset is large due to which the preprocessing can take several hours to complete on a normal laptop. To save time, we provide fully processed dataset. 
 
-*Follow these instructions to skip preprocessing step*
-   - Download the repository to your computer
+***Follow these instructions to skip preprocessing step***
+   - Clone the repository to your computer and move to `Web-Browsing` subfolder
    - Replace `processed_dataset` folder with the one in [Google Drive](https://drive.google.com/drive/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0?usp=sharing)
    - Proceed to step 2
 
-*Follow these instructions to preprocess complete dataset*
-   - Download the repository to your computer
+***Follow these instructions to preprocess complete dataset***
+   - Clone the repository to your computer and move to `Web-Browsing` subfolder
    - Replace the `raw_dataset` with the one in [Google Drive](https://drive.google.com/drive/folders/1ADDPvkAGiRTYAIxJJUzuY_UhMTW9Ifm0?usp=sharing)
    - Run `python preprocessing.py`
    - After the preprocessing is complete, two pickle files `WebSet.pickle` and `fileStatistics.pickle` will be saved in the `processed_dataset` folder. Details of the pickle files can be found [here](processed_dataset).
 
 By default, `raw_dataset` and `processed_data` contain sample files that one could use to test the environment or play with it. 
 
-#### Step 2 (Generate the plots)
+### Step 2 (Generate the plots)
 
-Once the both pickle files are present in `processed_dataset` folder, we can use the following bash command to generate all the results and plots.
+Once the both pickle files are present in `processed_dataset` folder, use the following bash command to generate results/plots
 
 ```bash
 bash plot-section6.sh
 ```
-The generated results will be saved in the `results` folder.
+The generated results/plots will be saved in the `results` folder.
