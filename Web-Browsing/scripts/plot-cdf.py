@@ -16,7 +16,7 @@ from sklearn.preprocessing import MaxAbsScaler
 import random
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-from utils import mergeList, picklePreprocessing
+from web_utils import mergeList, picklePreprocessing
 from matplotlib.font_manager import FontProperties
 
 

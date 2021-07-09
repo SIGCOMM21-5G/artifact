@@ -11,7 +11,7 @@ This folder contains details of the artifacts related to Section 6 (Web Browsing
 | scripts      | Scripts for generating plots and results. |
 | preprocessing.py | Preprocessing Script |
 | plot-section6.sh  | One command to run all the scripts              |
-| results  | Bash Scripts generated results and save in results folder            |
+| plots  | Bash Scripts generated results and save in plots folder            |
 
 ---
 
@@ -59,4 +59,4 @@ Once the both pickle files are present in `processed_dataset` folder, we can use
 ```bash
 bash plot-section6.sh
 ```
-The generated results will be saved in the `results` folder.
+The generated results will be saved in the `plots` folder.

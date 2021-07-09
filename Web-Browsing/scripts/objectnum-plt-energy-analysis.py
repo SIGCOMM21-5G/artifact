@@ -8,7 +8,7 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList, picklePreprocessing
+from web_utils import mergeList, picklePreprocessing
 
 
 webset_threshold = 3
@@ -76,6 +76,7 @@ for k in asset_number_plt_final_dict_4g.keys():
     energy4g.append(sum(asset_number_energy_final_dict_4g[k]) / len(asset_number_energy_final_dict_4g[k]) * 0.001 * 0.001)
 
 if (len(labelList) == 2):
+    print('\033[1;33;44mThe current dataset is a toy version comparing with the Google Drive Version!\033[0m')
     show_label_list = ['11-100', '100-1000']
 
 fig = plt.figure(figsize=(5.32, 5))

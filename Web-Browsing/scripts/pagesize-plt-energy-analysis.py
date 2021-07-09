@@ -10,7 +10,7 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList, picklePreprocessing
+from web_utils import mergeList, picklePreprocessing
 
 webset_threshold = 3
 
@@ -80,6 +80,7 @@ for k in pageSize_plt_final_dict_4g.keys():
 if (len(labelList) > 2):
     labelList = ['<1', '1-10', '>10']
 else:
+    print('\033[1;33;44mThe current dataset is a toy version comparing with the Google Drive Version!\033[0m')
     labelList = ['<1', '1-10']
 
 fig = plt.figure(figsize=(5.32, 5))

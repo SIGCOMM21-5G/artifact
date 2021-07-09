@@ -10,7 +10,7 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList, picklePreprocessing
+from web_utils import mergeList, picklePreprocessing
 
 webset_threshold = 3
 manual_seed = 42
@@ -23,7 +23,6 @@ energy_plt_dict = preprocessed_result['energy_plt_dict']
 
 key_list = list(energy_plt_dict.keys())
 key_list.sort()
-print(key_list)
 box_list = []
 
 x = []
@@ -41,6 +40,7 @@ fig = plt.figure(figsize=(8.5, 4.3))
 
 if (len(x) < 5):
     #for toy demo
+    print('\033[1;33;44mThe current dataset is a toy version comparing with the Google Drive Version!\033[0m')
     final_labels = ["0-10",  "30-40", "40-50"]
 else:
     final_labels = ["0-10", "10-20", "20-30", "30-40", "40-50"]
