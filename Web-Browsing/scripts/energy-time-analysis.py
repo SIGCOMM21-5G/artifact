@@ -60,4 +60,4 @@ plt.ylabel("% of energy saving over\nthe penalised PLT")
 plt.rcParams['pdf.fonttype'] = 42
 fig.tight_layout()
 # Show the plot
-plt.savefig('./results/energy-plt-relation.pdf')
+plt.savefig('./plots/energy-plt-relation.pdf')

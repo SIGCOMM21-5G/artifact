@@ -114,7 +114,7 @@ ax2.legend(fontsize=16)
 fig.tight_layout()
 plt.subplots_adjust(hspace=.12)
 
-plt.savefig('./results/objectnum-plt-energy-relation.pdf')
+plt.savefig('./plots/objectnum-plt-energy-relation.pdf')
 plt.close('all')
 
 

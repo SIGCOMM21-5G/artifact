@@ -109,7 +109,7 @@ for i in webSet_train:
 
 clf = tree.DecisionTreeClassifier(max_depth = 2, min_samples_leaf = 20, random_state = manual_seed)#, class_weight = "balanced")
 clf.fit(data_list, label_list)
-dot_data = tree.export_graphviz(clf, out_file='./results/tree.dot', 
+dot_data = tree.export_graphviz(clf, out_file='./plots/tree.dot', 
                          feature_names=["pageSize","objectNumber","averageObjectSize", 
                          "imageNum", "VideoNum", "dynamicObjRatio", "dynamicObjSizeRatio"],#, "ProtocolNumber"],
                          class_names=['4G','5G'],
@@ -119,4 +119,5 @@ graph = graphviz.Source(dot_data)
 
 
 treePredict()
-os.system('dot -Tpng ./results/tree.dot -o ./results/tree-M4.png')
+os.system('dot -Tpng ./plots/tree.dot -o ./plots/tree-M4.png')
+os.unlink('./plots/tree.dot')

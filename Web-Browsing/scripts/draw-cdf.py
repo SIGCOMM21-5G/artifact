@@ -51,7 +51,7 @@ plt.ylabel("CDF", fontsize=50)
 
 plt.legend(prop = {'size':40}, loc='lower right', bbox_to_anchor=(0.98,-0.05))
 fig.tight_layout()
-plt.savefig('./results/cdf-energy.pdf')
+plt.savefig('./plots/cdf-energy.pdf')
 
 plt.cla()
 
@@ -71,4 +71,4 @@ plt.xlabel("PLT (s)", fontsize=50)
 plt.ylabel("CDF", fontsize=30)
 plt.legend(prop = {'size':40}, loc='lower right', bbox_to_anchor=(0.98,-0.05))
 fig2.tight_layout()
-plt.savefig('./results/cdf-plt.pdf')
+plt.savefig('./plots/cdf-plt.pdf')

@@ -126,16 +126,5 @@ for (index, alpha_beta) in enumerate(alpha_beta_list):
 
     
     clf.fit(data_list, label_list)
-
-
-    dot_data = tree.export_graphviz(clf, out_file='tree.dot', 
-                            feature_names=["pageSize","objectNumber","averageObjectSize", 
-                            "imageNum", "VideoNum", "dynamicObjRatio", "dynamicObjSizeRatio"],
-                            class_names=['4G','5G'],
-                            filled=True, rounded=True,  
-                            special_characters=True)  
-    graph = graphviz.Source(dot_data)  
-
-
     treePredict(clf, alpha, beta, index)
     
