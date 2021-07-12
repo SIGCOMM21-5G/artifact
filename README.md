@@ -43,9 +43,9 @@ This is a measurement paper with several types of experiments conducted for diff
 | Figures 11, 12 (Section 4.3), 26, 27 (Appendix A.4) |    [Data-Transfer-Power](Data-Transfer-Power)   | Conduct controlled to measure power during data transfers in multiple settings.           |
 |           Figures 13 and 14 (Section 4.4)           |  [Power-SignalStrength](Power-SignalStrength)    | Orangized data to study the relationship between power/energy efficiency and signal strength  |
 |          Figures 15 and 16 (Section 4.5)            |        [Power-Model](Power-Model)       | Power Model Construction and Evaluation                                                   |
-|   Table 3 (Section 4.6)  Table 9 (Appendix A.5)     | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
+|   Table 3 (Section 4.6),  Table 9 (Appendix A.5)     | [Benchmark-Software-Power](Benchmark-Software-Power) | Benchmarking software-based power monitor.                                                |
 |           Figures 17 and 18 (Section 5)             |      [Video-Streaming](Video-Streaming)     | Evaluate ABR algorithms for video streaming using real-world 5G and 4G throughput traces. |
-|        Figures 19 to 22 Table 6 (Section 6)         |       [Web-Browsing](Web-Browsing)       | QoE implications (performance v/s energy efficiency) of using 4G v/s 5G for web-browsing. |
+|        Figures 19 to 22, Table 6 (Section 6)         |       [Web-Browsing](Web-Browsing)       | QoE implications (performance v/s energy efficiency) of using 4G v/s 5G for web-browsing. |
 
 ---
 
