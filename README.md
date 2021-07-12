@@ -18,13 +18,14 @@ This is a measurement paper with several types of experiments conducted for diff
     2. output logs
     3. if one has their own compute resources, we provide instructions on how to evaluate.
 
-#### User-side Measurement tools (todo)
+#### User-side Measurement tools
 
-- 5G Tracker (to use this tool, one will require access to 5G data services/sim cards and be in areas with 5G coverage)
-   - Passive measurements using Android APIs
-   - iPerf
-   - RRC-Probe 
-   - TCPDUMP    
+- <b>5G Tracker</b>: is available for free of cost to academic research groups and non-profit organizations. If you qualify, please [click here](https://license.umn.edu/product/5g-tracker-android-application-for-collecting-and-visualizing-5g-performance-data) to apply and get access to 5G Tracker. Note, in addition to this tool, you will need to arrange for 5G data services/sim cards. 5G Tracker features:
+   - Record passive measurements using Android APIs
+   - Record active measurements using iPerf3 and Ping
+   - RRC-Probe
+   - Packet dumps using TCPDUMP
+   
 - Monsoon Power Monitor
 
 ---
