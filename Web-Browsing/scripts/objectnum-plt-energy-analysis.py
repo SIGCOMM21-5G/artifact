@@ -8,90 +8,20 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList
+from web_utils import mergeList, picklePreprocessing
 
 
 webset_threshold = 3
 manual_seed = 42
 random.seed(manual_seed)
 
-
-with open('./processed_dataset/WebSet.pickle', 'rb') as f:
-    webSet = pickle.load(f)
-with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
-    fileStatistics = pickle.load(f)
-
-webSet = list(webSet)
-webSet.sort()
-
-
-filtered_webSet = []
-for i in webSet:
-    if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
-        continue
-    if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
-        continue
-    dict_4g = mergeList(fileStatistics[(i, '4G')])
-    dict_5g = mergeList(fileStatistics[(i, '5G')])
-    #filter the website which have a really long loading time
-    if (dict_4g['onLoad'] > 15000 and dict_5g['onLoad'] > 15000):
-        continue
-    filtered_webSet.append(i)
-
-
-final_statistics = {}
-
-
-obj_num_plt_4g = {}
-obj_num_plt_5g = {}
-
-
-asset_number_plt_4g_dict = {}
-asset_number_plt_5g_dict = {}
-
-pagesize_plt_4g_dict = {}
-pagesize_plt_5g_dict = {}
-
-energy_plt_4g_dict = {}
-energy_plt_5g_dict = {}
-
-for i in filtered_webSet:
-    if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
-        continue
-    #ipdb.set_trace()
-    if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
-        continue
-    final_statistics[(i, "4G")] = mergeList(fileStatistics[(i, '4G')])
-    final_statistics[(i, "5G")] = mergeList(fileStatistics[(i, '5G')])
-    dict_4g = final_statistics[(i, "4G")]
-    dict_5g = final_statistics[(i, "5G")]
-
-    #add the energy consumption calculated from the throughput
-    dict_4g['power'] = 13.38 * float(dict_4g['throughput']) + 936.1
-    dict_5g['power'] = 2.062 * float(dict_5g['throughput']) + 3352
-    dict_4g['network_energy'] = dict_4g['power'] * dict_4g['onContentLoad']
-    dict_5g['network_energy'] = dict_5g['power'] * dict_5g['onContentLoad']
-    
-
-    
-    merge_feature_dict = mergeList(fileStatistics[(i, '4G')] + fileStatistics[(i, '5G')])
-
-
-    objNum = merge_feature_dict["objectNumber"]
-    pageSize = merge_feature_dict["pageSize"]
-    if not (objNum in asset_number_plt_4g_dict.keys()):
-        asset_number_plt_4g_dict[objNum] = []
-        asset_number_plt_5g_dict[objNum] = []
-    if not (objNum in energy_plt_4g_dict.keys()):
-        energy_plt_4g_dict[objNum] = []
-        energy_plt_5g_dict[objNum] = []
-    
-    asset_number_plt_4g_dict[objNum].append(dict_4g['onLoad'])
-    asset_number_plt_5g_dict[objNum].append(dict_5g['onLoad'])
-
-    energy_plt_4g_dict[objNum].append(dict_4g['network_energy'])
-    energy_plt_5g_dict[objNum].append(dict_5g['network_energy'])
-
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
+asset_number_plt_5g_dict = preprocessed_result['asset_number_plt_5g_dict']
+asset_number_plt_4g_dict = preprocessed_result['asset_number_plt_4g_dict']
+energy_plt_5g_dict = preprocessed_result['energy_plt_5g_dict']
+energy_plt_4g_dict = preprocessed_result['energy_plt_4g_dict']
   
 
 #deal with the asset_number_plt relationship drawing
@@ -146,6 +76,7 @@ for k in asset_number_plt_final_dict_4g.keys():
     energy4g.append(sum(asset_number_energy_final_dict_4g[k]) / len(asset_number_energy_final_dict_4g[k]) * 0.001 * 0.001)
 
 if (len(labelList) == 2):
+    print('\033[1;33;44mThe current dataset is a toy version comparing with the Google Drive Version!\033[0m')
     show_label_list = ['11-100', '100-1000']
 
 fig = plt.figure(figsize=(5.32, 5))
@@ -184,7 +115,7 @@ ax2.legend(fontsize=16)
 fig.tight_layout()
 plt.subplots_adjust(hspace=.12)
 
-plt.savefig('./results/objectnum-plt-energy-relation.pdf')
+plt.savefig('./plots/objectnum-plt-energy-relation.pdf')
 plt.close('all')
 
 

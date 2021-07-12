@@ -10,97 +10,22 @@ import seaborn as sns
 from collections import Counter
 import random
 import numpy as np
-from utils import mergeList
+from web_utils import mergeList, picklePreprocessing
 
 webset_threshold = 3
 
 manual_seed = 42
 random.seed(manual_seed)
 
-with open('./processed_dataset/WebSet.pickle', 'rb') as f:
-    webSet = pickle.load(f)
-with open('./processed_dataset/fileStatistics.pickle', 'rb') as f:
-    fileStatistics = pickle.load(f)
+preprocessed_result = picklePreprocessing(web_pickle_name = './processed_dataset/WebSet.pickle',
+                        file_pickle_name = './processed_dataset/fileStatistics.pickle', 
+                        webset_threshold = webset_threshold)
 
-webSet = list(webSet)
-webSet.sort()
-
-filtered_webSet = []
-for i in webSet:
-    if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
-        continue
-    if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
-        continue
-    dict_4g = mergeList(fileStatistics[(i, '4G')])
-    dict_5g = mergeList(fileStatistics[(i, '5G')])
-    #filter the website which have a really long loading time
-    if (dict_4g['onLoad'] > 15000 and dict_5g['onLoad'] > 15000):
-        continue
-    filtered_webSet.append(i)
-
-final_statistics = {}
-
-
-
-
-
-pagesize_plt_4g_dict = {}
-pagesize_plt_5g_dict = {}
-
-energy_plt_4g_dict = {}
-energy_plt_5g_dict = {}
-
-for i in filtered_webSet:
-    if (not ((i, '4G') in fileStatistics.keys())) or (not ((i, '5G') in fileStatistics.keys())):
-        continue
-    #ipdb.set_trace()
-    if ((len(fileStatistics[(i, "4G")]) <= webset_threshold) or (len(fileStatistics[(i, "5G")]) <= webset_threshold)):
-        continue
-    final_statistics[(i, "4G")] = mergeList(fileStatistics[(i, '4G')])
-    final_statistics[(i, "5G")] = mergeList(fileStatistics[(i, '5G')])
-    dict_4g = final_statistics[(i, "4G")]
-    dict_5g = final_statistics[(i, "5G")]
-
-    #add the energy consumption calculated from the throughput
-    dict_4g['power'] = 13.38 * float(dict_4g['throughput']) + 936.1
-    dict_5g['power'] = 2.062 * float(dict_5g['throughput']) + 3352
-    dict_4g['network_energy'] = dict_4g['power'] * dict_4g['onContentLoad']
-    dict_5g['network_energy'] = dict_5g['power'] * dict_5g['onContentLoad']
-    
-
-    
-    merge_feature_dict = mergeList(fileStatistics[(i, '4G')] + fileStatistics[(i, '5G')])
-
-
-    objNum = int(merge_feature_dict["objectNumber"]/100)
-    pageSize = merge_feature_dict["pageSize"]
-    
-
-    if not (pageSize in pagesize_plt_4g_dict.keys()):
-        pagesize_plt_4g_dict[pageSize] = []
-        pagesize_plt_5g_dict[pageSize] = []
-    if not (pageSize in energy_plt_4g_dict.keys()):
-        energy_plt_4g_dict[pageSize] = []
-        energy_plt_5g_dict[pageSize] = []
-
-    pagesize_plt_4g_dict[pageSize].append(dict_4g['onLoad'])
-    pagesize_plt_5g_dict[pageSize].append(dict_5g['onLoad'])
-
-    energy_plt_4g_dict[pageSize].append(dict_4g['network_energy'])
-    energy_plt_5g_dict[pageSize].append(dict_5g['network_energy'])
-
-    feature_list = [merge_feature_dict["pageSize"], merge_feature_dict["objectNumber"], merge_feature_dict["averageObjectSize"], merge_feature_dict["protocolCounter"][0], 
-        merge_feature_dict["protocolCounter"][1], merge_feature_dict["protocolCounter"][2], merge_feature_dict["memeCounter"][0], merge_feature_dict["memeCounter"][1], 
-        merge_feature_dict["staticObjratio"], merge_feature_dict["dynamicObjratio"], merge_feature_dict["staticObjNum"], merge_feature_dict["dynamicObjNum"]]
-
-
-
-
-
-
+pagesize_plt_4g_dict = preprocessed_result['pagesize_plt_4g_dict']
+pagesize_plt_5g_dict = preprocessed_result['pagesize_plt_5g_dict']
+energy_pagesize_5g_dict = preprocessed_result['energy_pagesize_5g_dict']
+energy_pagesize_4g_dict = preprocessed_result['energy_pagesize_4g_dict']
 labelList = []
-
-
 
 #draw pagesize -plt relation graph
 show_label_list = ["100KB", "1MB", "33MB"]
@@ -120,18 +45,18 @@ for key in pagesize_plt_4g_dict.keys():
     if (key < 1024):
         pageSize_plt_final_dict_4g["100KB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["100KB"] += pagesize_plt_5g_dict[key]  
-        pageSize_energy_final_dict_5g["100KB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["100KB"] += energy_plt_4g_dict[key]
+        pageSize_energy_final_dict_5g["100KB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["100KB"] += energy_pagesize_4g_dict[key]
     elif (key < 10240):
         pageSize_plt_final_dict_4g["1MB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["1MB"] += pagesize_plt_5g_dict[key]  
-        pageSize_energy_final_dict_5g["1MB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["1MB"] += energy_plt_4g_dict[key] 
+        pageSize_energy_final_dict_5g["1MB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["1MB"] += energy_pagesize_4g_dict[key] 
     else:
         pageSize_plt_final_dict_4g["33MB"] += pagesize_plt_4g_dict[key]
         pageSize_plt_final_dict_5g["33MB"] += pagesize_plt_5g_dict[key] 
-        pageSize_energy_final_dict_5g["33MB"] += energy_plt_5g_dict[key]
-        pageSize_energy_final_dict_4g["33MB"] += energy_plt_4g_dict[key]         
+        pageSize_energy_final_dict_5g["33MB"] += energy_pagesize_5g_dict[key]
+        pageSize_energy_final_dict_4g["33MB"] += energy_pagesize_4g_dict[key]         
 
 
 Ylabel4g = []
@@ -155,6 +80,7 @@ for k in pageSize_plt_final_dict_4g.keys():
 if (len(labelList) > 2):
     labelList = ['<1', '1-10', '>10']
 else:
+    print('\033[1;33;44mThe current dataset is a toy version comparing with the Google Drive Version!\033[0m')
     labelList = ['<1', '1-10']
 
 fig = plt.figure(figsize=(5.32, 5))
@@ -192,5 +118,5 @@ ax.legend(fontsize=18)
 ax2.legend(fontsize=16)
 fig.tight_layout()
 plt.subplots_adjust(hspace=.12)
-plt.savefig('./results/pagesize-plt-energy-relation.pdf')
+plt.savefig('./plots/pagesize-plt-energy-relation.pdf')
 plt.close('all')
