@@ -58,7 +58,7 @@ size_video6 = [336477,14648397,17616813,8581118,4726840,3421740,1987360,2185110,
 
 
 def get_chunk_size(quality, index):
-    if ( index < 0 or index > 48 ):
+    if ( index < 0 or index > TOTAL_VIDEO_CHUNKS ):
         return 0
     # note that the quality and video labels are inverted (i.e., quality 8 is highest and this pertains to video1)
     sizes = {5: size_video1[index], 4: size_video2[index], 3: size_video3[index], 2: size_video4[index], 1: size_video5[index], 0: size_video6[index]}
