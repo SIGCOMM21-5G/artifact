@@ -1,6 +1,6 @@
 ## A Variegated Look at 5G in the Wild
 
-In this repository, we release the dataset and tools in SIGCOMM '21 paper, *A Variegated Look at 5G in the Wild: Performance, Power, and QoE Implications*. 
+In this repository, we release the dataset and tools in SIGCOMM '21 paper, [*A Variegated Look at 5G in the Wild: Performance, Power, and QoE Implications*](https://dl.acm.org/doi/10.1145/3452296.3472923). 
 
 This is a measurement paper with several types of experiments conducted for different purposes having different methodologies. To help you quickly navigate and have the ability to understand the different pieces, we have created different folders for different experiments. There are README files within each folder that provide instructions on validating the experiment-specific artifacts. At the very top of the README instructions, we also specify which results/plots (e.g. Figure 2 in the paper) the folder is responsible. Lastly, to make it easy here are some generic principles we followed for releasing the artifacts:
 
