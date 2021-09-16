@@ -64,3 +64,9 @@ To generate the figures, run `bash plot-section5.sh`. A `plots` folder should be
 ## Evaluate Experiments on a Real Testbed
 
 Since we perform the experiments on AWS VM instances and the price is quite high to keep them running, we have currently terminated them. If required, we can provision and provide two AWS VMs (a client-server pair) for tesing all the experiments. For setting up instructions, please refer to `ABR-5G/README.md`.
+
+## Updates
+
+For the Pensieve 5G results, we've found that carefully tuning the Pensieve's RL model can yeild better performance in terms of Video stall (different from `Fig. 17` in the paper). The figure with tuned results are shown below.
+
+![Figure_17_tuned](Figure17_tuned.png "Figure_17_tuned")
