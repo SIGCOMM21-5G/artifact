@@ -30,7 +30,7 @@ After cloning the repository, navigate to `Power-SignalStrength` folder and run 
 
 ```
 gnuplot Power-Throughput-RSRP/power-rsrp-throughput.gp
-python3 calculate-stats.py -p EnergyEfficiency-RSRP/ -k mn -s ./
-python3 calculate-stats.py -p EnergyEfficiency-RSRP/ -k mi -s ./
+python3 EnergyEfficiency-RSRP/calculate-stats.py -p EnergyEfficiency-RSRP/ -k mn -s ./
+python3 EnergyEfficiency-RSRP/calculate-stats.py -p EnergyEfficiency-RSRP/ -k mi -s ./
 gnuplot EnergyEfficiency-RSRP/efficiency-rsrp.gp
 ```
