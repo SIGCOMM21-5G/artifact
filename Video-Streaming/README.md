@@ -70,3 +70,4 @@ Since we perform the experiments on AWS VM instances and the price is quite high
 For the Pensieve 5G results, we've found that carefully tuning the Pensieve's RL model can yeild better performance in terms of Video stall (different from `Fig. 17` in the paper). The figure with tuned results are shown below.
 
 ![Figure_17_tuned](Figure17_tuned.png "Figure_17_tuned")
+*Figure_17_tuned*
